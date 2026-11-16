@@ -1,0 +1,335 @@
+{
+    "classes": [
+        {
+            "classInfos": [
+                {
+                    "name": "QML.Element",
+                    "value": "auto"
+                },
+                {
+                    "name": "QML.Singleton",
+                    "value": "true"
+                }
+            ],
+            "className": "Yadro",
+            "lineNumber": 10,
+            "methods": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "host",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "port",
+                            "type": "int"
+                        },
+                        {
+                            "name": "dbName",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "user",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "password",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 0,
+                    "lineNumber": 19,
+                    "name": "connectToDatabase",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "login",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "password",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 1,
+                    "lineNumber": 21,
+                    "name": "loginUser",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "departmentId",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 2,
+                    "lineNumber": 23,
+                    "name": "getChambersByDepartment",
+                    "returnType": "QVariantList"
+                },
+                {
+                    "access": "public",
+                    "index": 3,
+                    "lineNumber": 25,
+                    "name": "getEmployees",
+                    "returnType": "QVariantList"
+                },
+                {
+                    "access": "public",
+                    "index": 4,
+                    "lineNumber": 26,
+                    "name": "getRoles",
+                    "returnType": "QVariantList"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "int"
+                        },
+                        {
+                            "name": "name",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "sourName",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "login",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "password",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "roleId",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 5,
+                    "lineNumber": 27,
+                    "name": "updateEmployee",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "name",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "sourName",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "login",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "password",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "roleId",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 6,
+                    "lineNumber": 28,
+                    "name": "createEmployee",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 7,
+                    "lineNumber": 29,
+                    "name": "deleteEmployee",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "index": 8,
+                    "lineNumber": 32,
+                    "name": "getDepartments",
+                    "returnType": "QVariantList"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "name",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "capacity",
+                            "type": "int"
+                        },
+                        {
+                            "name": "capacityDisease",
+                            "type": "int"
+                        },
+                        {
+                            "name": "chambers",
+                            "type": "QVariantList"
+                        }
+                    ],
+                    "index": 9,
+                    "lineNumber": 33,
+                    "name": "createDepartment",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "int"
+                        },
+                        {
+                            "name": "name",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 10,
+                    "lineNumber": 34,
+                    "name": "updateDepartmentName",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 11,
+                    "lineNumber": 35,
+                    "name": "deleteDepartment",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "departmentId",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 12,
+                    "lineNumber": 38,
+                    "name": "getNextChamberNumber",
+                    "returnType": "int"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "departmentId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "number",
+                            "type": "int"
+                        },
+                        {
+                            "name": "capacity",
+                            "type": "int"
+                        },
+                        {
+                            "name": "isDisease",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 13,
+                    "lineNumber": 39,
+                    "name": "addChamber",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "departmentId",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 14,
+                    "lineNumber": 40,
+                    "name": "getLastChamber",
+                    "returnType": "QVariantMap"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "departmentId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "isDisease",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 15,
+                    "lineNumber": 41,
+                    "name": "getLastChamberByType",
+                    "returnType": "QVariantMap"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "chamberId",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 16,
+                    "lineNumber": 42,
+                    "name": "deleteChamber",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "index": 17,
+                    "lineNumber": 45,
+                    "name": "getPatients",
+                    "returnType": "QVariantList"
+                },
+                {
+                    "access": "public",
+                    "index": 18,
+                    "lineNumber": 46,
+                    "name": "getTransfers",
+                    "returnType": "QVariantList"
+                }
+            ],
+            "object": true,
+            "qualifiedClassName": "Yadro",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "yadro.h",
+    "outputRevision": 69
+}

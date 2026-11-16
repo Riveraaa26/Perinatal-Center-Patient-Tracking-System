@@ -1,0 +1,3 @@
+set(__QT_DEPLOY_TARGET_appPerinatalCenter_FILE C:/Users/sanek26/Documents/PerinatalCenter/build/work-Debug/appPerinatalCenter.exe)
+set(__QT_DEPLOY_TARGET_appPerinatalCenter_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_appPerinatalCenter_RUNTIME_DLLS C:/msys64/mingw64/bin/Qt6QuickControls2.dll;C:/msys64/mingw64/bin/Qt6Sql.dll;C:/msys64/mingw64/bin/Qt6QuickTemplates2.dll;C:/msys64/mingw64/bin/Qt6Quick.dll;C:/msys64/mingw64/bin/Qt6OpenGL.dll;C:/msys64/mingw64/bin/Qt6QmlMeta.dll;C:/msys64/mingw64/bin/Qt6QmlWorkerScript.dll;C:/msys64/mingw64/bin/Qt6Gui.dll;C:/msys64/mingw64/bin/Qt6QmlModels.dll;C:/msys64/mingw64/bin/Qt6Qml.dll;C:/msys64/mingw64/bin/Qt6Network.dll;C:/msys64/mingw64/bin/Qt6Core.dll)
