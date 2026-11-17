@@ -1,0 +1,11 @@
+--resource
+C:/Users/sanek26/Documents/PerinatalCenter/build/work-Debug/.qt/rcc/qmake_PerinatalCenter.qrc
+--resource
+C:/Users/sanek26/Documents/PerinatalCenter/build/work-Debug/.qt/rcc/appPerinatalCenter_raw_qml_0.qrc
+/qt/qml/PerinatalCenter/Main.qml
+/qt/qml/PerinatalCenter/LoginPage.qml
+/qt/qml/PerinatalCenter/AdminPage.qml
+/qt/qml/PerinatalCenter/NursePage.qml
+/qt/qml/PerinatalCenter/DoctorPage.qml
+/qt/qml/PerinatalCenter/DepartamentsView.qml
+/qt/qml/PerinatalCenter/ChambersView.qml

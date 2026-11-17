@@ -1,0 +1,12 @@
+module PerinatalCenter
+typeinfo appPerinatalCenter.qmltypes
+prefer :/qt/qml/PerinatalCenter/
+Main 1.0 Main.qml
+LoginPage 1.0 LoginPage.qml
+AdminPage 1.0 AdminPage.qml
+NursePage 1.0 NursePage.qml
+DoctorPage 1.0 DoctorPage.qml
+DepartamentsView 1.0 DepartamentsView.qml
+ChambersView 1.0 ChambersView.qml
+depends QtQuick
+
