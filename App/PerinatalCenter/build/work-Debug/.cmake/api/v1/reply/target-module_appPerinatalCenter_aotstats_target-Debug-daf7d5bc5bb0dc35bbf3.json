@@ -154,7 +154,8 @@
 				6,
 				7,
 				8,
-				9
+				9,
+				10
 			]
 		}
 	],
@@ -199,6 +200,12 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_DoctorPage_qml.cpp.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
 			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_LoginPage_qml.cpp.rule",
 			"sourceGroupIndex" : 1
 		},
@@ -211,7 +218,7 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_UserPage_qml.cpp.rule",
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_NursePage_qml.cpp.rule",
 			"sourceGroupIndex" : 1
 		},
 		{

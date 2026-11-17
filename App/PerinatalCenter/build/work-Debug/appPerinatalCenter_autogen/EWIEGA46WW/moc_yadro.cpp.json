@@ -56,34 +56,21 @@
                         }
                     ],
                     "index": 1,
-                    "lineNumber": 21,
+                    "lineNumber": 20,
                     "name": "loginUser",
                     "returnType": "QString"
                 },
                 {
                     "access": "public",
-                    "arguments": [
-                        {
-                            "name": "departmentId",
-                            "type": "int"
-                        }
-                    ],
                     "index": 2,
                     "lineNumber": 23,
-                    "name": "getChambersByDepartment",
-                    "returnType": "QVariantList"
-                },
-                {
-                    "access": "public",
-                    "index": 3,
-                    "lineNumber": 25,
                     "name": "getEmployees",
                     "returnType": "QVariantList"
                 },
                 {
                     "access": "public",
-                    "index": 4,
-                    "lineNumber": 26,
+                    "index": 3,
+                    "lineNumber": 24,
                     "name": "getRoles",
                     "returnType": "QVariantList"
                 },
@@ -115,8 +102,8 @@
                             "type": "int"
                         }
                     ],
-                    "index": 5,
-                    "lineNumber": 27,
+                    "index": 4,
+                    "lineNumber": 25,
                     "name": "updateEmployee",
                     "returnType": "QString"
                 },
@@ -144,8 +131,8 @@
                             "type": "int"
                         }
                     ],
-                    "index": 6,
-                    "lineNumber": 28,
+                    "index": 5,
+                    "lineNumber": 26,
                     "name": "createEmployee",
                     "returnType": "QString"
                 },
@@ -157,15 +144,32 @@
                             "type": "int"
                         }
                     ],
-                    "index": 7,
-                    "lineNumber": 29,
+                    "index": 6,
+                    "lineNumber": 27,
                     "name": "deleteEmployee",
                     "returnType": "QString"
                 },
                 {
                     "access": "public",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "int"
+                        },
+                        {
+                            "name": "blocked",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 7,
+                    "lineNumber": 28,
+                    "name": "setEmployeeBlocked",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
                     "index": 8,
-                    "lineNumber": 32,
+                    "lineNumber": 31,
                     "name": "getDepartments",
                     "returnType": "QVariantList"
                 },
@@ -190,7 +194,7 @@
                         }
                     ],
                     "index": 9,
-                    "lineNumber": 33,
+                    "lineNumber": 32,
                     "name": "createDepartment",
                     "returnType": "QString"
                 },
@@ -207,7 +211,7 @@
                         }
                     ],
                     "index": 10,
-                    "lineNumber": 34,
+                    "lineNumber": 33,
                     "name": "updateDepartmentName",
                     "returnType": "QString"
                 },
@@ -220,7 +224,7 @@
                         }
                     ],
                     "index": 11,
-                    "lineNumber": 35,
+                    "lineNumber": 34,
                     "name": "deleteDepartment",
                     "returnType": "QString"
                 },
@@ -233,9 +237,26 @@
                         }
                     ],
                     "index": 12,
+                    "lineNumber": 37,
+                    "name": "getChambersByDepartment",
+                    "returnType": "QVariantList"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "departmentId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "number",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 13,
                     "lineNumber": 38,
-                    "name": "getNextChamberNumber",
-                    "returnType": "int"
+                    "name": "chamberExists",
+                    "returnType": "bool"
                 },
                 {
                     "access": "public",
@@ -257,7 +278,7 @@
                             "type": "bool"
                         }
                     ],
-                    "index": 13,
+                    "index": 14,
                     "lineNumber": 39,
                     "name": "addChamber",
                     "returnType": "QString"
@@ -268,12 +289,30 @@
                         {
                             "name": "departmentId",
                             "type": "int"
+                        },
+                        {
+                            "name": "number",
+                            "type": "int"
                         }
                     ],
-                    "index": 14,
+                    "index": 15,
                     "lineNumber": 40,
-                    "name": "getLastChamber",
-                    "returnType": "QVariantMap"
+                    "name": "deleteChamberByNumber",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "index": 16,
+                    "lineNumber": 43,
+                    "name": "getPatients",
+                    "returnType": "QVariantList"
+                },
+                {
+                    "access": "public",
+                    "index": 17,
+                    "lineNumber": 44,
+                    "name": "getTransfers",
+                    "returnType": "QVariantList"
                 },
                 {
                     "access": "public",
@@ -283,40 +322,13 @@
                             "type": "int"
                         },
                         {
-                            "name": "isDisease",
-                            "type": "bool"
-                        }
-                    ],
-                    "index": 15,
-                    "lineNumber": 41,
-                    "name": "getLastChamberByType",
-                    "returnType": "QVariantMap"
-                },
-                {
-                    "access": "public",
-                    "arguments": [
-                        {
-                            "name": "chamberId",
+                            "name": "chamberNumber",
                             "type": "int"
                         }
                     ],
-                    "index": 16,
-                    "lineNumber": 42,
-                    "name": "deleteChamber",
-                    "returnType": "QString"
-                },
-                {
-                    "access": "public",
-                    "index": 17,
-                    "lineNumber": 45,
-                    "name": "getPatients",
-                    "returnType": "QVariantList"
-                },
-                {
-                    "access": "public",
                     "index": 18,
-                    "lineNumber": 46,
-                    "name": "getTransfers",
+                    "lineNumber": 47,
+                    "name": "getPatientsByChamber",
                     "returnType": "QVariantList"
                 }
             ],

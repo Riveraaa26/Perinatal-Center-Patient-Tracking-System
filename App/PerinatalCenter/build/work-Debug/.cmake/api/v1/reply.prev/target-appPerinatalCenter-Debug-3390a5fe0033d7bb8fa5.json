@@ -28,13 +28,13 @@
 			"qt6_add_qml_module",
 			"qt_add_qml_module",
 			"add_dependencies",
-			"_qt_internal_write_deferred_qmlls_build_ini_file",
 			"_qt_internal_qml_copy_files_to_build_dir",
 			"_qt_internal_scan_qml_imports",
 			"_qt_internal_generate_deploy_qml_imports_script",
 			"cmake_language",
 			"_qt_internal_finalize_executable",
 			"qt6_finalize_target",
+			"_qt_internal_write_deferred_qmlls_build_ini_file",
 			"_qt_internal_target_enable_qmlcachegen",
 			"qt6_target_qml_sources",
 			"add_custom_command",
@@ -75,8 +75,8 @@
 			"C:/msys64/mingw64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateTargets.cmake",
 			"C:/msys64/mingw64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateConfig.cmake",
 			"C:/msys64/mingw64/lib/cmake/Qt6Core/Qt6CoreDependencies.cmake",
-			"C:/msys64/mingw64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1179:EVAL",
 			"C:/msys64/mingw64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:866:EVAL",
+			"C:/msys64/mingw64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1179:EVAL",
 			"build/work-Debug/.qtcreator/cmake-helper/qtcreator-project.cmake",
 			"C:/msys64/mingw64/lib/cmake/Qt6/QtPublicWindowsHelpers.cmake"
 		],
@@ -112,13 +112,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 46,
+				"line" : 47,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 42,
+				"line" : 43,
 				"parent" : 0
 			},
 			{
@@ -446,36 +446,7 @@
 				"parent" : 64
 			},
 			{
-				"file" : 1,
-				"line" : -1,
-				"parent" : 0
-			},
-			{
 				"command" : 15,
-				"file" : 21,
-				"line" : 1,
-				"parent" : 66
-			},
-			{
-				"command" : 14,
-				"file" : 10,
-				"line" : 1477,
-				"parent" : 67
-			},
-			{
-				"command" : 16,
-				"file" : 10,
-				"line" : 1045,
-				"parent" : 25
-			},
-			{
-				"command" : 14,
-				"file" : 10,
-				"line" : 3223,
-				"parent" : 69
-			},
-			{
-				"command" : 16,
 				"file" : 10,
 				"line" : 1051,
 				"parent" : 25
@@ -484,42 +455,71 @@
 				"command" : 14,
 				"file" : 10,
 				"line" : 3223,
-				"parent" : 71
-			},
-			{
-				"command" : 21,
-				"file" : 22,
-				"line" : 1,
 				"parent" : 66
 			},
 			{
+				"command" : 15,
+				"file" : 10,
+				"line" : 1045,
+				"parent" : 25
+			},
+			{
+				"command" : 14,
+				"file" : 10,
+				"line" : 3223,
+				"parent" : 68
+			},
+			{
+				"file" : 1,
+				"line" : -1,
+				"parent" : 0
+			},
+			{
 				"command" : 20,
-				"file" : 0,
-				"line" : 897,
-				"parent" : 73
+				"file" : 21,
+				"line" : 1,
+				"parent" : 70
 			},
 			{
 				"command" : 19,
 				"file" : 0,
-				"line" : 817,
-				"parent" : 74
+				"line" : 897,
+				"parent" : 71
 			},
 			{
 				"command" : 18,
 				"file" : 0,
 				"line" : 817,
-				"parent" : 75
+				"parent" : 72
 			},
 			{
 				"command" : 17,
+				"file" : 0,
+				"line" : 817,
+				"parent" : 73
+			},
+			{
+				"command" : 16,
 				"file" : 10,
 				"line" : 4921,
-				"parent" : 76
+				"parent" : 74
 			},
 			{
 				"command" : 14,
 				"file" : 10,
 				"line" : 4696,
+				"parent" : 75
+			},
+			{
+				"command" : 21,
+				"file" : 22,
+				"line" : 1,
+				"parent" : 70
+			},
+			{
+				"command" : 14,
+				"file" : 10,
+				"line" : 1477,
 				"parent" : 77
 			},
 			{
@@ -571,6 +571,12 @@
 				"parent" : 85
 			},
 			{
+				"command" : 24,
+				"file" : 0,
+				"line" : 1504,
+				"parent" : 85
+			},
+			{
 				"command" : 28,
 				"file" : 10,
 				"line" : 962,
@@ -580,19 +586,13 @@
 				"command" : 27,
 				"file" : 0,
 				"line" : 419,
-				"parent" : 87
-			},
-			{
-				"command" : 24,
-				"file" : 0,
-				"line" : 2597,
 				"parent" : 88
 			},
 			{
 				"command" : 24,
 				"file" : 0,
-				"line" : 1504,
-				"parent" : 85
+				"line" : 2597,
+				"parent" : 89
 			},
 			{
 				"command" : 29,
@@ -656,7 +656,7 @@
 				"command" : 35,
 				"file" : 0,
 				"line" : 2658,
-				"parent" : 88
+				"parent" : 89
 			},
 			{
 				"command" : 33,
@@ -731,6 +731,18 @@
 				"parent" : 79
 			},
 			{
+				"command" : 33,
+				"file" : 10,
+				"line" : 3694,
+				"parent" : 79
+			},
+			{
+				"command" : 33,
+				"file" : 10,
+				"line" : 3887,
+				"parent" : 79
+			},
+			{
 				"command" : 28,
 				"file" : 10,
 				"line" : 3979,
@@ -740,43 +752,43 @@
 				"command" : 27,
 				"file" : 0,
 				"line" : 419,
-				"parent" : 114
+				"parent" : 116
 			},
 			{
 				"command" : 35,
 				"file" : 0,
 				"line" : 2658,
-				"parent" : 115
+				"parent" : 117
 			},
 			{
 				"command" : 33,
 				"file" : 0,
 				"line" : 2198,
-				"parent" : 116
+				"parent" : 118
 			},
 			{
 				"command" : 36,
 				"file" : 0,
 				"line" : 891,
-				"parent" : 73
+				"parent" : 71
 			},
 			{
 				"command" : 33,
 				"file" : 0,
 				"line" : 2323,
-				"parent" : 118
+				"parent" : 120
 			},
 			{
 				"command" : 37,
 				"file" : 0,
 				"line" : 834,
-				"parent" : 74
+				"parent" : 72
 			},
 			{
 				"command" : 33,
 				"file" : 24,
 				"line" : 126,
-				"parent" : 120
+				"parent" : 122
 			}
 		]
 	},
@@ -996,7 +1008,8 @@
 				14,
 				15,
 				17,
-				18
+				19,
+				20
 			]
 		},
 		{
@@ -1178,20 +1191,20 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 68,
-			"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 70,
-			"id" : "appPerinatalCenter_copy_qml::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 72,
+			"backtrace" : 67,
 			"id" : "appPerinatalCenter_copy_res::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 78,
+			"backtrace" : 69,
+			"id" : "appPerinatalCenter_copy_qml::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 76,
 			"id" : "appPerinatalCenter_qmlimportscan::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 78,
+			"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "appPerinatalCenter_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
@@ -1386,24 +1399,24 @@
 			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 89,
-			"id" : "Qt6::rcc::@6890427a1f51a3e7e1df"
+			"backtrace" : 87,
+			"id" : "Qt6::cmake_automoc_parser::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 90,
-			"id" : "Qt6::cmake_automoc_parser::@6890427a1f51a3e7e1df"
+			"id" : "Qt6::rcc::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 92,
 			"id" : "appPerinatalCenter_tooling::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 68,
-			"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df"
+			"backtrace" : 76,
+			"id" : "appPerinatalCenter_qmlimportscan::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 78,
-			"id" : "appPerinatalCenter_qmlimportscan::@6890427a1f51a3e7e1df"
+			"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "appPerinatalCenter_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
@@ -1438,18 +1451,19 @@
 				14,
 				15,
 				17,
-				18,
 				19,
+				20,
 				21,
 				23,
-				36,
-				37,
-				38,
+				25,
 				39,
 				40,
 				41,
 				42,
-				43
+				43,
+				44,
+				45,
+				46
 			]
 		},
 		{
@@ -1462,7 +1476,8 @@
 				8,
 				11,
 				13,
-				16
+				16,
+				18
 			]
 		},
 		{
@@ -1476,22 +1491,20 @@
 			"name" : "Resources",
 			"sourceIndexes" : 
 			[
-				20
+				22
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				22
+				24
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				24,
-				25,
 				26,
 				27,
 				28,
@@ -1501,7 +1514,10 @@
 				32,
 				33,
 				34,
-				35
+				35,
+				36,
+				37,
+				38
 			]
 		}
 	],
@@ -1553,7 +1569,7 @@
 		},
 		{
 			"backtrace" : 103,
-			"path" : "UserPage.qml",
+			"path" : "NursePage.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -1603,7 +1619,7 @@
 			"backtrace" : 111,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_UserPage_qml.cpp",
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_NursePage_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -1619,32 +1635,44 @@
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 117,
+			"backtrace" : 114,
+			"path" : "ChambersView.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 115,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_ChambersView_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 119,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.qt/rcc/qrc_appPerinatalCenter_raw_qml_0.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 119,
+			"backtrace" : 121,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.qt/rcc/qmake_PerinatalCenter.qrc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 119,
+			"backtrace" : 121,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/PerinatalCenter/qmldir",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 119,
+			"backtrace" : 121,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.qt/rcc/appPerinatalCenter_raw_qml_0.qrc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 121,
+			"backtrace" : 123,
 			"path" : "build/work-Debug/appPerinatalCenter.exe.manifest",
 			"sourceGroupIndex" : 4
 		},
@@ -1699,13 +1727,19 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_UserPage_qml.cpp.rule",
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_NursePage_qml.cpp.rule",
 			"sourceGroupIndex" : 5
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_DepartamentsView_qml.cpp.rule",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_ChambersView_qml.cpp.rule",
 			"sourceGroupIndex" : 5
 		},
 		{

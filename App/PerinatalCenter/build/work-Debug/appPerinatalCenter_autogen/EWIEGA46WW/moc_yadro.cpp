@@ -52,10 +52,8 @@ template <> constexpr inline auto Yadro::qt_create_metaobjectdata<qt_meta_tag_ZN
         "password",
         "loginUser",
         "login",
-        "getChambersByDepartment",
-        "QVariantList",
-        "departmentId",
         "getEmployees",
+        "QVariantList",
         "getRoles",
         "updateEmployee",
         "id",
@@ -64,6 +62,8 @@ template <> constexpr inline auto Yadro::qt_create_metaobjectdata<qt_meta_tag_ZN
         "roleId",
         "createEmployee",
         "deleteEmployee",
+        "setEmployeeBlocked",
+        "blocked",
         "getDepartments",
         "createDepartment",
         "capacity",
@@ -71,17 +71,17 @@ template <> constexpr inline auto Yadro::qt_create_metaobjectdata<qt_meta_tag_ZN
         "chambers",
         "updateDepartmentName",
         "deleteDepartment",
-        "getNextChamberNumber",
-        "addChamber",
+        "getChambersByDepartment",
+        "departmentId",
+        "chamberExists",
         "number",
+        "addChamber",
         "isDisease",
-        "getLastChamber",
-        "QVariantMap",
-        "getLastChamberByType",
-        "deleteChamber",
-        "chamberId",
+        "deleteChamberByNumber",
         "getPatients",
-        "getTransfers"
+        "getTransfers",
+        "getPatientsByChamber",
+        "chamberNumber"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -94,66 +94,66 @@ template <> constexpr inline auto Yadro::qt_create_metaobjectdata<qt_meta_tag_ZN
         QtMocHelpers::MethodData<QString(const QString &, const QString &)>(12, 6, QMC::AccessPublic, QMetaType::QString, {{
             { QMetaType::QString, 13 }, { QMetaType::QString, 11 },
         }}),
-        // Method 'getChambersByDepartment'
-        QtMocHelpers::MethodData<QVariantList(int)>(14, 6, QMC::AccessPublic, 0x80000000 | 15, {{
-            { QMetaType::Int, 16 },
-        }}),
         // Method 'getEmployees'
-        QtMocHelpers::MethodData<QVariantList()>(17, 6, QMC::AccessPublic, 0x80000000 | 15),
+        QtMocHelpers::MethodData<QVariantList()>(14, 6, QMC::AccessPublic, 0x80000000 | 15),
         // Method 'getRoles'
-        QtMocHelpers::MethodData<QVariantList()>(18, 6, QMC::AccessPublic, 0x80000000 | 15),
+        QtMocHelpers::MethodData<QVariantList()>(16, 6, QMC::AccessPublic, 0x80000000 | 15),
         // Method 'updateEmployee'
-        QtMocHelpers::MethodData<QString(int, const QString &, const QString &, const QString &, const QString &, int)>(19, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::Int, 20 }, { QMetaType::QString, 21 }, { QMetaType::QString, 22 }, { QMetaType::QString, 13 },
-            { QMetaType::QString, 11 }, { QMetaType::Int, 23 },
+        QtMocHelpers::MethodData<QString(int, const QString &, const QString &, const QString &, const QString &, int)>(17, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::Int, 18 }, { QMetaType::QString, 19 }, { QMetaType::QString, 20 }, { QMetaType::QString, 13 },
+            { QMetaType::QString, 11 }, { QMetaType::Int, 21 },
         }}),
         // Method 'createEmployee'
-        QtMocHelpers::MethodData<QString(const QString &, const QString &, const QString &, const QString &, int)>(24, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::QString, 21 }, { QMetaType::QString, 22 }, { QMetaType::QString, 13 }, { QMetaType::QString, 11 },
-            { QMetaType::Int, 23 },
+        QtMocHelpers::MethodData<QString(const QString &, const QString &, const QString &, const QString &, int)>(22, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::QString, 19 }, { QMetaType::QString, 20 }, { QMetaType::QString, 13 }, { QMetaType::QString, 11 },
+            { QMetaType::Int, 21 },
         }}),
         // Method 'deleteEmployee'
-        QtMocHelpers::MethodData<QString(int)>(25, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::Int, 20 },
+        QtMocHelpers::MethodData<QString(int)>(23, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::Int, 18 },
+        }}),
+        // Method 'setEmployeeBlocked'
+        QtMocHelpers::MethodData<QString(int, bool)>(24, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::Int, 18 }, { QMetaType::Bool, 25 },
         }}),
         // Method 'getDepartments'
         QtMocHelpers::MethodData<QVariantList()>(26, 6, QMC::AccessPublic, 0x80000000 | 15),
         // Method 'createDepartment'
         QtMocHelpers::MethodData<QString(const QString &, int, int, const QVariantList &)>(27, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::QString, 21 }, { QMetaType::Int, 28 }, { QMetaType::Int, 29 }, { 0x80000000 | 15, 30 },
+            { QMetaType::QString, 19 }, { QMetaType::Int, 28 }, { QMetaType::Int, 29 }, { 0x80000000 | 15, 30 },
         }}),
         // Method 'updateDepartmentName'
         QtMocHelpers::MethodData<QString(int, const QString &)>(31, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::Int, 20 }, { QMetaType::QString, 21 },
+            { QMetaType::Int, 18 }, { QMetaType::QString, 19 },
         }}),
         // Method 'deleteDepartment'
         QtMocHelpers::MethodData<QString(int)>(32, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::Int, 20 },
+            { QMetaType::Int, 18 },
         }}),
-        // Method 'getNextChamberNumber'
-        QtMocHelpers::MethodData<int(int)>(33, 6, QMC::AccessPublic, QMetaType::Int, {{
-            { QMetaType::Int, 16 },
+        // Method 'getChambersByDepartment'
+        QtMocHelpers::MethodData<QVariantList(int)>(33, 6, QMC::AccessPublic, 0x80000000 | 15, {{
+            { QMetaType::Int, 34 },
+        }}),
+        // Method 'chamberExists'
+        QtMocHelpers::MethodData<bool(int, int)>(35, 6, QMC::AccessPublic, QMetaType::Bool, {{
+            { QMetaType::Int, 34 }, { QMetaType::Int, 36 },
         }}),
         // Method 'addChamber'
-        QtMocHelpers::MethodData<QString(int, int, int, bool)>(34, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::Int, 16 }, { QMetaType::Int, 35 }, { QMetaType::Int, 28 }, { QMetaType::Bool, 36 },
+        QtMocHelpers::MethodData<QString(int, int, int, bool)>(37, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::Int, 34 }, { QMetaType::Int, 36 }, { QMetaType::Int, 28 }, { QMetaType::Bool, 38 },
         }}),
-        // Method 'getLastChamber'
-        QtMocHelpers::MethodData<QVariantMap(int)>(37, 6, QMC::AccessPublic, 0x80000000 | 38, {{
-            { QMetaType::Int, 16 },
-        }}),
-        // Method 'getLastChamberByType'
-        QtMocHelpers::MethodData<QVariantMap(int, bool)>(39, 6, QMC::AccessPublic, 0x80000000 | 38, {{
-            { QMetaType::Int, 16 }, { QMetaType::Bool, 36 },
-        }}),
-        // Method 'deleteChamber'
-        QtMocHelpers::MethodData<QString(int)>(40, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::Int, 41 },
+        // Method 'deleteChamberByNumber'
+        QtMocHelpers::MethodData<QString(int, int)>(39, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::Int, 34 }, { QMetaType::Int, 36 },
         }}),
         // Method 'getPatients'
-        QtMocHelpers::MethodData<QVariantList()>(42, 6, QMC::AccessPublic, 0x80000000 | 15),
+        QtMocHelpers::MethodData<QVariantList()>(40, 6, QMC::AccessPublic, 0x80000000 | 15),
         // Method 'getTransfers'
-        QtMocHelpers::MethodData<QVariantList()>(43, 6, QMC::AccessPublic, 0x80000000 | 15),
+        QtMocHelpers::MethodData<QVariantList()>(41, 6, QMC::AccessPublic, 0x80000000 | 15),
+        // Method 'getPatientsByChamber'
+        QtMocHelpers::MethodData<QVariantList(int, int)>(42, 6, QMC::AccessPublic, 0x80000000 | 15, {{
+            { QMetaType::Int, 34 }, { QMetaType::Int, 43 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -186,17 +186,17 @@ void Yadro::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
         case 1: { QString _r = _t->loginUser((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[2])));
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
-        case 2: { QVariantList _r = _t->getChambersByDepartment((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
+        case 2: { QVariantList _r = _t->getEmployees();
             if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
-        case 3: { QVariantList _r = _t->getEmployees();
+        case 3: { QVariantList _r = _t->getRoles();
             if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
-        case 4: { QVariantList _r = _t->getRoles();
-            if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
-        case 5: { QString _r = _t->updateEmployee((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[5])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[6])));
+        case 4: { QString _r = _t->updateEmployee((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[5])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[6])));
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
-        case 6: { QString _r = _t->createEmployee((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[5])));
+        case 5: { QString _r = _t->createEmployee((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[5])));
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
-        case 7: { QString _r = _t->deleteEmployee((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
+        case 6: { QString _r = _t->deleteEmployee((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
+            if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
+        case 7: { QString _r = _t->setEmployeeBlocked((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<bool>>(_a[2])));
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
         case 8: { QVariantList _r = _t->getDepartments();
             if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
@@ -206,19 +206,19 @@ void Yadro::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
         case 11: { QString _r = _t->deleteDepartment((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
-        case 12: { int _r = _t->getNextChamberNumber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
-            if (_a[0]) *reinterpret_cast<int*>(_a[0]) = std::move(_r); }  break;
-        case 13: { QString _r = _t->addChamber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<bool>>(_a[4])));
-            if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
-        case 14: { QVariantMap _r = _t->getLastChamber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
-            if (_a[0]) *reinterpret_cast<QVariantMap*>(_a[0]) = std::move(_r); }  break;
-        case 15: { QVariantMap _r = _t->getLastChamberByType((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<bool>>(_a[2])));
-            if (_a[0]) *reinterpret_cast<QVariantMap*>(_a[0]) = std::move(_r); }  break;
-        case 16: { QString _r = _t->deleteChamber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
-            if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
-        case 17: { QVariantList _r = _t->getPatients();
+        case 12: { QVariantList _r = _t->getChambersByDepartment((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
             if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
-        case 18: { QVariantList _r = _t->getTransfers();
+        case 13: { bool _r = _t->chamberExists((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])));
+            if (_a[0]) *reinterpret_cast<bool*>(_a[0]) = std::move(_r); }  break;
+        case 14: { QString _r = _t->addChamber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<bool>>(_a[4])));
+            if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
+        case 15: { QString _r = _t->deleteChamberByNumber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])));
+            if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
+        case 16: { QVariantList _r = _t->getPatients();
+            if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
+        case 17: { QVariantList _r = _t->getTransfers();
+            if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
+        case 18: { QVariantList _r = _t->getPatientsByChamber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])));
             if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }

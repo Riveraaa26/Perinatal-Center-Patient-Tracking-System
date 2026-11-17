@@ -26,7 +26,14 @@ namespace _qt_qml_PerinatalCenter_AdminPage_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
     };
 }
-namespace _qt_qml_PerinatalCenter_UserPage_qml { 
+namespace _qt_qml_PerinatalCenter_NursePage_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _qt_qml_PerinatalCenter_DoctorPage_qml { 
     extern const unsigned char qmlData[];
     extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
     const QQmlPrivate::CachedQmlUnit unit = {
@@ -64,7 +71,8 @@ Registry::Registry() {
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/PerinatalCenter/Main.qml"), &QmlCacheGeneratedCode::_qt_qml_PerinatalCenter_Main_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/PerinatalCenter/LoginPage.qml"), &QmlCacheGeneratedCode::_qt_qml_PerinatalCenter_LoginPage_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/PerinatalCenter/AdminPage.qml"), &QmlCacheGeneratedCode::_qt_qml_PerinatalCenter_AdminPage_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/PerinatalCenter/UserPage.qml"), &QmlCacheGeneratedCode::_qt_qml_PerinatalCenter_UserPage_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/PerinatalCenter/NursePage.qml"), &QmlCacheGeneratedCode::_qt_qml_PerinatalCenter_NursePage_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/PerinatalCenter/DoctorPage.qml"), &QmlCacheGeneratedCode::_qt_qml_PerinatalCenter_DoctorPage_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/PerinatalCenter/DepartamentsView.qml"), &QmlCacheGeneratedCode::_qt_qml_PerinatalCenter_DepartamentsView_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/PerinatalCenter/ChambersView.qml"), &QmlCacheGeneratedCode::_qt_qml_PerinatalCenter_ChambersView_qml::unit);
     QQmlPrivate::RegisterQmlUnitCacheHook registration;

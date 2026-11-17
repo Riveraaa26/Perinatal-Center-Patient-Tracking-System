@@ -96,23 +96,32 @@ Item {
                         errorLabel.visible = false
                         const result = Yadro.loginUser(loginField.text, passwordField.text)
 
-                        // Если вернулась известная ошибка
-                        if (result === "Введите логин и пароль." ||
-                            result === "Нет подключения к базе данных." ||
-                            result === "Неверный логин или пароль." ||
-                            result.startsWith("Ошибка БД:")) {
+                        // Проверяем на ошибки (если нет разделителя |, значит это ошибка)
+                        if (!result.includes("|")) {
                             errorLabel.text = result
                             errorLabel.visible = true
+                            return
+                        }
+
+                        // Разделяем ФИО и Роль
+                        const parts = result.split("|")
+                        const fullName = parts[0]
+                        const roleName = parts[1]
+
+                        // Распределяем по ролям
+                        if (roleName === "Администратор") {
+                            stackView.push("AdminPage.qml")
+                        } else if (roleName === "Врач акушер-гинеколог" || roleName === "Врач") {
+                            stackView.push("DoctorPage.qml", {
+                                "currentUserLogin": loginField.text,
+                                "currentUserFullName": fullName
+                            })
                         } else {
-                            // ✅ Успех! result содержит ФИО
-                            if (loginField.text === "admin") {
-                                stackView.push("AdminPage.qml")
-                            } else {
-                                stackView.push("UserPage.qml", {
-                                    "currentUserLogin": loginField.text,
-                                    "currentUserFullName": result
-                                })
-                            }
+                            // По умолчанию (или если роль "Медсестра") кидаем к медсестре
+                            stackView.push("NursePage.qml", {
+                                "currentUserLogin": loginField.text,
+                                "currentUserFullName": fullName
+                            })
                         }
                     }
                 }

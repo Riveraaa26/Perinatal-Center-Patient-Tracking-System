@@ -614,11 +614,43 @@
                             "message": ""
                         },
                         {
+                            "codegenResult": 2,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "allPatients",
+                            "line": 370,
+                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "filteredPatients",
+                            "line": 372,
+                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 13,
+                            "durationMicroseconds": 0,
+                            "functionName": "loadPatients",
+                            "line": 378,
+                            "message": "Cannot retrieve a non-object type by ID: searchField"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 13,
+                            "durationMicroseconds": 3000,
+                            "functionName": "filterPatients",
+                            "line": 384,
+                            "message": "Cannot retrieve a non-object type by ID: searchField"
+                        },
+                        {
                             "codegenResult": 0,
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "onCompleted",
-                            "line": 369,
+                            "line": 374,
                             "message": ""
                         },
                         {
@@ -626,7 +658,7 @@
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 379,
+                            "line": 408,
                             "message": ""
                         },
                         {
@@ -634,7 +666,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 381,
+                            "line": 410,
                             "message": ""
                         },
                         {
@@ -642,47 +674,111 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 387,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 30,
-                            "durationMicroseconds": 0,
-                            "functionName": "top",
-                            "line": 389,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 398,
-                            "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 408,
-                            "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 30,
-                            "durationMicroseconds": 0,
-                            "functionName": "top",
                             "line": 416,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 418,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "onTextChanged",
+                            "line": 438,
+                            "message": "Could not find signal \"textChanged\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 432,
+                            "message": "Could not find property \"fill\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 34,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 448,
+                            "message": "Could not find property \"visible\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 461,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 445,
+                            "message": "Could not find property \"right\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 49,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalCenter",
+                            "line": 447,
+                            "message": "Could not find property \"verticalCenter\"."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "horizontalAlignment",
+                            "line": 458,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 48,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 459,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 473,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 483,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 491,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 418,
+                            "line": 493,
                             "message": ""
                         },
                         {
@@ -690,7 +786,7 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 420,
+                            "line": 495,
                             "message": ""
                         },
                         {
@@ -698,7 +794,15 @@
                             "column": 33,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 422,
+                            "line": 497,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "model",
+                            "line": 514,
                             "message": ""
                         },
                         {
@@ -706,7 +810,7 @@
                             "column": 35,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 432,
+                            "line": 507,
                             "message": ""
                         },
                         {
@@ -714,7 +818,7 @@
                             "column": 61,
                             "durationMicroseconds": 0,
                             "functionName": "policy",
-                            "line": 436,
+                            "line": 511,
                             "message": "Could not find property \"policy\"."
                         },
                         {
@@ -722,7 +826,7 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 439,
+                            "line": 517,
                             "message": "Cannot access value for name patientModel"
                         },
                         {
@@ -730,7 +834,7 @@
                             "column": 43,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 444,
+                            "line": 522,
                             "message": ""
                         },
                         {
@@ -738,7 +842,7 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 459,
+                            "line": 537,
                             "message": "Cannot access value for name patientModel"
                         },
                         {
@@ -746,7 +850,7 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 461,
+                            "line": 539,
                             "message": "Cannot access value for name index"
                         },
                         {
@@ -754,7 +858,7 @@
                             "column": 43,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 465,
+                            "line": 543,
                             "message": ""
                         },
                         {
@@ -762,7 +866,7 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 470,
+                            "line": 548,
                             "message": "Cannot access value for name modelData"
                         },
                         {
@@ -770,7 +874,7 @@
                             "column": 155,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 470,
+                            "line": 548,
                             "message": ""
                         },
                         {
@@ -778,7 +882,7 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 471,
+                            "line": 549,
                             "message": "Cannot access value for name modelData"
                         },
                         {
@@ -786,7 +890,7 @@
                             "column": 149,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 471,
+                            "line": 549,
                             "message": ""
                         },
                         {
@@ -794,7 +898,7 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 472,
+                            "line": 550,
                             "message": "Cannot access value for name modelData"
                         },
                         {
@@ -802,7 +906,7 @@
                             "column": 169,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 472,
+                            "line": 550,
                             "message": ""
                         },
                         {
@@ -810,7 +914,7 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 473,
+                            "line": 551,
                             "message": "Cannot access value for name modelData"
                         },
                         {
@@ -818,7 +922,7 @@
                             "column": 151,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 473,
+                            "line": 551,
                             "message": ""
                         },
                         {
@@ -826,7 +930,7 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 474,
+                            "line": 552,
                             "message": "Cannot access value for name modelData"
                         },
                         {
@@ -834,7 +938,7 @@
                             "column": 157,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 474,
+                            "line": 552,
                             "message": ""
                         },
                         {
@@ -842,7 +946,7 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 475,
+                            "line": 553,
                             "message": "Cannot access value for name modelData"
                         },
                         {
@@ -850,15 +954,23 @@
                             "column": 151,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 475,
+                            "line": 553,
                             "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 560,
+                            "message": "Cannot retrieve a non-object type by ID: searchField"
                         },
                         {
                             "codegenResult": 0,
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 484,
+                            "line": 563,
                             "message": ""
                         },
                         {
@@ -866,7 +978,7 @@
                             "column": 39,
                             "durationMicroseconds": 0,
                             "functionName": "centerIn",
-                            "line": 482,
+                            "line": 561,
                             "message": ""
                         }
                     ],

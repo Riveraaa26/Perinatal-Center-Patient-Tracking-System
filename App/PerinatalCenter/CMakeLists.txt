@@ -24,13 +24,14 @@ qt_add_qml_module(appPerinatalCenter
         Main.qml
         LoginPage.qml
         AdminPage.qml
-        UserPage.qml
+        NursePage.qml
+        DoctorPage.qml
         DepartamentsView.qml
         ChambersView.qml
     SOURCES
         yadro.cpp
         yadro.h
-        UserPage.qml
+        QML_FILES DoctorPage.qml
 )
 
 set_target_properties(appPerinatalCenter PROPERTIES

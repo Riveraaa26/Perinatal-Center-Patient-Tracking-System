@@ -12,17 +12,20 @@ Item {
     property var rolesList: []
     property var collectedChambers: []
 
-    property int chamberToDeleteId: -1
-    property bool deleteIsDisease: false
-
     Component.onCompleted: {
         employeeModel.model = Yadro.getEmployees()
         departmentModel.model = Yadro.getDepartments()
         rolesList = Yadro.getRoles()
+
+        // Автоматически выбираем первого сотрудника при входе
+        if (employeeModel.count > 0) {
+            employeeModel.currentIndex = 0
+            adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
+        }
     }
 
     // ==========================================
-    // 1. ШАПКА И САЙДБАР
+    // 1. ШАПКА
     // ==========================================
     Text {
         id: brandText
@@ -68,6 +71,9 @@ Item {
         anchors.topMargin: 30
     }
 
+    // ==========================================
+    // 2. САЙДБАР
+    // ==========================================
     Rectangle {
         id: sidebar
         width: 200
@@ -96,7 +102,14 @@ Item {
                 onClicked: {
                     contentArea.currentPage = "Сотрудники"
                     employeeModel.model = Yadro.getEmployees()
-                    adminPage.selectedEmployeeId = -1
+
+                    // Выделяем первого при переключении
+                    if (employeeModel.count > 0) {
+                        employeeModel.currentIndex = 0
+                        adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
+                    } else {
+                        adminPage.selectedEmployeeId = -1
+                    }
                     adminPage.selectedDepartmentId = -1
                 }
             }
@@ -114,8 +127,16 @@ Item {
                 onClicked: {
                     contentArea.currentPage = "Отделения"
                     departmentModel.model = Yadro.getDepartments()
+
+                    // Выделяем первое при переключении
+                    if (departmentModel.count > 0) {
+                        departmentModel.currentIndex = 0
+                        adminPage.selectedDepartmentId = parseInt(departmentModel.model[0].id)
+                        adminPage.selectedDepartmentName = departmentModel.model[0].name
+                    } else {
+                        adminPage.selectedDepartmentId = -1
+                    }
                     adminPage.selectedEmployeeId = -1
-                    adminPage.selectedDepartmentId = -1
                 }
             }
 
@@ -124,7 +145,7 @@ Item {
     }
 
     // ==========================================
-    // 2. РАБОЧАЯ ОБЛАСТЬ
+    // 3. РАБОЧАЯ ЗОНА
     // ==========================================
     Item {
         id: contentArea
@@ -162,6 +183,7 @@ Item {
             border.width: 1
             radius: 8
 
+            // ТАБЛИЦА СОТРУДНИКОВ
             ListView {
                 id: employeeModel
                 visible: contentArea.currentPage === "Сотрудники"
@@ -170,26 +192,22 @@ Item {
                 clip: true
                 focus: true
                 highlightFollowsCurrentItem: false
-                ScrollBar.vertical: ScrollBar {
-                    policy: ScrollBar.AsNeeded
-                    width: 10
-                }
+                ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
 
                 header: Rectangle {
                     width: employeeModel.width - 10
                     height: 35
                     color: "#f0f0f0"
-
                     RowLayout {
                         anchors.fill: parent
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
                         spacing: 10
-
                         Text { text: "ФИО"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: "Логин"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: "Пароль"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: "Роль"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+                        Text { text: "Статус"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                     }
                 }
 
@@ -204,22 +222,28 @@ Item {
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
                         spacing: 10
-
                         Text { text: modelData.full_name !== undefined ? modelData.full_name : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: modelData.login !== undefined ? modelData.login : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: modelData.password !== undefined ? modelData.password : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: modelData.role !== undefined ? modelData.role : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+
+                        // Статус: просто текст, как и другие колонки
+                        Text {
+                            text: modelData.block ? "Заблокирован" : "Активен"
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                        }
                     }
 
                     MouseArea {
                         anchors.fill: parent
                         acceptedButtons: Qt.LeftButton
-
                         onClicked: {
                             employeeModel.currentIndex = index
                             adminPage.selectedEmployeeId = parseInt(modelData.id)
                         }
-
                         onDoubleClicked: {
                             employeeModel.currentIndex = index
                             adminPage.selectedEmployeeId = parseInt(modelData.id)
@@ -235,13 +259,13 @@ Item {
                                     break
                                 }
                             }
-
                             editPopup.open()
                         }
                     }
                 }
             }
 
+            // ТАБЛИЦА ОТДЕЛЕНИЙ
             ListView {
                 id: departmentModel
                 visible: contentArea.currentPage === "Отделения"
@@ -250,25 +274,20 @@ Item {
                 clip: true
                 focus: true
                 highlightFollowsCurrentItem: false
-                ScrollBar.vertical: ScrollBar {
-                    policy: ScrollBar.AsNeeded
-                    width: 10
-                }
+                ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
 
                 header: Rectangle {
                     width: departmentModel.width - 10
                     height: 35
                     color: "#f0f0f0"
-
                     RowLayout {
                         anchors.fill: parent
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
                         spacing: 10
-
                         Text { text: "Название отделения"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: "Всего палат"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: "Из них инкубаторов"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+                        Text { text: "Из них изоляторов"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                     }
                 }
 
@@ -283,7 +302,6 @@ Item {
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
                         spacing: 10
-
                         Text { text: modelData.name !== undefined ? modelData.name : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: modelData.capacity !== undefined ? modelData.capacity : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: modelData.capacity_disease !== undefined ? modelData.capacity_disease : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
@@ -317,6 +335,7 @@ Item {
             }
         }
 
+        // КНОПКИ ДЕЙСТВИЙ
         RowLayout {
             id: buttonRow
             anchors.left: parent.left
@@ -355,6 +374,47 @@ Item {
                 }
             }
 
+            // КНОПКА БЛОКИРОВКИ
+            Button {
+                id: blockEmployeeButton
+                visible: contentArea.currentPage === "Сотрудники"
+                implicitHeight: 40
+                implicitWidth: 180
+                font.pixelSize: 15
+                enabled: adminPage.selectedEmployeeId !== -1
+
+                property bool selectedIsBlocked: {
+                    if (adminPage.selectedEmployeeId === -1) return false
+                    const m = employeeModel.model
+                    if (!m) return false
+                    for (let i = 0; i < m.length; i++) {
+                        if (parseInt(m[i].id) === adminPage.selectedEmployeeId)
+                            return !!m[i].block
+                    }
+                    return false
+                }
+
+                text: selectedIsBlocked ? "Разблокировать" : "Заблокировать"
+
+                onClicked: {
+                    const blocked = !selectedIsBlocked
+                    const err = Yadro.setEmployeeBlocked(adminPage.selectedEmployeeId, blocked)
+                    if (err.length === 0) {
+                        employeeModel.model = Yadro.getEmployees()
+
+                        // После обновления модели возвращаем выделение на текущего пользователя
+                        for (let i = 0; i < employeeModel.count; i++) {
+                            if (parseInt(employeeModel.model[i].id) === adminPage.selectedEmployeeId) {
+                                employeeModel.currentIndex = i
+                                break
+                            }
+                        }
+                    } else {
+                        console.error(err)
+                    }
+                }
+            }
+
             Button {
                 text: "Создать отделение"
                 visible: contentArea.currentPage === "Отделения"
@@ -375,7 +435,7 @@ Item {
     }
 
     // ==========================================
-    // 3. МЕНЮ ДЕЙСТВИЙ С ОТДЕЛЕНИЕМ
+    // 4. МЕНЮ ДЕЙСТВИЙ С ОТДЕЛЕНИЕМ
     // ==========================================
     Popup {
         id: departmentActionPopup
@@ -440,7 +500,7 @@ Item {
     }
 
     // ==========================================
-    // 4. ПОПАПЫ ДЛЯ СОТРУДНИКОВ
+    // 5. ПОПАПЫ ДЛЯ СОТРУДНИКОВ
     // ==========================================
     Popup {
         id: createPopup
@@ -523,6 +583,12 @@ Item {
                         if (err.length === 0) {
                             createPopup.close()
                             employeeModel.model = Yadro.getEmployees()
+
+                            // Выделяем первого после создания
+                            if (employeeModel.count > 0) {
+                                employeeModel.currentIndex = 0
+                                adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
+                            }
                         } else {
                             createErrorLabel.text = err
                             createErrorLabel.visible = true
@@ -614,7 +680,14 @@ Item {
                         if (err.length === 0) {
                             editPopup.close()
                             employeeModel.model = Yadro.getEmployees()
-                            adminPage.selectedEmployeeId = -1
+
+                            // Восстанавливаем выделение после сохранения
+                            if (employeeModel.count > 0) {
+                                employeeModel.currentIndex = 0
+                                adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
+                            } else {
+                                adminPage.selectedEmployeeId = -1
+                            }
                         } else {
                             editErrorLabel.text = err
                             editErrorLabel.visible = true
@@ -676,7 +749,14 @@ Item {
                         if (err.length === 0) {
                             deletePopup.close()
                             employeeModel.model = Yadro.getEmployees()
-                            adminPage.selectedEmployeeId = -1
+
+                            // Выделяем первого после удаления
+                            if (employeeModel.count > 0) {
+                                employeeModel.currentIndex = 0
+                                adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
+                            } else {
+                                adminPage.selectedEmployeeId = -1
+                            }
                         } else {
                             console.error(err)
                         }
@@ -687,7 +767,7 @@ Item {
     }
 
     // ==========================================
-    // 5. ПОПАПЫ ДЛЯ ОТДЕЛЕНИЙ
+    // 6. ПОПАПЫ ДЛЯ ОТДЕЛЕНИЙ
     // ==========================================
 
     Popup {
@@ -707,12 +787,12 @@ Item {
             Text { text: "Новое отделение"; font.pixelSize: 20; font.bold: true; Layout.alignment: Qt.AlignHCenter }
 
             Text { text: "Название"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createDeptName; Layout.fillWidth: true; implicitHeight: 40 }
+            TextField { id: createDeptName; Layout.fillWidth: true; implicitHeight: 40; onTextChanged: createDeptErrorLabel.visible = false }
 
             Text { text: "Всего палат"; font.pixelSize: 12; color: "#666" }
             TextField { id: createDeptCapacity; Layout.fillWidth: true; implicitHeight: 40; validator: IntValidator { bottom: 0 } }
 
-            Text { text: "Из них инкубаторов"; font.pixelSize: 12; color: "#666" }
+            Text { text: "Из них изоляторов"; font.pixelSize: 12; color: "#666" }
             TextField { id: createDeptCapacityDisease; Layout.fillWidth: true; implicitHeight: 40; validator: IntValidator { bottom: 0 } }
 
             Text {
@@ -752,7 +832,7 @@ Item {
                         let disease = parseInt(createDeptCapacityDisease.text)
 
                         if (disease > total) {
-                            createDeptErrorLabel.text = "Инкубаторов не может быть больше общего количества!"
+                            createDeptErrorLabel.text = "Изоляторов не может быть больше общего количества!"
                             createDeptErrorLabel.visible = true
                             return
                         }
@@ -774,7 +854,9 @@ Item {
                             if (err.length === 0) {
                                 departmentModel.model = Yadro.getDepartments()
                             } else {
-                                console.error(err)
+                                createDeptErrorLabel.text = err
+                                createDeptErrorLabel.visible = true
+                                createDeptPopup.open()
                             }
                         }
                     }
@@ -818,8 +900,8 @@ Item {
                 Layout.fillWidth: true
                 implicitHeight: 40
                 font.pixelSize: 14
-                text: (chambersWizard.currentIndex + 1).toString()
-                readOnly: true
+                validator: IntValidator { bottom: 1 }
+                onVisibleChanged: text = ""
             }
 
             Text { text: "Вместимость (мест)"; font.pixelSize: 12; color: "#666" }
@@ -833,10 +915,20 @@ Item {
             }
 
             Text {
-                text: "Инкубатор (для больных): " + (((chambersWizard.totalChambers - chambersWizard.currentIndex) <= (chambersWizard.totalDisease - chambersWizard.diseaseCreated)) ? "Да" : "Нет")
+                text: "Изолятор (для больных): " + (((chambersWizard.totalChambers - chambersWizard.currentIndex) <= (chambersWizard.totalDisease - chambersWizard.diseaseCreated)) ? "Да" : "Нет")
                 font.pixelSize: 14
                 color: (((chambersWizard.totalChambers - chambersWizard.currentIndex) <= (chambersWizard.totalDisease - chambersWizard.diseaseCreated)) ? "#d9534f" : "#666")
                 Layout.topMargin: 5
+            }
+
+            Text {
+                id: wizardErrorLabel
+                color: "red"
+                font.pixelSize: 13
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                visible: false
             }
 
             Item { Layout.fillHeight: true }
@@ -859,13 +951,24 @@ Item {
                     text: (chambersWizard.currentIndex + 1 === chambersWizard.totalChambers) ? "Завершить" : "Следующая палата"
                     Layout.fillWidth: true
                     implicitHeight: 40
-                    enabled: wizardChamberCapacity.text !== ""
+                    enabled: wizardChamberNumber.text !== "" && wizardChamberCapacity.text !== ""
 
                     onClicked: {
+                        wizardErrorLabel.visible = false
+                        let num = parseInt(wizardChamberNumber.text)
+
+                        for (let i = 0; i < adminPage.collectedChambers.length; i++) {
+                            if (adminPage.collectedChambers[i].number === num) {
+                                wizardErrorLabel.text = "Палата с таким номером уже добавлена в списке!"
+                                wizardErrorLabel.visible = true
+                                return
+                            }
+                        }
+
                         let isDisease = (chambersWizard.totalChambers - chambersWizard.currentIndex) <= (chambersWizard.totalDisease - chambersWizard.diseaseCreated)
 
                         let newChamber = {
-                            "number": parseInt(wizardChamberNumber.text),
+                            "number": num,
                             "capacity": parseInt(wizardChamberCapacity.text),
                             "disease": isDisease
                         }
@@ -890,10 +993,19 @@ Item {
                                 chambersWizard.close()
                                 adminPage.collectedChambers = []
                                 departmentModel.model = Yadro.getDepartments()
+
+                                // Выделяем первое отделение после создания
+                                if (departmentModel.count > 0) {
+                                    departmentModel.currentIndex = 0
+                                    adminPage.selectedDepartmentId = parseInt(departmentModel.model[0].id)
+                                    adminPage.selectedDepartmentName = departmentModel.model[0].name
+                                }
                             } else {
-                                console.error(err)
+                                wizardErrorLabel.text = "Ошибка сохранения: " + err
+                                wizardErrorLabel.visible = true
                             }
                         } else {
+                            wizardChamberNumber.text = ""
                             wizardChamberCapacity.text = ""
                         }
                     }
@@ -945,6 +1057,13 @@ Item {
                         if (err.length === 0) {
                             editNamePopup.close()
                             departmentModel.model = Yadro.getDepartments()
+
+                            // Восстанавливаем выделение после сохранения
+                            if (departmentModel.count > 0) {
+                                departmentModel.currentIndex = 0
+                                adminPage.selectedDepartmentId = parseInt(departmentModel.model[0].id)
+                                adminPage.selectedDepartmentName = departmentModel.model[0].name
+                            }
                         } else {
                             console.error(err)
                         }
@@ -954,7 +1073,6 @@ Item {
         }
     }
 
-    // ✅ МЕНЮ ДОБАВИТЬ/УБРАТЬ
     Popup {
         id: chamberActionsPopup
         width: 350
@@ -978,9 +1096,6 @@ Item {
 
                 onClicked: {
                     chamberActionsPopup.close()
-                    addChamberNumber.text = Yadro.getNextChamberNumber(adminPage.selectedDepartmentId).toString()
-                    addChamberCapacity.text = ""
-                    addChamberDisease.checked = false
                     addChamberPopup.open()
                 }
             }
@@ -992,7 +1107,7 @@ Item {
 
                 onClicked: {
                     chamberActionsPopup.close()
-                    removeChamberTypePopup.open()
+                    removeChamberPopup.open()
                 }
             }
 
@@ -1002,96 +1117,6 @@ Item {
                 implicitHeight: 40
                 onClicked: {
                     chamberActionsPopup.close()
-                }
-            }
-        }
-    }
-
-    // ✅ НОВОЕ МЕНЮ: выбор типа удаляемой палаты
-    Popup {
-        id: removeChamberTypePopup
-        width: 350
-        height: 250
-        anchors.centerIn: parent
-        modal: true
-        focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
-
-        ColumnLayout {
-            anchors.fill: parent
-            anchors.margins: 20
-            spacing: 15
-
-            Text { text: "Какую палату убрать?"; font.pixelSize: 16; font.bold: true; Layout.alignment: Qt.AlignHCenter }
-
-            Button {
-                text: "Обычную палату"
-                Layout.fillWidth: true
-                implicitHeight: 40
-
-                onClicked: {
-                    removeChamberTypePopup.close()
-
-                    let lastChamber = Yadro.getLastChamberByType(adminPage.selectedDepartmentId, false)
-
-                    if (lastChamber.id === undefined) {
-                        deleteChamberError.text = "В отделении нет обычных палат для удаления."
-                        deleteChamberError.visible = true
-                        removeChamberPopup.open()
-                        return
-                    }
-
-                    adminPage.chamberToDeleteId = lastChamber.id
-                    adminPage.deleteIsDisease = false
-
-                    if (lastChamber.load > 0) {
-                        deleteChamberError.text = "Невозможно удалить палату №" + lastChamber.number + ", так как в ней есть пациенты!"
-                        deleteChamberError.visible = true
-                    } else {
-                        deleteChamberError.visible = false
-                    }
-
-                    removeChamberPopup.open()
-                }
-            }
-
-            Button {
-                text: "Инкубатор"
-                Layout.fillWidth: true
-                implicitHeight: 40
-
-                onClicked: {
-                    removeChamberTypePopup.close()
-
-                    let lastChamber = Yadro.getLastChamberByType(adminPage.selectedDepartmentId, true)
-
-                    if (lastChamber.id === undefined) {
-                        deleteChamberError.text = "В отделении нет инкубаторов для удаления."
-                        deleteChamberError.visible = true
-                        removeChamberPopup.open()
-                        return
-                    }
-
-                    adminPage.chamberToDeleteId = lastChamber.id
-                    adminPage.deleteIsDisease = true
-
-                    if (lastChamber.load > 0) {
-                        deleteChamberError.text = "Невозможно удалить палату №" + lastChamber.number + ", так как в ней есть пациенты!"
-                        deleteChamberError.visible = true
-                    } else {
-                        deleteChamberError.visible = false
-                    }
-
-                    removeChamberPopup.open()
-                }
-            }
-
-            Button {
-                text: "Отмена"
-                Layout.fillWidth: true
-                implicitHeight: 40
-                onClicked: {
-                    removeChamberTypePopup.close()
                 }
             }
         }
@@ -1113,13 +1138,20 @@ Item {
 
             Text { text: "Новая палата"; font.pixelSize: 16; font.bold: true }
 
-            Text { text: "Номер палаты (автоматически)"; font.pixelSize: 12; color: "#666" }
-            TextField { id: addChamberNumber; Layout.fillWidth: true; implicitHeight: 40; readOnly: true }
+            Text { text: "Номер палаты"; font.pixelSize: 12; color: "#666" }
+            TextField {
+                id: addChamberNumber
+                Layout.fillWidth: true
+                implicitHeight: 40
+                validator: IntValidator { bottom: 1 }
+            }
 
             Text { text: "Кол-во мест"; font.pixelSize: 12; color: "#666" }
             TextField { id: addChamberCapacity; Layout.fillWidth: true; implicitHeight: 40; validator: IntValidator { bottom: 1 } }
 
-            CheckBox { id: addChamberDisease; text: "Инкубатор (для больных)"; font.pixelSize: 14 }
+            CheckBox { id: addChamberDisease; text: "Изолятор (для больных)"; font.pixelSize: 14 }
+
+            Text { id: addChamberError; color: "red"; font.pixelSize: 13; Layout.fillWidth: true; horizontalAlignment: Text.AlignHCenter; visible: false }
 
             Item { Layout.fillHeight: true }
 
@@ -1140,16 +1172,26 @@ Item {
                     text: "Создать"
                     Layout.fillWidth: true
                     implicitHeight: 40
-                    enabled: addChamberCapacity.text !== ""
+                    enabled: addChamberNumber.text !== "" && addChamberCapacity.text !== ""
 
                     onClicked: {
+                        addChamberError.visible = false
                         let err = Yadro.addChamber(adminPage.selectedDepartmentId, parseInt(addChamberNumber.text), parseInt(addChamberCapacity.text), addChamberDisease.checked)
 
                         if (err.length === 0) {
                             addChamberPopup.close()
                             departmentModel.model = Yadro.getDepartments()
+
+                            // Возвращаем выделение после обновления
+                            for (let i = 0; i < departmentModel.count; i++) {
+                                if (parseInt(departmentModel.model[i].id) === adminPage.selectedDepartmentId) {
+                                    departmentModel.currentIndex = i
+                                    break
+                                }
+                            }
                         } else {
-                            console.error(err)
+                            addChamberError.text = err
+                            addChamberError.visible = true
                         }
                     }
                 }
@@ -1173,9 +1215,15 @@ Item {
 
             Text { text: "Удаление палаты"; font.pixelSize: 16; font.bold: true }
 
-            Text { id: deleteChamberError; color: "red"; font.pixelSize: 13; wrapMode: Text.WordWrap; Layout.fillWidth: true; visible: false }
+            Text { text: "Введите номер палаты для удаления"; font.pixelSize: 12; color: "#666" }
+            TextField {
+                id: deleteChamberNumberInput
+                Layout.fillWidth: true
+                implicitHeight: 40
+                validator: IntValidator { bottom: 1 }
+            }
 
-            Text { text: "Вы уверены, что хотите удалить эту палату?"; font.pixelSize: 14; wrapMode: Text.WordWrap; Layout.fillWidth: true }
+            Text { id: deleteChamberError; color: "red"; font.pixelSize: 13; wrapMode: Text.WordWrap; Layout.fillWidth: true; visible: false }
 
             Item { Layout.fillHeight: true }
 
@@ -1208,16 +1256,24 @@ Item {
                     }
 
                     onClicked: {
-                        if (adminPage.chamberToDeleteId !== -1) {
-                            let err = Yadro.deleteChamber(adminPage.chamberToDeleteId)
+                        if (deleteChamberNumberInput.text === "") return
 
-                            if (err.length === 0) {
-                                removeChamberPopup.close()
-                                departmentModel.model = Yadro.getDepartments()
-                            } else {
-                                deleteChamberError.text = err
-                                deleteChamberError.visible = true
+                        let err = Yadro.deleteChamberByNumber(adminPage.selectedDepartmentId, parseInt(deleteChamberNumberInput.text))
+
+                        if (err.length === 0) {
+                            removeChamberPopup.close()
+                            departmentModel.model = Yadro.getDepartments()
+
+                            // Возвращаем выделение после обновления
+                            for (let i = 0; i < departmentModel.count; i++) {
+                                if (parseInt(departmentModel.model[i].id) === adminPage.selectedDepartmentId) {
+                                    departmentModel.currentIndex = i
+                                    break
+                                }
                             }
+                        } else {
+                            deleteChamberError.text = err
+                            deleteChamberError.visible = true
                         }
                     }
                 }

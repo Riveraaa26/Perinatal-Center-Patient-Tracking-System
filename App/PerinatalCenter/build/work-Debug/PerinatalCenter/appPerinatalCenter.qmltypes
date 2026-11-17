@@ -29,22 +29,16 @@ Module {
         Method {
             name: "loginUser"
             type: "QString"
-            lineNumber: 21
+            lineNumber: 20
             Parameter { name: "login"; type: "QString" }
             Parameter { name: "password"; type: "QString" }
         }
-        Method {
-            name: "getChambersByDepartment"
-            type: "QVariantList"
-            lineNumber: 23
-            Parameter { name: "departmentId"; type: "int" }
-        }
-        Method { name: "getEmployees"; type: "QVariantList"; lineNumber: 25 }
-        Method { name: "getRoles"; type: "QVariantList"; lineNumber: 26 }
+        Method { name: "getEmployees"; type: "QVariantList"; lineNumber: 23 }
+        Method { name: "getRoles"; type: "QVariantList"; lineNumber: 24 }
         Method {
             name: "updateEmployee"
             type: "QString"
-            lineNumber: 27
+            lineNumber: 25
             Parameter { name: "id"; type: "int" }
             Parameter { name: "name"; type: "QString" }
             Parameter { name: "sourName"; type: "QString" }
@@ -55,7 +49,7 @@ Module {
         Method {
             name: "createEmployee"
             type: "QString"
-            lineNumber: 28
+            lineNumber: 26
             Parameter { name: "name"; type: "QString" }
             Parameter { name: "sourName"; type: "QString" }
             Parameter { name: "login"; type: "QString" }
@@ -65,14 +59,21 @@ Module {
         Method {
             name: "deleteEmployee"
             type: "QString"
-            lineNumber: 29
+            lineNumber: 27
             Parameter { name: "id"; type: "int" }
         }
-        Method { name: "getDepartments"; type: "QVariantList"; lineNumber: 32 }
+        Method {
+            name: "setEmployeeBlocked"
+            type: "QString"
+            lineNumber: 28
+            Parameter { name: "id"; type: "int" }
+            Parameter { name: "blocked"; type: "bool" }
+        }
+        Method { name: "getDepartments"; type: "QVariantList"; lineNumber: 31 }
         Method {
             name: "createDepartment"
             type: "QString"
-            lineNumber: 33
+            lineNumber: 32
             Parameter { name: "name"; type: "QString" }
             Parameter { name: "capacity"; type: "int" }
             Parameter { name: "capacityDisease"; type: "int" }
@@ -81,21 +82,28 @@ Module {
         Method {
             name: "updateDepartmentName"
             type: "QString"
-            lineNumber: 34
+            lineNumber: 33
             Parameter { name: "id"; type: "int" }
             Parameter { name: "name"; type: "QString" }
         }
         Method {
             name: "deleteDepartment"
             type: "QString"
-            lineNumber: 35
+            lineNumber: 34
             Parameter { name: "id"; type: "int" }
         }
         Method {
-            name: "getNextChamberNumber"
-            type: "int"
+            name: "getChambersByDepartment"
+            type: "QVariantList"
+            lineNumber: 37
+            Parameter { name: "departmentId"; type: "int" }
+        }
+        Method {
+            name: "chamberExists"
+            type: "bool"
             lineNumber: 38
             Parameter { name: "departmentId"; type: "int" }
+            Parameter { name: "number"; type: "int" }
         }
         Method {
             name: "addChamber"
@@ -107,25 +115,20 @@ Module {
             Parameter { name: "isDisease"; type: "bool" }
         }
         Method {
-            name: "getLastChamber"
-            type: "QVariantMap"
+            name: "deleteChamberByNumber"
+            type: "QString"
             lineNumber: 40
             Parameter { name: "departmentId"; type: "int" }
+            Parameter { name: "number"; type: "int" }
         }
+        Method { name: "getPatients"; type: "QVariantList"; lineNumber: 43 }
+        Method { name: "getTransfers"; type: "QVariantList"; lineNumber: 44 }
         Method {
-            name: "getLastChamberByType"
-            type: "QVariantMap"
-            lineNumber: 41
+            name: "getPatientsByChamber"
+            type: "QVariantList"
+            lineNumber: 47
             Parameter { name: "departmentId"; type: "int" }
-            Parameter { name: "isDisease"; type: "bool" }
+            Parameter { name: "chamberNumber"; type: "int" }
         }
-        Method {
-            name: "deleteChamber"
-            type: "QString"
-            lineNumber: 42
-            Parameter { name: "chamberId"; type: "int" }
-        }
-        Method { name: "getPatients"; type: "QVariantList"; lineNumber: 45 }
-        Method { name: "getTransfers"; type: "QVariantList"; lineNumber: 46 }
     }
 }

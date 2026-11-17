@@ -17,16 +17,15 @@ public:
     explicit Yadro(QObject *parent = nullptr);
 
     Q_INVOKABLE QString connectToDatabase(const QString &host, int port, const QString &dbName, const QString &user, const QString &password);
-    // Возвращает ФИО при успехе, или текст ошибки при неудаче
     Q_INVOKABLE QString loginUser(const QString &login, const QString &password);
 
-    Q_INVOKABLE QVariantList getChambersByDepartment(int departmentId);
     // Сотрудники
     Q_INVOKABLE QVariantList getEmployees();
     Q_INVOKABLE QVariantList getRoles();
     Q_INVOKABLE QString updateEmployee(int id, const QString &name, const QString &sourName, const QString &login, const QString &password, int roleId);
     Q_INVOKABLE QString createEmployee(const QString &name, const QString &sourName, const QString &login, const QString &password, int roleId);
     Q_INVOKABLE QString deleteEmployee(int id);
+    Q_INVOKABLE QString setEmployeeBlocked(int id, bool blocked);
 
     // Отделения
     Q_INVOKABLE QVariantList getDepartments();
@@ -35,15 +34,17 @@ public:
     Q_INVOKABLE QString deleteDepartment(int id);
 
     // Палаты
-    Q_INVOKABLE int getNextChamberNumber(int departmentId);
+    Q_INVOKABLE QVariantList getChambersByDepartment(int departmentId);
+    Q_INVOKABLE bool chamberExists(int departmentId, int number);
     Q_INVOKABLE QString addChamber(int departmentId, int number, int capacity, bool isDisease);
-    Q_INVOKABLE QVariantMap getLastChamber(int departmentId);
-    Q_INVOKABLE QVariantMap getLastChamberByType(int departmentId, bool isDisease);
-    Q_INVOKABLE QString deleteChamber(int chamberId);
+    Q_INVOKABLE QString deleteChamberByNumber(int departmentId, int number);
 
     // Пациенты и Переводы
     Q_INVOKABLE QVariantList getPatients();
     Q_INVOKABLE QVariantList getTransfers();
+
+    // НОВЫЙ МЕТОД: Получить пациентов конкретной палаты
+    Q_INVOKABLE QVariantList getPatientsByChamber(int departmentId, int chamberNumber);
 
 private:
     static QSqlDatabase s_db;

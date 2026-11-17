@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import PerinatalCenter 1.0
 
 Item {
-    id: userPage
+    id: doctorPage
 
     property string currentUserLogin: ""
     property string currentUserFullName: ""
@@ -16,7 +16,7 @@ Item {
     // ==========================================
     Text {
         id: roleText
-        text: "Медсестра"
+        text: "Врач акушер-гинеколог"
         font.pixelSize: 20
         font.bold: true
         color: "#333333"
@@ -28,7 +28,7 @@ Item {
 
     Text {
         id: centerText
-        text: userPage.currentUserFullName
+        text: doctorPage.currentUserFullName
         font.pixelSize: 24
         font.bold: true
         color: "#333333"
@@ -88,8 +88,8 @@ Item {
                     radius: 4
                 }
                 onClicked: {
-                    userPage.currentTab = "departments"
-                    userStackView.pop(null)
+                    doctorPage.currentTab = "departments"
+                    doctorStackView.pop(null)
                 }
             }
 
@@ -104,9 +104,9 @@ Item {
                     radius: 4
                 }
                 onClicked: {
-                    userPage.currentTab = "patients"
-                    userStackView.pop(null)
-                    userStackView.push(patientsPage)
+                    doctorPage.currentTab = "patients"
+                    doctorStackView.pop(null)
+                    doctorStackView.push(patientsPage)
                 }
             }
 
@@ -126,7 +126,7 @@ Item {
         clip: true
 
         StackView {
-            id: userStackView
+            id: doctorStackView
             anchors.fill: parent
 
             // СТРАНИЦА 1: ОТДЕЛЕНИЯ
@@ -181,7 +181,7 @@ Item {
                                 spacing: 10
                                 Text { text: "Название отделения"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                                 Text { text: "Всего палат"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
-                                Text { text: "Инкубаторов"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
+                                Text { text: "Изоляторов"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                             }
                         }
 
@@ -208,7 +208,7 @@ Item {
                                     deptModel.currentIndex = index
                                 }
                                 onDoubleClicked: {
-                                    userStackView.push(chambersPage, {
+                                    doctorStackView.push(mapPage, {
                                         "deptId": parseInt(modelData.id),
                                         "deptName": modelData.name
                                     })
@@ -222,23 +222,28 @@ Item {
     }
 
     // ==========================================
-    // 4. СТРАНИЦА ПАЛАТ
+    // 4. КАРТА ЗАГРУЖЕННОСТИ (ПЛИТКА)
     // ==========================================
     Component {
-        id: chambersPage
+        id: mapPage
 
         Item {
-            id: chambersItem
+            id: mapItem
             property int deptId: -1
             property string deptName: ""
+            property var chambers: []
 
             Component.onCompleted: {
-                chamberModel.model = Yadro.getChambersByDepartment(chambersItem.deptId)
+                loadChambers()
+            }
+
+            function loadChambers() {
+                chambers = Yadro.getChambersByDepartment(mapItem.deptId)
             }
 
             Text {
-                id: chamberTitle
-                text: chambersItem.deptName
+                id: mapTitle
+                text: mapItem.deptName
                 font.pixelSize: 22
                 font.bold: true
                 color: "#333333"
@@ -261,7 +266,7 @@ Item {
                     implicitHeight: 35
                     font.pixelSize: 14
                     onClicked: {
-                        chamberModel.model = Yadro.getChambersByDepartment(chambersItem.deptId)
+                        mapItem.loadChambers()
                     }
                 }
 
@@ -271,13 +276,168 @@ Item {
                     implicitHeight: 35
                     font.pixelSize: 14
                     onClicked: {
-                        userStackView.pop()
+                        doctorStackView.pop()
                     }
                 }
             }
 
             Rectangle {
-                anchors.top: chamberTitle.bottom
+                anchors.top: mapTitle.bottom
+                anchors.topMargin: 15
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                anchors.right: parent.right
+                anchors.rightMargin: 20
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 20
+
+                color: "#ffffff"
+                border.color: "#e0e0e0"
+                border.width: 1
+                radius: 8
+
+                GridView {
+                    id: chambersGrid
+                    anchors.fill: parent
+                    anchors.margins: 15
+                    clip: true
+                    cellWidth: 220
+                    cellHeight: 140
+                    model: mapItem.chambers
+
+                    delegate: Item {
+                        width: chambersGrid.cellWidth
+                        height: chambersGrid.cellHeight
+
+                        Rectangle {
+                            width: parent.width - 20
+                            height: parent.height - 20
+                            anchors.centerIn: parent
+                            radius: 8
+
+                            // Логика цвета: зеленый если есть свободные места, красный если заполнена
+                            color: modelData.free_places > 0 ? "#dcfce7" : "#fde2e1"
+                            border.color: modelData.free_places > 0 ? "#16a34a" : "#d9534f"
+                            border.width: 2
+
+                            ColumnLayout {
+                                anchors.fill: parent
+                                anchors.margins: 15
+                                spacing: 10
+
+                                Text {
+                                    text: "Палата " + modelData.number
+                                    font.pixelSize: 18
+                                    font.bold: true
+                                    color: "#333333"
+                                    Layout.fillWidth: true
+                                }
+
+                                Text {
+                                    text: "Тип: " + (modelData.disease ? "Изолятор" : "Обычная")
+                                    font.pixelSize: 14
+                                    color: "#555555"
+                                    Layout.fillWidth: true
+                                }
+
+                                Text {
+                                    text: "Свободно: " + modelData.free_places + " / " + modelData.capacity
+                                    font.pixelSize: 14
+                                    font.bold: true
+                                    color: modelData.free_places > 0 ? "#15803d" : "#b91c1c"
+                                    Layout.fillWidth: true
+                                }
+                            }
+
+                            // КЛИК ПО КАРТОЧКЕ ПАЛАТЫ
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {
+                                    doctorStackView.push(chamberPatientsPage, {
+                                        "deptId": mapItem.deptId,
+                                        "chamberNumber": parseInt(modelData.number),
+                                        "chamberName": "Палата " + modelData.number
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Text {
+                    text: "В этом отделении пока нет палат"
+                    anchors.centerIn: parent
+                    color: "#999999"
+                    visible: mapItem.chambers.length === 0
+                }
+            }
+        }
+    }
+
+    // ==========================================
+    // 5. СПИСОК ПАЦИЕНТОВ КОНКРЕТНОЙ ПАЛАТЫ (Таблица)
+    // ==========================================
+    Component {
+        id: chamberPatientsPage
+
+        Item {
+            id: chamberPatItem
+            property int deptId: -1
+            property int chamberNumber: -1
+            property string chamberName: ""
+            property var patientsList: []
+
+            Component.onCompleted: {
+                loadPatients()
+            }
+
+            function loadPatients() {
+                patientsList = Yadro.getPatientsByChamber(chamberPatItem.deptId, chamberPatItem.chamberNumber)
+            }
+
+            Text {
+                id: pageTitle
+                text: chamberPatItem.chamberName
+                font.pixelSize: 22
+                font.bold: true
+                color: "#333333"
+                anchors.top: parent.top
+                anchors.topMargin: 20
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+            }
+
+            RowLayout {
+                anchors.right: parent.right
+                anchors.rightMargin: 20
+                anchors.top: parent.top
+                anchors.topMargin: 15
+                spacing: 10
+
+                Button {
+                    text: "Обновить"
+                    implicitWidth: 100
+                    implicitHeight: 35
+                    font.pixelSize: 14
+                    onClicked: {
+                        chamberPatItem.loadPatients()
+                    }
+                }
+
+                Button {
+                    text: "Назад"
+                    implicitWidth: 100
+                    implicitHeight: 35
+                    font.pixelSize: 14
+                    onClicked: {
+                        doctorStackView.pop()
+                    }
+                }
+            }
+
+            Rectangle {
+                anchors.top: pageTitle.bottom
                 anchors.topMargin: 15
                 anchors.left: parent.left
                 anchors.leftMargin: 20
@@ -292,31 +452,36 @@ Item {
                 radius: 8
 
                 ListView {
-                    id: chamberModel
+                    id: patientListModel
                     anchors.fill: parent
                     anchors.margins: 10
                     clip: true
                     highlightFollowsCurrentItem: false
                     ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
 
+                    model: chamberPatItem.patientsList
+
                     header: Rectangle {
-                        width: chamberModel.width - 10
+                        width: patientListModel.width - 10
                         height: 35
                         color: "#f0f0f0"
+
                         RowLayout {
                             anchors.fill: parent
                             anchors.leftMargin: 10
                             anchors.rightMargin: 10
                             spacing: 10
-                            Text { text: "Номер"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
-                            Text { text: "Тип"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
-                            Text { text: "Всего мест"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
-                            Text { text: "Свободно"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
+
+                            // БЕЗ КОЛОНОК ОТДЕЛЕНИЕ И ПАЛАТА
+                            Text { text: "ФИО"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 2; font.pixelSize: 14 }
+                            Text { text: "Полис"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
+                            Text { text: "Срок"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
+                            Text { text: "Болезнь"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                         }
                     }
 
                     delegate: Rectangle {
-                        width: chamberModel.width - 10
+                        width: patientListModel.width - 10
                         height: 40
                         color: index % 2 === 0 ? "#ffffff" : "#f9f9f9"
                         border.color: "#eeeeee"
@@ -326,39 +491,28 @@ Item {
                             anchors.leftMargin: 10
                             anchors.rightMargin: 10
                             spacing: 10
-                            Text { text: modelData.number; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                            Text {
-                                text: modelData.disease ? "Инкубатор" : "Обычная"
-                                Layout.fillWidth: true; Layout.preferredWidth: 1
-                                elide: Text.ElideRight
-                                font.pixelSize: 14
-                                color: modelData.disease ? "#d9534f" : "#333333"
-                            }
-                            Text { text: modelData.capacity; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                            Text {
-                                text: modelData.free_places
-                                Layout.fillWidth: true; Layout.preferredWidth: 1
-                                elide: Text.ElideRight
-                                font.pixelSize: 14
-                                font.bold: true
-                                color: modelData.free_places > 0 ? "#16a34a" : "#d9534f"
-                            }
+
+                            Text { text: modelData.full_name !== "" ? modelData.full_name : "—"; Layout.fillWidth: true; Layout.preferredWidth: 2; elide: Text.ElideRight; font.pixelSize: 14 }
+                            Text { text: modelData.policy !== "" ? modelData.policy : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+                            Text { text: modelData.pregnancy_period !== "" ? modelData.pregnancy_period : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+                            Text { text: modelData.disease !== "" ? modelData.disease : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         }
                     }
                 }
 
                 Text {
-                    text: "В этом отделении пока нет палат"
+                    text: "В этой палате пока нет пациентов"
                     anchors.centerIn: parent
                     color: "#999999"
-                    visible: chamberModel.count === 0
+                    visible: patientListModel.count === 0
+                    font.pixelSize: 14
                 }
             }
         }
     }
 
     // ==========================================
-    // 5. СТРАНИЦА ПАЦИЕНТОВ
+    // 6. СТРАНИЦА ВСЕХ ПАЦИЕНТОВ
     // ==========================================
     Component {
         id: patientsPage
@@ -366,8 +520,34 @@ Item {
         Item {
             id: patientsItem
 
+            property var allPatients: []
+            property var filteredPatients: []
+
             Component.onCompleted: {
-                patientModel.model = Yadro.getPatients()
+                loadPatients()
+            }
+
+            function loadPatients() {
+                allPatients = Yadro.getPatients()
+                patientsItem.filteredPatients = allPatients
+                searchField.text = ""
+            }
+
+            function filterPatients() {
+                let query = searchField.text.trim().toLowerCase()
+                if (query === "") {
+                    patientsItem.filteredPatients = patientsItem.allPatients
+                    return
+                }
+
+                let result = []
+                for (let i = 0; i < patientsItem.allPatients.length; i++) {
+                    let pat = patientsItem.allPatients[i]
+                    if (pat.full_name && pat.full_name.toLowerCase().includes(query)) {
+                        result.push(pat)
+                    }
+                }
+                patientsItem.filteredPatients = result
             }
 
             Text {
@@ -382,7 +562,6 @@ Item {
                 anchors.leftMargin: 20
             }
 
-            // ✅ БЛОК КНОПОК СПРАВА (Обновить + Назад)
             RowLayout {
                 anchors.right: parent.right
                 anchors.rightMargin: 20
@@ -390,13 +569,57 @@ Item {
                 anchors.topMargin: 15
                 spacing: 10
 
+                Rectangle {
+                    width: 250
+                    height: 35
+                    color: "#ffffff"
+                    border.color: "#cccccc"
+                    radius: 4
+
+                    TextField {
+                        id: searchField
+                        anchors.fill: parent
+                        placeholderText: "Поиск по ФИО..."
+                        font.pixelSize: 14
+                        leftPadding: 10
+                        rightPadding: 30
+                        background: null
+                        onTextChanged: patientsItem.filterPatients()
+                    }
+
+                    Button {
+                        width: 24
+                        height: 24
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: searchField.text !== ""
+
+                        background: Rectangle {
+                            color: "transparent"
+                            radius: 12
+                        }
+                        contentItem: Text {
+                            text: "✕"
+                            font.pixelSize: 14
+                            color: "#666666"
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        onClicked: {
+                            searchField.text = ""
+                            patientsItem.filteredPatients = patientsItem.allPatients
+                        }
+                    }
+                }
+
                 Button {
                     text: "Обновить"
                     implicitWidth: 100
                     implicitHeight: 35
                     font.pixelSize: 14
                     onClicked: {
-                        patientModel.model = Yadro.getPatients()
+                        patientsItem.loadPatients()
                     }
                 }
 
@@ -406,8 +629,8 @@ Item {
                     implicitHeight: 35
                     font.pixelSize: 14
                     onClicked: {
-                        userPage.currentTab = "departments"
-                        userStackView.pop(null)
+                        doctorPage.currentTab = "departments"
+                        doctorStackView.pop(null)
                     }
                 }
             }
@@ -434,6 +657,8 @@ Item {
                     clip: true
                     highlightFollowsCurrentItem: false
                     ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
+
+                    model: patientsItem.filteredPatients
 
                     header: Rectangle {
                         width: patientModel.width - 10
@@ -478,10 +703,11 @@ Item {
                 }
 
                 Text {
-                    text: "В базе пока нет пациентов"
+                    text: searchField.text === "" ? "В базе пока нет пациентов" : "Нет таких пациентов с ФИО"
                     anchors.centerIn: parent
                     color: "#999999"
                     visible: patientModel.count === 0
+                    font.pixelSize: 14
                 }
             }
         }

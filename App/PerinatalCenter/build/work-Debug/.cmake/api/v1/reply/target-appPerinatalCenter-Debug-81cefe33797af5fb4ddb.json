@@ -39,9 +39,9 @@
 			"qt6_target_qml_sources",
 			"add_custom_command",
 			"_qt_internal_qml_type_registration",
+			"qt6_extract_metatypes",
 			"_qt_internal_process_resource",
 			"qt6_add_resources",
-			"qt6_extract_metatypes",
 			"_qt_internal_ensure_tooling_target",
 			"add_compile_definitions",
 			"project",
@@ -112,13 +112,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 47,
+				"line" : 48,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 43,
+				"line" : 44,
 				"parent" : 0
 			},
 			{
@@ -448,7 +448,7 @@
 			{
 				"command" : 15,
 				"file" : 10,
-				"line" : 1051,
+				"line" : 1045,
 				"parent" : 25
 			},
 			{
@@ -460,7 +460,7 @@
 			{
 				"command" : 15,
 				"file" : 10,
-				"line" : 1045,
+				"line" : 1051,
 				"parent" : 25
 			},
 			{
@@ -559,25 +559,7 @@
 				"parent" : 83
 			},
 			{
-				"command" : 27,
-				"file" : 10,
-				"line" : 962,
-				"parent" : 25
-			},
-			{
 				"command" : 26,
-				"file" : 0,
-				"line" : 419,
-				"parent" : 85
-			},
-			{
-				"command" : 24,
-				"file" : 0,
-				"line" : 2597,
-				"parent" : 86
-			},
-			{
-				"command" : 28,
 				"file" : 10,
 				"line" : 4181,
 				"parent" : 83
@@ -586,13 +568,31 @@
 				"command" : 24,
 				"file" : 0,
 				"line" : 1562,
-				"parent" : 88
+				"parent" : 85
 			},
 			{
 				"command" : 24,
 				"file" : 0,
 				"line" : 1504,
+				"parent" : 85
+			},
+			{
+				"command" : 28,
+				"file" : 10,
+				"line" : 962,
+				"parent" : 25
+			},
+			{
+				"command" : 27,
+				"file" : 0,
+				"line" : 419,
 				"parent" : 88
+			},
+			{
+				"command" : 24,
+				"file" : 0,
+				"line" : 2597,
+				"parent" : 89
 			},
 			{
 				"command" : 29,
@@ -638,7 +638,7 @@
 				"command" : 33,
 				"file" : 0,
 				"line" : 1612,
-				"parent" : 88
+				"parent" : 85
 			},
 			{
 				"command" : 33,
@@ -656,19 +656,13 @@
 				"command" : 35,
 				"file" : 0,
 				"line" : 2658,
-				"parent" : 86
+				"parent" : 89
 			},
 			{
 				"command" : 33,
 				"file" : 0,
 				"line" : 2198,
 				"parent" : 101
-			},
-			{
-				"command" : 33,
-				"file" : 10,
-				"line" : 1009,
-				"parent" : 25
 			},
 			{
 				"command" : 33,
@@ -715,6 +709,24 @@
 			{
 				"command" : 33,
 				"file" : 10,
+				"line" : 3694,
+				"parent" : 79
+			},
+			{
+				"command" : 33,
+				"file" : 10,
+				"line" : 3887,
+				"parent" : 79
+			},
+			{
+				"command" : 33,
+				"file" : 10,
+				"line" : 3694,
+				"parent" : 79
+			},
+			{
+				"command" : 33,
+				"file" : 10,
 				"line" : 3887,
 				"parent" : 79
 			},
@@ -743,28 +755,28 @@
 				"parent" : 79
 			},
 			{
-				"command" : 27,
+				"command" : 28,
 				"file" : 10,
 				"line" : 3979,
 				"parent" : 79
 			},
 			{
-				"command" : 26,
+				"command" : 27,
 				"file" : 0,
 				"line" : 419,
-				"parent" : 116
+				"parent" : 118
 			},
 			{
 				"command" : 35,
 				"file" : 0,
 				"line" : 2658,
-				"parent" : 117
+				"parent" : 119
 			},
 			{
 				"command" : 33,
 				"file" : 0,
 				"line" : 2198,
-				"parent" : 118
+				"parent" : 120
 			},
 			{
 				"command" : 36,
@@ -776,7 +788,7 @@
 				"command" : 33,
 				"file" : 0,
 				"line" : 2323,
-				"parent" : 120
+				"parent" : 122
 			},
 			{
 				"command" : 37,
@@ -788,7 +800,7 @@
 				"command" : 33,
 				"file" : 24,
 				"line" : 126,
-				"parent" : 122
+				"parent" : 124
 			}
 		]
 	},
@@ -1002,14 +1014,15 @@
 				1,
 				2,
 				6,
+				8,
 				9,
-				10,
-				12,
-				14,
+				11,
+				13,
 				15,
 				17,
 				19,
-				20
+				21,
+				22
 			]
 		},
 		{
@@ -1192,11 +1205,11 @@
 	[
 		{
 			"backtrace" : 67,
-			"id" : "appPerinatalCenter_copy_res::@6890427a1f51a3e7e1df"
+			"id" : "appPerinatalCenter_copy_qml::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 69,
-			"id" : "appPerinatalCenter_copy_qml::@6890427a1f51a3e7e1df"
+			"id" : "appPerinatalCenter_copy_res::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 72,
@@ -1395,16 +1408,16 @@
 			"id" : "Qt6::qmltyperegistrar::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 87,
-			"id" : "Qt6::rcc::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 89,
+			"backtrace" : 86,
 			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 90,
+			"backtrace" : 87,
 			"id" : "Qt6::cmake_automoc_parser::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 90,
+			"id" : "Qt6::rcc::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 92,
@@ -1445,25 +1458,26 @@
 				4,
 				5,
 				6,
+				8,
 				9,
-				10,
-				12,
-				14,
+				11,
+				13,
 				15,
 				17,
 				19,
-				20,
 				21,
+				22,
 				23,
 				25,
-				39,
-				40,
-				41,
+				27,
 				42,
 				43,
 				44,
 				45,
-				46
+				46,
+				47,
+				48,
+				49
 			]
 		},
 		{
@@ -1473,11 +1487,12 @@
 				1,
 				2,
 				7,
-				8,
-				11,
-				13,
+				10,
+				12,
+				14,
 				16,
-				18
+				18,
+				20
 			]
 		},
 		{
@@ -1491,22 +1506,20 @@
 			"name" : "Resources",
 			"sourceIndexes" : 
 			[
-				22
+				24
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				24
+				26
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				26,
-				27,
 				28,
 				29,
 				30,
@@ -1517,7 +1530,10 @@
 				35,
 				36,
 				37,
-				38
+				38,
+				39,
+				40,
+				41
 			]
 		}
 	],
@@ -1569,110 +1585,122 @@
 		},
 		{
 			"backtrace" : 103,
-			"path" : "UserPage.qml",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 104,
 			"path" : "Main.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 105,
+			"backtrace" : 104,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_qmlcache_loader.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 106,
+			"backtrace" : 105,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_Main_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 107,
+			"backtrace" : 106,
 			"path" : "LoginPage.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 108,
+			"backtrace" : 107,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_LoginPage_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 109,
+			"backtrace" : 108,
 			"path" : "AdminPage.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 110,
+			"backtrace" : 109,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_AdminPage_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
+			"backtrace" : 110,
+			"path" : "NursePage.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
 			"backtrace" : 111,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_UserPage_qml.cpp",
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_NursePage_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 112,
-			"path" : "DepartamentsView.qml",
+			"path" : "DoctorPage.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 113,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_DepartamentsView_qml.cpp",
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_DoctorPage_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 114,
-			"path" : "ChambersView.qml",
+			"path" : "DepartamentsView.qml",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 115,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_DepartamentsView_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 116,
+			"path" : "ChambersView.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 117,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
 			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_ChambersView_qml.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 119,
+			"backtrace" : 121,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.qt/rcc/qrc_appPerinatalCenter_raw_qml_0.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 121,
+			"backtrace" : 123,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.qt/rcc/qmake_PerinatalCenter.qrc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 121,
+			"backtrace" : 123,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/PerinatalCenter/qmldir",
 			"sourceGroupIndex" : 3
 		},
 		{
-			"backtrace" : 121,
+			"backtrace" : 123,
 			"isGenerated" : true,
 			"path" : "build/work-Debug/.qt/rcc/appPerinatalCenter_raw_qml_0.qrc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 123,
+			"backtrace" : 125,
 			"path" : "build/work-Debug/appPerinatalCenter.exe.manifest",
 			"sourceGroupIndex" : 4
 		},
@@ -1727,7 +1755,13 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_UserPage_qml.cpp.rule",
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_NursePage_qml.cpp.rule",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/work-Debug/.rcc/qmlcache/appPerinatalCenter_DoctorPage_qml.cpp.rule",
 			"sourceGroupIndex" : 5
 		},
 		{
