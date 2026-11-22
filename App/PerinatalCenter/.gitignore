@@ -1,0 +1,18 @@
+# Build output / personal Qt Creator settings
+build/
+build-*/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+.qtcreator/
+*.user
+*.user.*
+.vs/
+# Local passwords / configs
+.env
+.env.*
+*secrets*
+*.local.ini
+# Temporary files
+__pycache__/
+*.pyc

@@ -1,0 +1,131 @@
+Test database: pc_test_1b500c5777
+PASS isolated DB target
+PASS QPSQL
+PASS ephemeral credentials present
+PASS blank login denied
+PASS wrong password denied
+PASS login testadmin
+PASS nurse
+PASS doctor
+PASS head
+PASS password generation
+PASS duplicate login
+PASS role changed
+PASS role restored
+PASS blocked
+PASS blocked login rejected
+PASS login testadmin
+PASS unblocked
+PASS login nurse
+PASS required fields
+PASS invalid policy
+PASS registration UTF-8 / leading zero
+PASS isolation patient
+PASS third patient
+регистрация пациентки 23505
+PASS duplicate policy
+PASS nurse cannot transfer
+PASS login doctor
+PASS doctor cannot register
+PASS first placement
+PASS registry after first placement
+PASS repeat placement rejected
+PASS isolation rule
+PASS isolation placement
+PASS operating room accepts isolation patient
+PASS operating status
+PASS cross-department transfer
+PASS registry after transfer
+PASS origin released
+PASS destination roster
+PASS occupancy statistics
+PASS doctor cannot discharge
+PASS login head
+PASS postpartum prerequisite
+PASS invalid discharge
+PASS discharge
+PASS closed chart and bed released
+PASS closed chart read-only
+PASS history retained
+PASS operating room released
+PASS stale transfer confirmation rejected
+PASS parallel admin session
+PASS revoke active session
+PASS revoked session cannot read or write
+PASS restore head
+PASS persisted origin counter
+PASS persisted discharge counter
+PASS isolated DB target
+PASS QPSQL
+PASS ephemeral credentials present
+PASS login doctor
+Ошибка записи аудита: "P0001"
+qt.sql.postgresql: Unable to free statement: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+.
+PASS simulated audit failure
+PASS SQL failure rolled back history, counters and audit
+PASS race gate acquired
+PASS isolated DB target
+PASS isolated DB target
+PASS QPSQL
+PASS QPSQL
+PASS ephemeral credentials present
+PASS ephemeral credentials present
+PASS login doctor
+PASS login doctor
+PASS one confirmed transfer, one full-room response
+PASS last bed occupied exactly once
+PASS all eight stored loads match history
+PASS isolated DB target
+PASS QPSQL
+PASS ephemeral credentials present
+PASS main window
+PASS QML singleton
+PASS QML login route testadmin
+PASS admin employee table
+PASS QML generated password
+PASS QML employee creation and confirmation
+PASS QML login route nurse
+PASS QML search and registry nurse
+PASS QML registration submit
+PASS QML login route doctor
+PASS QML search and registry doctor
+PASS QML transfer commit
+PASS same registry updated after transfer
+PASS QML department and registry refresh
+PASS QML statistics
+PASS QML operating-room filter
+PASS map room details
+PASS isolated DB target
+PASS QPSQL
+PASS ephemeral credentials present
+PASS login head
+PASS other employee updates isolation bed
+PASS independent client committed
+PASS visible map refreshed by timer
+PASS QML login route head
+PASS QML search and registry head
+PASS QML discharge commit
+PASS QML discharge history
+PASS QML statistics
+PASS QML operating-room filter
+PASS map room details
+PASS map outage setup
+PASS map retains snapshot and marks connection loss
+PASS QML UserPage
+PASS QML DepartamentsView
+PASS QML ChambersView
+PASS QML StatisticsPopup
+PASS isolated DB target
+PASS QPSQL
+PASS ephemeral credentials present
+PostgreSQL: connection to server at "127.0.0.1", port 1 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+QPSQL: Unable to connect
+PASS unavailable server
+PASS no offline login
+PASS unconfirmed legacy migration rolled back
+PASS migration repaired loads and is repeatable
+PASS legacy credential converted
+PASS optional sample import idempotent
+PASS integration suite. Isolated DB retained: pc_test_1b500c5777

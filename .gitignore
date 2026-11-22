@@ -1,0 +1,13 @@
+# Generated Qt/CMake artifacts (per-developer)
+**/build/
+**/build-*/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/Makefile
+**/.qtcreator/
+**/*.user
+**/*.user.*
+.vscode/
+.idea/
+*.log

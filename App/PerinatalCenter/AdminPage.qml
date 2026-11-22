@@ -55,6 +55,7 @@ Item {
         implicitHeight: 35
         font.pixelSize: 14
         onClicked: {
+            Yadro.logoutUser()
             stackView.pop()
         }
     }
@@ -240,7 +241,7 @@ Item {
                             editName.text = modelData.name !== undefined ? modelData.name : ""
                             editSourName.text = modelData.sour_name !== undefined ? modelData.sour_name : ""
                             editLogin.text = modelData.login !== undefined ? modelData.login : ""
-                            editPassword.text = modelData.password !== undefined ? modelData.password : ""
+                            editPassword.text = ""
 
                             for (let i = 0; i < adminPage.rolesList.length; i++) {
                                 if (adminPage.rolesList[i].id === modelData.role_id) {
@@ -334,6 +335,7 @@ Item {
             spacing: 15
 
             Button {
+                id: newEmployeeButton
                 text: "Создать пользователя"
                 visible: contentArea.currentPage === "Сотрудники"
                 implicitHeight: 40
@@ -344,22 +346,9 @@ Item {
                     createName.text = ""
                     createSourName.text = ""
                     createLogin.text = ""
-                    createPassword.text = ""
-                    createRoleCombo.currentIndex = 0
+                    createPassword.text = Yadro.generatePassword()
+                    createRoleCombo.currentIndex = -1
                     createPopup.open()
-                }
-            }
-
-            Button {
-                text: "Удалить пользователя"
-                visible: contentArea.currentPage === "Сотрудники"
-                implicitHeight: 40
-                implicitWidth: 180
-                font.pixelSize: 15
-                enabled: adminPage.selectedEmployeeId !== -1
-
-                onClicked: {
-                    deletePopup.open()
                 }
             }
 
@@ -385,20 +374,9 @@ Item {
                 text: selectedIsBlocked ? "Разблокировать" : "Заблокировать"
 
                 onClicked: {
-                    const blocked = !selectedIsBlocked
-                    const err = Yadro.setEmployeeBlocked(adminPage.selectedEmployeeId, blocked)
-                    if (err.length === 0) {
-                        employeeModel.model = Yadro.getEmployees()
-
-                        for (let i = 0; i < employeeModel.count; i++) {
-                            if (parseInt(employeeModel.model[i].id) === adminPage.selectedEmployeeId) {
-                                employeeModel.currentIndex = i
-                                break
-                            }
-                        }
-                    } else {
-                        console.error(err)
-                    }
+                    confirmBlock.employeeId = adminPage.selectedEmployeeId
+                    confirmBlock.blocked = !selectedIsBlocked
+                    confirmBlock.open()
                 }
             }
 
@@ -502,15 +480,15 @@ Item {
             Text { text: "Новый сотрудник"; font.pixelSize: 20; font.bold: true; Layout.alignment: Qt.AlignHCenter; Layout.bottomMargin: 10 }
 
             Text { text: "Имя"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createName; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
+            TextField { id: createName; palette.placeholderText: "#b91c1c"; placeholderText: "Обязательное поле";  Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
 
             Text { text: "Фамилия"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createSourName; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
+            TextField { id: createSourName; palette.placeholderText: "#b91c1c"; placeholderText: "Обязательное поле";  Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
 
             Text { text: "Логин"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createLogin; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
+            TextField { id: createLogin; palette.placeholderText: "#b91c1c";  placeholderText: "Почта или телефон"; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
 
-            Text { text: "Пароль"; font.pixelSize: 12; color: "#666" }
+            Text { text: "Временный пароль (передайте сотруднику)"; font.pixelSize: 12; color: "#666" }
             TextField { id: createPassword; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
 
             Text { text: "Роль"; font.pixelSize: 12; color: "#666" }
@@ -548,6 +526,7 @@ Item {
                 }
 
                 Button {
+                    id: saveEmployeeButton
                     text: "Создать"
                     Layout.fillWidth: true
                     implicitHeight: 40
@@ -555,7 +534,7 @@ Item {
 
                     onClicked: {
                         createErrorLabel.visible = false
-                        let selectedRoleId = 1
+                        let selectedRoleId = -1
 
                         if (createRoleCombo.currentIndex >= 0 && adminPage.rolesList.length > 0) {
                             selectedRoleId = adminPage.rolesList[createRoleCombo.currentIndex].id
@@ -565,6 +544,8 @@ Item {
 
                         if (err.length === 0) {
                             createPopup.close()
+                            notice.show("Сотрудник зарегистрирован. Пароль: " + createPassword.text)
+                            createPassword.clear()
                             employeeModel.model = Yadro.getEmployees()
 
                             if (employeeModel.count > 0) {
@@ -606,7 +587,7 @@ Item {
             Text { text: "Логин"; font.pixelSize: 12; color: "#666" }
             TextField { id: editLogin; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: editErrorLabel.visible = false }
 
-            Text { text: "Пароль"; font.pixelSize: 12; color: "#666" }
+            Text { text: "Новый пароль (пусто — не менять)"; font.pixelSize: 12; color: "#666" }
             TextField { id: editPassword; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: editErrorLabel.visible = false }
 
             Text { text: "Роль"; font.pixelSize: 12; color: "#666" }
@@ -647,11 +628,11 @@ Item {
                     text: "Сохранить"
                     Layout.fillWidth: true
                     implicitHeight: 40
-                    enabled: editName.text.trim() !== "" && editSourName.text.trim() !== "" && editLogin.text.trim() !== "" && editPassword.text.trim() !== ""
+                    enabled: editName.text.trim() !== "" && editSourName.text.trim() !== "" && editLogin.text.trim() !== "" 
 
                     onClicked: {
                         editErrorLabel.visible = false
-                        let selectedRoleId = 1
+                        let selectedRoleId = -1
 
                         if (editRoleCombo.currentIndex >= 0 && adminPage.rolesList.length > 0) {
                             selectedRoleId = adminPage.rolesList[editRoleCombo.currentIndex].id
@@ -661,6 +642,7 @@ Item {
 
                         if (err.length === 0) {
                             editPopup.close()
+                            notice.show("Данные сотрудника обновлены.")
                             employeeModel.model = Yadro.getEmployees()
 
                             if (employeeModel.count > 0) {
@@ -672,73 +654,6 @@ Item {
                         } else {
                             editErrorLabel.text = err
                             editErrorLabel.visible = true
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    Popup {
-        id: deletePopup
-        width: 350
-        height: 200
-        anchors.centerIn: parent
-        modal: true
-        focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
-
-        ColumnLayout {
-            anchors.fill: parent
-            anchors.margins: 20
-            spacing: 15
-
-            Text { text: "Вы уверены, что хотите удалить\nэтого сотрудника?"; font.pixelSize: 16; horizontalAlignment: Text.AlignHCenter; Layout.fillWidth: true }
-            Item { Layout.fillHeight: true }
-
-            RowLayout {
-                Layout.fillWidth: true
-                spacing: 10
-
-                Button {
-                    text: "Отмена"
-                    Layout.fillWidth: true
-                    implicitHeight: 40
-                    onClicked: {
-                        deletePopup.close()
-                    }
-                }
-
-                Button {
-                    text: "Удалить"
-                    Layout.fillWidth: true
-                    implicitHeight: 40
-                    background: Rectangle {
-                        color: "#d9534f"
-                        radius: 4
-                    }
-                    contentItem: Text {
-                        text: parent.text
-                        color: "white"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-
-                    onClicked: {
-                        const err = Yadro.deleteEmployee(adminPage.selectedEmployeeId)
-
-                        if (err.length === 0) {
-                            deletePopup.close()
-                            employeeModel.model = Yadro.getEmployees()
-
-                            if (employeeModel.count > 0) {
-                                employeeModel.currentIndex = 0
-                                adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
-                            } else {
-                                adminPage.selectedEmployeeId = -1
-                            }
-                        } else {
-                            console.error(err)
                         }
                     }
                 }
@@ -1056,7 +971,7 @@ Item {
                                 adminPage.selectedDepartmentName = departmentModel.model[0].name
                             }
                         } else {
-                            console.error(err)
+                            notice.show(err)
                         }
                     }
                 }
@@ -1268,5 +1183,28 @@ Item {
                 }
             }
         }
+    }
+    Dialog {
+        id: confirmBlock
+        property int employeeId
+        property bool blocked
+        anchors.centerIn: parent
+        modal: true
+        title: blocked ? "Заблокировать сотрудника?" : "Разблокировать сотрудника?"
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        onAccepted: {
+            const err = Yadro.setEmployeeBlocked(employeeId, blocked)
+            notice.show(err || "Статус сотрудника обновлён.")
+            if (!err) employeeModel.model = Yadro.getEmployees()
+        }
+    }
+    Dialog {
+        id: notice
+        anchors.centerIn: parent
+        modal: true
+        standardButtons: Dialog.Ok
+        function show(message) { noticeText.text = message; open() }
+        onClosed: noticeText.text = ""
+        contentItem: Label { id: noticeText; wrapMode: Text.Wrap }
     }
 }

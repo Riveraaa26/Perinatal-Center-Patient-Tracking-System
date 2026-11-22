@@ -6,6 +6,15 @@ import PerinatalCenter 1.0
 Item {
     id: nursePage
 
+    Label {
+        id: registrationNotice
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        z: 2
+        visible: noticeTimer.running
+        text: "Пациентка успешно зарегистрирована"
+    }
+    Timer { id: noticeTimer; interval: 4000 }
     property string currentUserLogin: ""
     property string currentUserFullName: ""
 
@@ -44,6 +53,7 @@ Item {
         implicitHeight: 35
         font.pixelSize: 14
         onClicked: {
+            Yadro.logoutUser()
             stackView.pop()
         }
     }
@@ -125,13 +135,18 @@ Item {
 
             // СТРАНИЦА 1: ОТДЕЛЕНИЯ
             initialItem: Item {
-                Component.onCompleted: {
-                    deptModel.model = Yadro.getDepartments()
+                id: deptPage
+                function refresh() {
+                    const rows = Yadro.getDepartments()
+                    if (!Yadro.readError || Yadro.readError.includes("прав")) deptModel.model = rows
                 }
+                Component.onCompleted: refresh()
+                StackView.onActivated: refresh()
+                Timer { interval: 8000; repeat: true; running: deptPage.visible; onTriggered: deptPage.refresh() }
 
                 Text {
                     id: pageTitle
-                    text: "Отделения"
+                    text: !Yadro.readError && deptModel.model && deptModel.model.every(d => d.free_places === 0) ? "Отделения — свободных мест нет" : "Отделения"
                     font.pixelSize: 22
                     font.bold: true
                     color: "#333333"
@@ -176,6 +191,7 @@ Item {
                                 Text { text: "Название отделения"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                                 Text { text: "Всего палат"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                                 Text { text: "Изоляторов"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
+                                Text { text: "Свободно мест"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                             }
                         }
 
@@ -193,6 +209,7 @@ Item {
                                 Text { text: modelData.name; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                                 Text { text: modelData.capacity; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                                 Text { text: modelData.capacity_disease; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
+                                Text { text: modelData.free_places; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                             }
 
                             MouseArea {
@@ -226,6 +243,10 @@ Item {
 
             Component.onCompleted: {
                 chamberModel.model = Yadro.getChambersByDepartment(chambersItem.deptId)
+            }
+            Timer {
+                interval: 8000; repeat: true; running: chambersItem.visible
+                onTriggered: chamberModel.model = Yadro.getChambersByDepartment(chambersItem.deptId)
             }
 
             Text {
@@ -313,6 +334,15 @@ Item {
                         color: index % 2 === 0 ? "#ffffff" : "#f9f9f9"
                         border.color: "#eeeeee"
 
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                const list = Yadro.getPatientsByChamber(chambersItem.deptId, modelData.number)
+                                roomInfo.title = "Палата " + modelData.number
+                                roomInfoText.text = Yadro.readError || (list.length ? list.map(p => p.full_name).join("\n") : "Пациенток нет")
+                                roomInfo.open()
+                            }
+                        }
                         RowLayout {
                             anchors.fill: parent
                             anchors.leftMargin: 10
@@ -320,7 +350,7 @@ Item {
                             spacing: 10
                             Text { text: modelData.number; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text {
-                                text: modelData.disease ? "Изолятор" : "Обычная"
+                                text: modelData.kind === "operating" ? "Операционная" : modelData.disease ? "Изолятор" : "Обычная"
                                 Layout.fillWidth: true; Layout.preferredWidth: 1
                                 elide: Text.ElideRight
                                 font.pixelSize: 14
@@ -368,7 +398,16 @@ Item {
                 patientsItem.filteredPatients = allPatients
                 searchField.text = ""
             }
+            function refreshPatients() {
+                allPatients = Yadro.getPatients()
+                filterPatients()
+            }
+            Timer {
+                interval: 8000; repeat: true; running: patientsItem.visible && !registerPopup.visible
+                onTriggered: patientsItem.refreshPatients()
+            }
 
+            function findPolicy(policy) { refreshPatients(); searchField.text = policy }
             function filterPatients() {
                 let query = searchField.text.trim().toLowerCase()
                 if (query === "") {
@@ -379,7 +418,7 @@ Item {
                 let result = []
                 for (let i = 0; i < patientsItem.allPatients.length; i++) {
                     let pat = patientsItem.allPatients[i]
-                    if (pat.full_name && pat.full_name.toLowerCase().includes(query)) {
+                    if ((pat.full_name && pat.full_name.toLowerCase().includes(query)) || String(pat.policy).includes(query)) {
                         result.push(pat)
                     }
                 }
@@ -415,7 +454,7 @@ Item {
                     TextField {
                         id: searchField
                         anchors.fill: parent
-                        placeholderText: "Поиск по ФИО..."
+                        placeholderText: "Поиск по ФИО или полису..."
                         font.pixelSize: 14
                         leftPadding: 10
                         rightPadding: 30
@@ -449,6 +488,12 @@ Item {
                     }
                 }
 
+                Button {
+                    text: "Добавить пациентку"
+                    implicitWidth: 165
+                    implicitHeight: 35
+                    onClicked: registerPopup.openForm()
+                }
                 Button {
                     text: "Обновить"
                     implicitWidth: 100
@@ -532,10 +577,10 @@ Item {
                             Text { text: modelData.policy !== "" ? modelData.policy : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.pregnancy_period !== "" ? modelData.pregnancy_period : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text {
-                                text: (modelData.disease === "" || modelData.disease === undefined || modelData.disease === "false" || modelData.disease === false) ? "—" : modelData.disease
+                                text: modelData.disease ? "Да" : "—"
                                 Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14
                             }
-                            Text { text: modelData.department !== "" ? modelData.department : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+                            Text { text: modelData.discharged ? "Выписана" : (modelData.department !== "" ? modelData.department : "—"); Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.chamber !== "" ? modelData.chamber : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         }
                     }
@@ -551,4 +596,71 @@ Item {
             }
         }
     }
+    // UC-08: регистрация пациентки доступна медсестре.
+    Popup {
+        id: registerPopup
+        width: 450
+        height: 480
+        anchors.centerIn: parent
+        modal: true
+        focus: true
+        background: Rectangle { color: "#ffffff"; radius: 8; border.color: "#cccccc" }
+        function openForm() {
+            regName.text = ""; regSurname.text = ""; regPolicy.text = "";
+            regWeeks.text = ""; regDisease.checked = false; regError.text = "";
+            open()
+        }
+        ColumnLayout {
+            anchors.fill: parent; anchors.margins: 24; spacing: 9
+            Text { text: "Регистрация пациентки"; font.pixelSize: 20; font.bold: true; Layout.alignment: Qt.AlignHCenter }
+            Text { text: "Имя *" }
+            TextField { id: regName; palette.placeholderText: "#b91c1c";  Layout.fillWidth: true; placeholderText: "Имя" }
+            Text { text: "Фамилия *" }
+            TextField { id: regSurname; palette.placeholderText: "#b91c1c";  Layout.fillWidth: true; placeholderText: "Фамилия" }
+            Text { text: "Полис ОМС — 16 цифр *" }
+            TextField { id: regPolicy; palette.placeholderText: "#b91c1c";  Layout.fillWidth: true; placeholderText: "1234567890123456"; maximumLength: 16 }
+            Text { text: "Срок беременности (недели) *" }
+            TextField { id: regWeeks; palette.placeholderText: "#b91c1c";  Layout.fillWidth: true; placeholderText: "Например, 35" }
+            CheckBox { id: regDisease; text: "Требуется изолятор" }
+            Text { id: regError; color: "#b91c1c"; wrapMode: Text.WordWrap; Layout.fillWidth: true }
+                Button {
+                    text: "Найти карту по полису"
+                    visible: regError.visible && regError.text.includes("уже зарегистрирована")
+                    onClicked: {
+                        registerPopup.close()
+                        nurseStackView.currentItem.findPolicy(regPolicy.text.trim())
+                    }
+                }
+            Item { Layout.fillHeight: true }
+            RowLayout {
+                Layout.fillWidth: true
+                Button { text: "Отмена"; Layout.fillWidth: true; onClicked: registerPopup.close() }
+                Button {
+                    id: registerSave
+                    text: "Зарегистрировать"
+                    Layout.fillWidth: true
+                    enabled: regName.text.trim() && regSurname.text.trim() && regPolicy.text.trim() && regWeeks.text.trim()
+                    onClicked: {
+                        const err = Yadro.createPatient(regName.text,regSurname.text,regPolicy.text,regWeeks.text,regDisease.checked)
+                        if (err.length > 0) regError.text = err
+                        else {
+                            noticeTimer.restart()
+                            registerPopup.close()
+                            nurseStackView.pop(null)
+                            nurseStackView.push(patientsPage)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Dialog {
+        id: roomInfo
+        modal: true
+        anchors.centerIn: parent
+        standardButtons: Dialog.Ok
+        contentItem: Label { id: roomInfoText; wrapMode: Text.Wrap }
+    }
+
 }

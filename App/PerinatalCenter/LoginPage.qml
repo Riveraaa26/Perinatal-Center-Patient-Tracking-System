@@ -5,6 +5,13 @@ import PerinatalCenter 1.0
 
 Item {
     id: loginPage
+    Component.onCompleted: {
+        const err = Yadro.databaseStatus()
+        if (err.length > 0) {
+            errorLabel.text = err
+            errorLabel.visible = true
+        }
+    }
 
     Text {
         id: headerText
@@ -86,6 +93,7 @@ Item {
                 }
 
                 Button {
+                    id: loginButton
                     text: "Войти"
                     Layout.fillWidth: true
                     Layout.topMargin: 10
@@ -105,22 +113,29 @@ Item {
 
                         // Разделяем ФИО и Роль
                         const parts = result.split("|")
-                        const fullName = parts[0]
-                        const roleName = parts[1]
+                        const roleName = parts.pop()
+                        const fullName = parts.join("|")
+                        passwordField.clear()
 
                         // Распределяем по ролям
                         if (roleName === "Администратор") {
                             stackView.push("AdminPage.qml")
-                        } else if (roleName === "Врач акушер-гинеколог" || roleName === "Врач") {
+                        } else if (roleName.includes("Врач") || roleName.includes("Завед")) {
                             stackView.push("DoctorPage.qml", {
                                 "currentUserLogin": loginField.text,
-                                "currentUserFullName": fullName
+                                "currentUserFullName": fullName,
+                                "currentUserRole": roleName,
+                                "isHead": roleName.includes("Завед")
                             })
-                        } else {
+                        } else if (roleName.includes("Медсестр")) {
                             stackView.push("NursePage.qml", {
                                 "currentUserLogin": loginField.text,
                                 "currentUserFullName": fullName
                             })
+                        } else {
+                            Yadro.logoutUser()
+                            errorLabel.text = "Неизвестная роль учётной записи: " + roleName
+                            errorLabel.visible = true
                         }
                     }
                 }

@@ -1,2 +1,13 @@
-# Perinatal-Center-Patient-Tracking-System
-An automated system for tracking patient stays across the departments of a perinatal center — admission, transfer between departments, and discharge.
+# Учёт пребывания пациенток перинатального центра
+
+Учебное настольное приложение команды. Редакция для демонстрации 25 ноября 2026 года. Для начала распакуйте ZIP и откройте в Qt Creator **App/PerinatalCenter/CMakeLists.txt**. Для входа нужны отдельная тестовая база и созданный в ней сотрудник.
+
+| Что требуется | Где найти |
+|---|---|
+| Запустить под Windows, настроить отдельную БД и первого администратора | [Инструкция запуска](App/PerinatalCenter/README.ru.md) |
+| Сопоставить схему со старой версией, проверить миграцию | [Подключение PostgreSQL](App/PerinatalCenter/DATABASE.ru.md) |
+| Узнать, что изменилось относительно исходных архивов | [Изменения](App/PerinatalCenter/CHANGELOG.ru.md) |
+| Посмотреть статусы UC, протокол испытаний и ограничения | [Отчёт](App/PerinatalCenter/TESTING.ru.md) |
+| Записать демонстрацию с ролями и контрольными числами | [Сценарий](App/PerinatalCenter/DEMO.ru.md) |
+
+В каталогах Course_Work, Design и Software_Requirements находятся материалы команды. Приложенная отдельно спецификация побайтно совпала с документом в архиве Александра. Исходники, SQL, тесты и инструкции находятся в App/PerinatalCenter.
