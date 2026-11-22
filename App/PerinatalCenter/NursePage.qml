@@ -4,16 +4,14 @@ import QtQuick.Layouts
 import PerinatalCenter 1.0
 
 Item {
-    id: userPage
+    id: nursePage
 
     property string currentUserLogin: ""
     property string currentUserFullName: ""
 
     property string currentTab: "departments"
 
-    // ==========================================
     // 1. ШАПКА
-    // ==========================================
     Text {
         id: roleText
         text: "Медсестра"
@@ -28,7 +26,7 @@ Item {
 
     Text {
         id: centerText
-        text: userPage.currentUserFullName
+        text: nursePage.currentUserFullName
         font.pixelSize: 24
         font.bold: true
         color: "#333333"
@@ -59,9 +57,7 @@ Item {
         anchors.topMargin: 30
     }
 
-    // ==========================================
     // 2. САЙДБАР
-    // ==========================================
     Rectangle {
         id: sidebar
         width: 200
@@ -88,8 +84,8 @@ Item {
                     radius: 4
                 }
                 onClicked: {
-                    userPage.currentTab = "departments"
-                    userStackView.pop(null)
+                    nursePage.currentTab = "departments"
+                    nurseStackView.pop(null)
                 }
             }
 
@@ -104,9 +100,9 @@ Item {
                     radius: 4
                 }
                 onClicked: {
-                    userPage.currentTab = "patients"
-                    userStackView.pop(null)
-                    userStackView.push(patientsPage)
+                    nursePage.currentTab = "patients"
+                    nurseStackView.pop(null)
+                    nurseStackView.push(patientsPage)
                 }
             }
 
@@ -114,9 +110,7 @@ Item {
         }
     }
 
-    // ==========================================
     // 3. РАБОЧАЯ ЗОНА
-    // ==========================================
     Item {
         id: contentArea
         anchors.top: headerLine.bottom
@@ -126,7 +120,7 @@ Item {
         clip: true
 
         StackView {
-            id: userStackView
+            id: nurseStackView
             anchors.fill: parent
 
             // СТРАНИЦА 1: ОТДЕЛЕНИЯ
@@ -208,7 +202,7 @@ Item {
                                     deptModel.currentIndex = index
                                 }
                                 onDoubleClicked: {
-                                    userStackView.push(chambersPage, {
+                                    nurseStackView.push(chambersPage, {
                                         "deptId": parseInt(modelData.id),
                                         "deptName": modelData.name
                                     })
@@ -221,9 +215,7 @@ Item {
         }
     }
 
-    // ==========================================
     // 4. СТРАНИЦА ПАЛАТ
-    // ==========================================
     Component {
         id: chambersPage
 
@@ -271,7 +263,7 @@ Item {
                     implicitHeight: 35
                     font.pixelSize: 14
                     onClicked: {
-                        userStackView.pop()
+                        nurseStackView.pop()
                     }
                 }
             }
@@ -357,18 +349,14 @@ Item {
         }
     }
 
-    // ==========================================
     // 5. СТРАНИЦА ПАЦИЕНТОВ
-    // ==========================================
     Component {
         id: patientsPage
 
         Item {
             id: patientsItem
 
-            // Храним полный список пациентов
             property var allPatients: []
-            // Храним отфильтрованный список для отображения
             property var filteredPatients: []
 
             Component.onCompleted: {
@@ -391,7 +379,6 @@ Item {
                 let result = []
                 for (let i = 0; i < patientsItem.allPatients.length; i++) {
                     let pat = patientsItem.allPatients[i]
-                    // Ищем по ФИО (полное имя уже есть в поле full_name)
                     if (pat.full_name && pat.full_name.toLowerCase().includes(query)) {
                         result.push(pat)
                     }
@@ -411,7 +398,6 @@ Item {
                 anchors.leftMargin: 20
             }
 
-            // ПАНЕЛЬ КНОПОК И ПОИСКА СПРАВА
             RowLayout {
                 anchors.right: parent.right
                 anchors.rightMargin: 20
@@ -419,7 +405,6 @@ Item {
                 anchors.topMargin: 15
                 spacing: 10
 
-                // ПОИСК
                 Rectangle {
                     width: 250
                     height: 35
@@ -434,11 +419,10 @@ Item {
                         font.pixelSize: 14
                         leftPadding: 10
                         rightPadding: 30
-                        background: null // Убираем фон TextField, используем фон Rectangle
+                        background: null
                         onTextChanged: patientsItem.filterPatients()
                     }
 
-                    // КРЕСТИК ДЛЯ СБРОСА
                     Button {
                         width: 24
                         height: 24
@@ -481,8 +465,8 @@ Item {
                     implicitHeight: 35
                     font.pixelSize: 14
                     onClicked: {
-                        userPage.currentTab = "departments"
-                        userStackView.pop(null)
+                        nursePage.currentTab = "departments"
+                        nurseStackView.pop(null)
                     }
                 }
             }
@@ -510,7 +494,6 @@ Item {
                     highlightFollowsCurrentItem: false
                     ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
 
-                    // Используем отфильтрованный список
                     model: patientsItem.filteredPatients
 
                     header: Rectangle {
@@ -548,14 +531,16 @@ Item {
                             Text { text: modelData.full_name !== "" ? modelData.full_name : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.policy !== "" ? modelData.policy : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.pregnancy_period !== "" ? modelData.pregnancy_period : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                            Text { text: modelData.disease !== "" ? modelData.disease : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+                            Text {
+                                text: (modelData.disease === "" || modelData.disease === undefined || modelData.disease === "false" || modelData.disease === false) ? "—" : modelData.disease
+                                Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14
+                            }
                             Text { text: modelData.department !== "" ? modelData.department : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.chamber !== "" ? modelData.chamber : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         }
                     }
                 }
 
-                // СООБЩЕНИЕ ОБ ОТСУТСТВИИ ПАЦИЕНТОВ
                 Text {
                     text: searchField.text === "" ? "В базе пока нет пациентов" : "Нет таких пациентов с ФИО"
                     anchors.centerIn: parent

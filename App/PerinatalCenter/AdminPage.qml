@@ -17,16 +17,13 @@ Item {
         departmentModel.model = Yadro.getDepartments()
         rolesList = Yadro.getRoles()
 
-        // Автоматически выбираем первого сотрудника при входе
         if (employeeModel.count > 0) {
             employeeModel.currentIndex = 0
             adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
         }
     }
 
-    // ==========================================
     // 1. ШАПКА
-    // ==========================================
     Text {
         id: brandText
         text: "Перинатальный центр"
@@ -71,9 +68,7 @@ Item {
         anchors.topMargin: 30
     }
 
-    // ==========================================
     // 2. САЙДБАР
-    // ==========================================
     Rectangle {
         id: sidebar
         width: 200
@@ -103,7 +98,6 @@ Item {
                     contentArea.currentPage = "Сотрудники"
                     employeeModel.model = Yadro.getEmployees()
 
-                    // Выделяем первого при переключении
                     if (employeeModel.count > 0) {
                         employeeModel.currentIndex = 0
                         adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
@@ -128,7 +122,6 @@ Item {
                     contentArea.currentPage = "Отделения"
                     departmentModel.model = Yadro.getDepartments()
 
-                    // Выделяем первое при переключении
                     if (departmentModel.count > 0) {
                         departmentModel.currentIndex = 0
                         adminPage.selectedDepartmentId = parseInt(departmentModel.model[0].id)
@@ -144,9 +137,7 @@ Item {
         }
     }
 
-    // ==========================================
     // 3. РАБОЧАЯ ЗОНА
-    // ==========================================
     Item {
         id: contentArea
         anchors.top: headerLine.bottom
@@ -226,8 +217,6 @@ Item {
                         Text { text: modelData.login !== undefined ? modelData.login : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: modelData.password !== undefined ? modelData.password : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                         Text { text: modelData.role !== undefined ? modelData.role : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-
-                        // Статус: просто текст, как и другие колонки
                         Text {
                             text: modelData.block ? "Заблокирован" : "Активен"
                             Layout.fillWidth: true
@@ -374,7 +363,6 @@ Item {
                 }
             }
 
-            // КНОПКА БЛОКИРОВКИ
             Button {
                 id: blockEmployeeButton
                 visible: contentArea.currentPage === "Сотрудники"
@@ -402,7 +390,6 @@ Item {
                     if (err.length === 0) {
                         employeeModel.model = Yadro.getEmployees()
 
-                        // После обновления модели возвращаем выделение на текущего пользователя
                         for (let i = 0; i < employeeModel.count; i++) {
                             if (parseInt(employeeModel.model[i].id) === adminPage.selectedEmployeeId) {
                                 employeeModel.currentIndex = i
@@ -434,9 +421,7 @@ Item {
         }
     }
 
-    // ==========================================
     // 4. МЕНЮ ДЕЙСТВИЙ С ОТДЕЛЕНИЕМ
-    // ==========================================
     Popup {
         id: departmentActionPopup
         width: 350
@@ -499,9 +484,7 @@ Item {
         }
     }
 
-    // ==========================================
     // 5. ПОПАПЫ ДЛЯ СОТРУДНИКОВ
-    // ==========================================
     Popup {
         id: createPopup
         width: 400
@@ -584,7 +567,6 @@ Item {
                             createPopup.close()
                             employeeModel.model = Yadro.getEmployees()
 
-                            // Выделяем первого после создания
                             if (employeeModel.count > 0) {
                                 employeeModel.currentIndex = 0
                                 adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
@@ -681,7 +663,6 @@ Item {
                             editPopup.close()
                             employeeModel.model = Yadro.getEmployees()
 
-                            // Восстанавливаем выделение после сохранения
                             if (employeeModel.count > 0) {
                                 employeeModel.currentIndex = 0
                                 adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
@@ -750,7 +731,6 @@ Item {
                             deletePopup.close()
                             employeeModel.model = Yadro.getEmployees()
 
-                            // Выделяем первого после удаления
                             if (employeeModel.count > 0) {
                                 employeeModel.currentIndex = 0
                                 adminPage.selectedEmployeeId = parseInt(employeeModel.model[0].id)
@@ -766,10 +746,7 @@ Item {
         }
     }
 
-    // ==========================================
     // 6. ПОПАПЫ ДЛЯ ОТДЕЛЕНИЙ
-    // ==========================================
-
     Popup {
         id: createDeptPopup
         width: 400
@@ -837,6 +814,22 @@ Item {
                             return
                         }
 
+                        // ПРОВЕРКА НА СУЩЕСТВОВАНИЕ ОТДЕЛЕНИЯ
+                        let exists = false
+                        for (let i = 0; i < departmentModel.count; i++) {
+                            if (departmentModel.model[i].name.toLowerCase() === createDeptName.text.trim().toLowerCase()) {
+                                exists = true
+                                break
+                            }
+                        }
+
+                        if (exists) {
+                            createDeptErrorLabel.text = "Отделение с таким названием уже существует!"
+                            createDeptErrorLabel.visible = true
+                            return // Выходим, не даем открыть визард
+                        }
+
+                        // Если отделения нет, продолжаем логику
                         adminPage.collectedChambers = []
                         chambersWizard.totalChambers = total
                         chambersWizard.totalDisease = disease
@@ -994,7 +987,6 @@ Item {
                                 adminPage.collectedChambers = []
                                 departmentModel.model = Yadro.getDepartments()
 
-                                // Выделяем первое отделение после создания
                                 if (departmentModel.count > 0) {
                                     departmentModel.currentIndex = 0
                                     adminPage.selectedDepartmentId = parseInt(departmentModel.model[0].id)
@@ -1058,7 +1050,6 @@ Item {
                             editNamePopup.close()
                             departmentModel.model = Yadro.getDepartments()
 
-                            // Восстанавливаем выделение после сохранения
                             if (departmentModel.count > 0) {
                                 departmentModel.currentIndex = 0
                                 adminPage.selectedDepartmentId = parseInt(departmentModel.model[0].id)
@@ -1182,7 +1173,6 @@ Item {
                             addChamberPopup.close()
                             departmentModel.model = Yadro.getDepartments()
 
-                            // Возвращаем выделение после обновления
                             for (let i = 0; i < departmentModel.count; i++) {
                                 if (parseInt(departmentModel.model[i].id) === adminPage.selectedDepartmentId) {
                                     departmentModel.currentIndex = i
@@ -1264,7 +1254,6 @@ Item {
                             removeChamberPopup.close()
                             departmentModel.model = Yadro.getDepartments()
 
-                            // Возвращаем выделение после обновления
                             for (let i = 0; i < departmentModel.count; i++) {
                                 if (parseInt(departmentModel.model[i].id) === adminPage.selectedDepartmentId) {
                                     departmentModel.currentIndex = i

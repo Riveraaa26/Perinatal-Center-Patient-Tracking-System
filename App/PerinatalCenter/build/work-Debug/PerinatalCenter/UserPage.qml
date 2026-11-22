@@ -181,7 +181,7 @@ Item {
                                 spacing: 10
                                 Text { text: "Название отделения"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                                 Text { text: "Всего палат"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
-                                Text { text: "Изоляторов"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
+                                Text { text: "Инкубаторов"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                             }
                         }
 
@@ -328,7 +328,7 @@ Item {
                             spacing: 10
                             Text { text: modelData.number; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text {
-                                text: modelData.disease ? "Изолятор" : "Обычная"
+                                text: modelData.disease ? "Инкубатор" : "Обычная"
                                 Layout.fillWidth: true; Layout.preferredWidth: 1
                                 elide: Text.ElideRight
                                 font.pixelSize: 14
@@ -366,37 +366,8 @@ Item {
         Item {
             id: patientsItem
 
-            // Храним полный список пациентов
-            property var allPatients: []
-            // Храним отфильтрованный список для отображения
-            property var filteredPatients: []
-
             Component.onCompleted: {
-                loadPatients()
-            }
-
-            function loadPatients() {
-                allPatients = Yadro.getPatients()
-                patientsItem.filteredPatients = allPatients
-                searchField.text = ""
-            }
-
-            function filterPatients() {
-                let query = searchField.text.trim().toLowerCase()
-                if (query === "") {
-                    patientsItem.filteredPatients = patientsItem.allPatients
-                    return
-                }
-
-                let result = []
-                for (let i = 0; i < patientsItem.allPatients.length; i++) {
-                    let pat = patientsItem.allPatients[i]
-                    // Ищем по ФИО (полное имя уже есть в поле full_name)
-                    if (pat.full_name && pat.full_name.toLowerCase().includes(query)) {
-                        result.push(pat)
-                    }
-                }
-                patientsItem.filteredPatients = result
+                patientModel.model = Yadro.getPatients()
             }
 
             Text {
@@ -411,7 +382,7 @@ Item {
                 anchors.leftMargin: 20
             }
 
-            // ПАНЕЛЬ КНОПОК И ПОИСКА СПРАВА
+            // ✅ БЛОК КНОПОК СПРАВА (Обновить + Назад)
             RowLayout {
                 anchors.right: parent.right
                 anchors.rightMargin: 20
@@ -419,59 +390,13 @@ Item {
                 anchors.topMargin: 15
                 spacing: 10
 
-                // ПОИСК
-                Rectangle {
-                    width: 250
-                    height: 35
-                    color: "#ffffff"
-                    border.color: "#cccccc"
-                    radius: 4
-
-                    TextField {
-                        id: searchField
-                        anchors.fill: parent
-                        placeholderText: "Поиск по ФИО..."
-                        font.pixelSize: 14
-                        leftPadding: 10
-                        rightPadding: 30
-                        background: null // Убираем фон TextField, используем фон Rectangle
-                        onTextChanged: patientsItem.filterPatients()
-                    }
-
-                    // КРЕСТИК ДЛЯ СБРОСА
-                    Button {
-                        width: 24
-                        height: 24
-                        anchors.right: parent.right
-                        anchors.rightMargin: 5
-                        anchors.verticalCenter: parent.verticalCenter
-                        visible: searchField.text !== ""
-
-                        background: Rectangle {
-                            color: "transparent"
-                            radius: 12
-                        }
-                        contentItem: Text {
-                            text: "✕"
-                            font.pixelSize: 14
-                            color: "#666666"
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                        }
-                        onClicked: {
-                            searchField.text = ""
-                            patientsItem.filteredPatients = patientsItem.allPatients
-                        }
-                    }
-                }
-
                 Button {
                     text: "Обновить"
                     implicitWidth: 100
                     implicitHeight: 35
                     font.pixelSize: 14
                     onClicked: {
-                        patientsItem.loadPatients()
+                        patientModel.model = Yadro.getPatients()
                     }
                 }
 
@@ -509,9 +434,6 @@ Item {
                     clip: true
                     highlightFollowsCurrentItem: false
                     ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
-
-                    // Используем отфильтрованный список
-                    model: patientsItem.filteredPatients
 
                     header: Rectangle {
                         width: patientModel.width - 10
@@ -555,13 +477,11 @@ Item {
                     }
                 }
 
-                // СООБЩЕНИЕ ОБ ОТСУТСТВИИ ПАЦИЕНТОВ
                 Text {
-                    text: searchField.text === "" ? "В базе пока нет пациентов" : "Нет таких пациентов с ФИО"
+                    text: "В базе пока нет пациентов"
                     anchors.centerIn: parent
                     color: "#999999"
                     visible: patientModel.count === 0
-                    font.pixelSize: 14
                 }
             }
         }

@@ -34,7 +34,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 1045,
+				"line" : 1051,
 				"parent" : 2
 			},
 			{
@@ -46,7 +46,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 1051,
+				"line" : 1045,
 				"parent" : 2
 			},
 			{
@@ -66,11 +66,11 @@
 	[
 		{
 			"backtrace" : 4,
-			"id" : "appPerinatalCenter_copy_qml::@6890427a1f51a3e7e1df"
+			"id" : "appPerinatalCenter_copy_res::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 6,
-			"id" : "appPerinatalCenter_copy_res::@6890427a1f51a3e7e1df"
+			"id" : "appPerinatalCenter_copy_qml::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
@@ -108,11 +108,11 @@
 		},
 		{
 			"backtrace" : 0,
-			"id" : "Qt6::QuickControls2::@6890427a1f51a3e7e1df"
+			"id" : "Qt6::Sql::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
-			"id" : "Qt6::Sql::@6890427a1f51a3e7e1df"
+			"id" : "Qt6::QuickControls2::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,

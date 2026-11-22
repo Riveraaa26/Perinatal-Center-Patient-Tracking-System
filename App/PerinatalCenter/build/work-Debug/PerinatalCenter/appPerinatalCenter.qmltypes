@@ -124,11 +124,35 @@ Module {
         Method { name: "getPatients"; type: "QVariantList"; lineNumber: 43 }
         Method { name: "getTransfers"; type: "QVariantList"; lineNumber: 44 }
         Method {
+            name: "createPatient"
+            type: "QString"
+            lineNumber: 47
+            Parameter { name: "name"; type: "QString" }
+            Parameter { name: "sourName"; type: "QString" }
+            Parameter { name: "policy"; type: "QString" }
+            Parameter { name: "pregnancyPeriod"; type: "QString" }
+            Parameter { name: "isDisease"; type: "bool" }
+        }
+        Method {
             name: "getPatientsByChamber"
             type: "QVariantList"
-            lineNumber: 47
+            lineNumber: 52
             Parameter { name: "departmentId"; type: "int" }
             Parameter { name: "chamberNumber"; type: "int" }
+        }
+        Method {
+            name: "transferPatient"
+            type: "QString"
+            lineNumber: 55
+            Parameter { name: "patientId"; type: "int" }
+            Parameter { name: "departmentId"; type: "int" }
+            Parameter { name: "chamberNumber"; type: "int" }
+        }
+        Method {
+            name: "dischargePatient"
+            type: "QString"
+            lineNumber: 56
+            Parameter { name: "patientId"; type: "int" }
         }
     }
 }

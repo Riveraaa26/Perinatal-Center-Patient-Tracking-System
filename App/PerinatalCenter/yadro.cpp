@@ -60,6 +60,8 @@ QString Yadro::loginUser(const QString &login, const QString &password)
     return QStringLiteral("Неверный логин или пароль.");
 }
 
+// ==================== СОТРУДНИКИ ====================
+
 QVariantList Yadro::getEmployees()
 {
     QVariantList list;
@@ -240,6 +242,8 @@ QString Yadro::setEmployeeBlocked(int id, bool blocked)
     return QString();
 }
 
+// ==================== ОТДЕЛЕНИЯ ====================
+
 QVariantList Yadro::getDepartments()
 {
     QVariantList list;
@@ -301,7 +305,7 @@ QString Yadro::createDepartment(const QString &name, int capacity, int capacityD
             return QStringLiteral("Палата с номером %1 уже существует!").arg(ch["number"].toInt());
         }
 
-        query.prepare("INSERT INTO chamber (number, capacity, department_id, disease) VALUES (:number, :ch_capacity, :dept_id, :disease)");
+        query.prepare("INSERT INTO chamber (number, capacity, department_id, disease, current_load) VALUES (:number, :ch_capacity, :dept_id, :disease, 0)");
         query.bindValue(":number", ch["number"]);
         query.bindValue(":ch_capacity", ch["capacity"]);
         query.bindValue(":dept_id", newDeptId);
@@ -324,24 +328,52 @@ QString Yadro::createDepartment(const QString &name, int capacity, int capacityD
 
 QString Yadro::updateDepartmentName(int id, const QString &name)
 {
-    if (!s_db.isOpen()) return QStringLiteral("Нет подключения к БД.");
+    if (!s_db.isOpen()) return QStringLiteral("Нет подключения к базе данных.");
+
     QSqlQuery query(s_db);
     query.prepare("UPDATE department SET department_name = :name WHERE id = :id");
     query.bindValue(":name", name);
     query.bindValue(":id", id);
-    if (!query.exec()) return QStringLiteral("Ошибка обновления: %1").arg(query.lastError().text());
+
+    if (!query.exec())
+        return QStringLiteral("Ошибка обновления названия: %1").arg(query.lastError().text());
+
     return QString();
 }
 
 QString Yadro::deleteDepartment(int id)
 {
-    if (!s_db.isOpen()) return QStringLiteral("Нет подключения к БД.");
+    if (!s_db.isOpen()) return QStringLiteral("Нет подключения к базе данных.");
+
+    if (!s_db.transaction())
+        return QStringLiteral("Не удалось начать транзакцию: %1").arg(s_db.lastError().text());
+
     QSqlQuery query(s_db);
+
+    query.prepare("DELETE FROM chamber WHERE department_id = :id");
+    query.bindValue(":id", id);
+    if (!query.exec()) {
+        s_db.rollback();
+        return QStringLiteral("Ошибка удаления палат: %1").arg(query.lastError().text());
+    }
+
     query.prepare("DELETE FROM department WHERE id = :id");
     query.bindValue(":id", id);
-    if (!query.exec()) return QStringLiteral("Ошибка удаления: %1").arg(query.lastError().text());
+    if (!query.exec()) {
+        s_db.rollback();
+        return QStringLiteral("Ошибка удаления отделения: %1").arg(query.lastError().text());
+    }
+
+    if (!s_db.commit()) {
+        const QString e = s_db.lastError().text();
+        s_db.rollback();
+        return QStringLiteral("Ошибка фиксации транзакции: %1").arg(e);
+    }
+
     return QString();
 }
+
+// ==================== ПАЛАТЫ ====================
 
 QVariantList Yadro::getChambersByDepartment(int departmentId)
 {
@@ -349,7 +381,12 @@ QVariantList Yadro::getChambersByDepartment(int departmentId)
     if (!s_db.isOpen()) return list;
 
     QSqlQuery query(s_db);
-    query.prepare("SELECT number, capacity, current_load, disease FROM chamber WHERE department_id = :dept_id ORDER BY number ASC");
+    query.prepare(R"(
+        SELECT number, capacity, disease, (capacity - current_load) AS free_places
+        FROM chamber
+        WHERE department_id = :dept_id
+        ORDER BY number ASC
+    )");
     query.bindValue(":dept_id", departmentId);
 
     if (!query.exec()) {
@@ -359,11 +396,10 @@ QVariantList Yadro::getChambersByDepartment(int departmentId)
 
     while (query.next()) {
         QVariantMap ch;
-        ch["number"] = query.value(0).toString();
+        ch["number"] = query.value(0).toInt();
         ch["capacity"] = query.value(1).toInt();
-        ch["current_load"] = query.value(2).toInt();
-        ch["disease"] = query.value(3).toBool();
-        ch["free_places"] = ch["capacity"].toInt() - ch["current_load"].toInt();
+        ch["disease"] = query.value(2).toBool();
+        ch["free_places"] = query.value(3).toInt();
         list.append(ch);
     }
     return list;
@@ -372,48 +408,31 @@ QVariantList Yadro::getChambersByDepartment(int departmentId)
 bool Yadro::chamberExists(int departmentId, int number)
 {
     if (!s_db.isOpen()) return false;
+
     QSqlQuery query(s_db);
     query.prepare("SELECT id FROM chamber WHERE department_id = :dept_id AND number = :number");
     query.bindValue(":dept_id", departmentId);
     query.bindValue(":number", number);
-    if (query.exec() && query.next()) {
-        return true;
-    }
-    return false;
+
+    return query.exec() && query.next();
 }
 
 QString Yadro::addChamber(int departmentId, int number, int capacity, bool isDisease)
 {
     if (!s_db.isOpen()) return QStringLiteral("Нет подключения к БД.");
-    if (chamberExists(departmentId, number)) {
-        return QStringLiteral("Палата с таким номером уже существует!");
-    }
 
-    if (!s_db.transaction())
-        return QStringLiteral("Не удалось начать транзакцию: %1").arg(s_db.lastError().text());
+    if (chamberExists(departmentId, number))
+        return QStringLiteral("Палата с таким номером уже существует!");
 
     QSqlQuery query(s_db);
-
     query.prepare("INSERT INTO chamber (number, capacity, department_id, disease, current_load) VALUES (:number, :capacity, :dept_id, :disease, 0)");
     query.bindValue(":number", number);
     query.bindValue(":capacity", capacity);
     query.bindValue(":dept_id", departmentId);
     query.bindValue(":disease", isDisease);
-    if (!query.exec()) {
-        s_db.rollback();
-        return QStringLiteral("Ошибка добавления палаты: %1").arg(query.lastError().text());
-    }
 
-    query.prepare("UPDATE department SET chamber_capacity = chamber_capacity + 1, chamber_capacity_disease = chamber_capacity_disease + :disease_inc WHERE id = :id");
-    query.bindValue(":disease_inc", isDisease ? 1 : 0);
-    query.bindValue(":id", departmentId);
-    query.exec();
-
-    if (!s_db.commit()) {
-        const QString e = s_db.lastError().text();
-        s_db.rollback();
-        return QStringLiteral("Ошибка фиксации транзакции: %1").arg(e);
-    }
+    if (!query.exec())
+        return QStringLiteral("Ошибка создания палаты: %1").arg(query.lastError().text());
 
     return QString();
 }
@@ -422,49 +441,27 @@ QString Yadro::deleteChamberByNumber(int departmentId, int number)
 {
     if (!s_db.isOpen()) return QStringLiteral("Нет подключения к БД.");
 
-    if (!s_db.transaction())
-        return QStringLiteral("Не удалось начать транзакцию: %1").arg(s_db.lastError().text());
+    QSqlQuery checkLoad(s_db);
+    checkLoad.prepare("SELECT current_load FROM chamber WHERE department_id = :dept_id AND number = :number");
+    checkLoad.bindValue(":dept_id", departmentId);
+    checkLoad.bindValue(":number", number);
+    if (checkLoad.exec() && checkLoad.next()) {
+        if (checkLoad.value(0).toInt() > 0)
+            return QStringLiteral("Нельзя удалить палату: в ней есть пациенты!");
+    }
 
     QSqlQuery query(s_db);
-
-    query.prepare("SELECT id, disease, current_load FROM chamber WHERE department_id = :dept_id AND number = :number");
+    query.prepare("DELETE FROM chamber WHERE department_id = :dept_id AND number = :number");
     query.bindValue(":dept_id", departmentId);
     query.bindValue(":number", number);
 
-    if (!query.exec() || !query.next()) {
-        s_db.rollback();
-        return QStringLiteral("Палаты с таким номером не существует!");
-    }
-
-    int chamberId = query.value(0).toInt();
-    bool isDisease = query.value(1).toBool();
-    int load = query.value(2).toInt();
-
-    if (load > 0) {
-        s_db.rollback();
-        return QStringLiteral("Невозможно удалить палату, в ней есть пациенты!");
-    }
-
-    query.prepare("DELETE FROM chamber WHERE id = :id");
-    query.bindValue(":id", chamberId);
-    if (!query.exec()) {
-        s_db.rollback();
+    if (!query.exec())
         return QStringLiteral("Ошибка удаления палаты: %1").arg(query.lastError().text());
-    }
-
-    query.prepare("UPDATE department SET chamber_capacity = chamber_capacity - 1, chamber_capacity_disease = chamber_capacity_disease - :disease_dec WHERE id = :id");
-    query.bindValue(":disease_dec", isDisease ? 1 : 0);
-    query.bindValue(":id", departmentId);
-    query.exec();
-
-    if (!s_db.commit()) {
-        const QString e = s_db.lastError().text();
-        s_db.rollback();
-        return QStringLiteral("Ошибка фиксации транзакции: %1").arg(e);
-    }
 
     return QString();
 }
+
+// ==================== ПАЦИЕНТЫ И ПЕРЕВОДЫ ====================
 
 QVariantList Yadro::getPatients()
 {
@@ -472,25 +469,18 @@ QVariantList Yadro::getPatients()
     if (!s_db.isOpen()) return list;
 
     QSqlQuery query(s_db);
-
     QString sql = R"(
-        SELECT
-            p.id,
-            p.sour_name || ' ' || p.name AS full_name,
-            p.policy,
-            p.pregnancy_period,
-            p.disease,
-            d.department_name,
-            c.number AS chamber_number
+        SELECT p.id, p.name, p.sour_name, p.policy, p.pregnancy_period, p.disease,
+               d.department_name, c.number AS chamber_number
         FROM patient p
         LEFT JOIN LATERAL (
             SELECT t.chamber_id
             FROM transfer t
             WHERE t.patient_id = p.id
-            ORDER BY t.date DESC
+            ORDER BY t.date DESC, t.id DESC
             LIMIT 1
-        ) last_transfer ON true
-        LEFT JOIN chamber c ON last_transfer.chamber_id = c.id
+        ) last_t ON TRUE
+        LEFT JOIN chamber c ON last_t.chamber_id = c.id
         LEFT JOIN department d ON c.department_id = d.id
         ORDER BY p.id ASC
     )";
@@ -502,13 +492,13 @@ QVariantList Yadro::getPatients()
 
     while (query.next()) {
         QVariantMap pat;
-        pat["id"] = query.value(0).toString();
-        pat["full_name"] = query.value(1).toString();
-        pat["policy"] = query.value(2).toString();
-        pat["pregnancy_period"] = query.value(3).toString();
-        pat["disease"] = query.value(4).toString();
-        pat["department"] = query.value(5).toString();
-        pat["chamber"] = query.value(6).toString();
+        pat["id"] = query.value(0).toInt();
+        pat["full_name"] = query.value(2).toString() + " " + query.value(1).toString();
+        pat["policy"] = query.value(3).toString();
+        pat["pregnancy_period"] = query.value(4).toString();
+        pat["disease"] = query.value(5).toBool();
+        pat["department"] = query.value(6).isNull() ? "" : query.value(6).toString();
+        pat["chamber"] = query.value(7).isNull() ? "" : query.value(7).toString();
         list.append(pat);
     }
     return list;
@@ -520,68 +510,77 @@ QVariantList Yadro::getTransfers()
     if (!s_db.isOpen()) return list;
 
     QSqlQuery query(s_db);
-    QString sql = R"(
-        SELECT
-            t.id,
-            p.sour_name || ' ' || p.name AS patient_name,
-            e.sour_name || ' ' || e.name AS employee_name,
-            c.number AS chamber_number,
-            t.date
-        FROM transfer t
-        LEFT JOIN patient p ON t.patient_id = p.id
-        LEFT JOIN employee e ON t.employee_id = e.id
-        LEFT JOIN chamber c ON t.chamber_id = c.id
-        ORDER BY t.date DESC
-    )";
-
-    if (!query.exec(sql)) {
+    if (!query.exec("SELECT id, patient_id, employee_id, chamber_id, date FROM transfer ORDER BY id DESC")) {
         qDebug() << "Ошибка получения переводов:" << query.lastError().text();
         return list;
     }
 
     while (query.next()) {
         QVariantMap tr;
-        tr["id"] = query.value(0).toString();
-        tr["patient_name"] = query.value(1).toString();
-        tr["employee_name"] = query.value(2).toString();
-        tr["chamber"] = query.value(3).toString();
+        tr["id"] = query.value(0).toInt();
+        tr["patient_id"] = query.value(1).toInt();
+        tr["employee_id"] = query.value(2).toInt();
+        tr["chamber_id"] = query.value(3).toInt();
         tr["date"] = query.value(4).toString();
         list.append(tr);
     }
     return list;
 }
 
-// НОВАЯ ФУНКЦИЯ: пациенты конкретной палаты
+QString Yadro::createPatient(const QString &name, const QString &sourName,
+                             const QString &policy, const QString &pregnancyPeriod,
+                             bool isDisease)
+{
+    if (!s_db.isOpen()) return QStringLiteral("Нет подключения к базе данных.");
+
+    QSqlQuery checkQuery(s_db);
+    checkQuery.prepare("SELECT id FROM patient WHERE policy = :policy");
+    checkQuery.bindValue(":policy", policy);
+    if (checkQuery.exec() && checkQuery.next()) {
+        return QStringLiteral("Пациентка с таким полисом уже существует!");
+    }
+
+    QSqlQuery query(s_db);
+    query.prepare(R"(
+        INSERT INTO patient (name, sour_name, policy, pregnancy_period, disease)
+        VALUES (:name, :sour_name, :policy, :pregnancy_period, :disease)
+        RETURNING id
+    )");
+    query.bindValue(":name", name);
+    query.bindValue(":sour_name", sourName);
+    query.bindValue(":policy", policy);
+    query.bindValue(":pregnancy_period", pregnancyPeriod);
+    query.bindValue(":disease", isDisease);
+
+    if (!query.exec() || !query.next()) {
+        return QStringLiteral("Ошибка создания пациентки: %1").arg(query.lastError().text());
+    }
+
+    return QString();
+}
+
 QVariantList Yadro::getPatientsByChamber(int departmentId, int chamberNumber)
 {
     QVariantList list;
     if (!s_db.isOpen()) return list;
 
     QSqlQuery query(s_db);
-    // Находим пациентов, у которых последний перевод был в эту палату
-    QString sql = R"(
-        SELECT
-            p.id,
-            p.sour_name || ' ' || p.name AS full_name,
-            p.policy,
-            p.pregnancy_period,
-            p.disease
+    query.prepare(R"(
+        SELECT p.id, p.name, p.sour_name, p.policy, p.pregnancy_period, p.disease
         FROM patient p
-        LEFT JOIN LATERAL (
+        JOIN LATERAL (
             SELECT t.chamber_id
             FROM transfer t
             WHERE t.patient_id = p.id
-            ORDER BY t.date DESC
+            ORDER BY t.date DESC, t.id DESC
             LIMIT 1
-        ) last_transfer ON true
-        LEFT JOIN chamber c ON last_transfer.chamber_id = c.id
-        WHERE c.department_id = :dept_id AND c.number = :ch_number
+        ) last_t ON TRUE
+        JOIN chamber c ON last_t.chamber_id = c.id
+        WHERE c.department_id = :dept_id AND c.number = :number
         ORDER BY p.id ASC
-    )";
-
-    query.prepare(sql);
+    )");
     query.bindValue(":dept_id", departmentId);
-    query.bindValue(":ch_number", chamberNumber);
+    query.bindValue(":number", chamberNumber);
 
     if (!query.exec()) {
         qDebug() << "Ошибка получения пациентов палаты:" << query.lastError().text();
@@ -590,12 +589,161 @@ QVariantList Yadro::getPatientsByChamber(int departmentId, int chamberNumber)
 
     while (query.next()) {
         QVariantMap pat;
-        pat["id"] = query.value(0).toString();
-        pat["full_name"] = query.value(1).toString();
-        pat["policy"] = query.value(2).toString();
-        pat["pregnancy_period"] = query.value(3).toString();
-        pat["disease"] = query.value(4).toString();
+        pat["id"] = query.value(0).toInt();
+        pat["full_name"] = query.value(2).toString() + " " + query.value(1).toString();
+        pat["policy"] = query.value(3).toString();
+        pat["pregnancy_period"] = query.value(4).toString();
+        pat["disease"] = query.value(5).toBool();
         list.append(pat);
     }
     return list;
+}
+
+// === ИСПРАВЛЕННЫЙ ПЕРЕВОД ПАЦИЕНТКИ ===
+QString Yadro::transferPatient(int patientId, int departmentId, int chamberNumber)
+{
+    if (!s_db.isOpen()) return QStringLiteral("Нет подключения к базе данных.");
+
+    if (!s_db.transaction())
+        return QStringLiteral("Не удалось начать транзакцию: %1").arg(s_db.lastError().text());
+
+    QSqlQuery query(s_db);
+
+    // 1. Получаем данные пациентки
+    query.prepare("SELECT id, disease FROM patient WHERE id = :id FOR UPDATE");
+    query.bindValue(":id", patientId);
+    if (!query.exec() || !query.next()) {
+        s_db.rollback();
+        return QStringLiteral("Пациентка не найдена.");
+    }
+    const bool patientIsDisease = query.value(1).toBool();
+
+    // 2. Ищем ТЕКУЩУЮ палату пациентки (последний перевод), чтобы вычесть из неё 1
+    query.prepare("SELECT chamber_id FROM transfer WHERE patient_id = :pid ORDER BY date DESC, id DESC LIMIT 1");
+    query.bindValue(":pid", patientId);
+    int oldChamberId = -1;
+    if (query.exec() && query.next() && !query.value(0).isNull()) {
+        oldChamberId = query.value(0).toInt();
+    }
+
+    // 3. Проверяем НОВУЮ палату
+    query.prepare("SELECT id, capacity, current_load, disease FROM chamber WHERE department_id = :dept_id AND number = :number FOR UPDATE");
+    query.bindValue(":dept_id", departmentId);
+    query.bindValue(":number", chamberNumber);
+    if (!query.exec() || !query.next()) {
+        s_db.rollback();
+        return QStringLiteral("Палата %1 не найдена в выбранном отделении.").arg(chamberNumber);
+    }
+    const int newChamberId = query.value(0).toInt();
+    const int chamberCapacity = query.value(1).toInt();
+    const int currentLoad = query.value(2).toInt();
+    const bool chamberIsDisease = query.value(3).toBool();
+
+    // Если пытаемся перевести в ту же самую палату - ничего не делаем
+    if (oldChamberId == newChamberId) {
+        s_db.rollback();
+        return QStringLiteral("Пациентка уже находится в этой палате.");
+    }
+
+    // 4. Проверка типа палаты
+    if (patientIsDisease != chamberIsDisease) {
+        s_db.rollback();
+        return patientIsDisease
+                   ? QStringLiteral("Пациентка с болезнью — только в изолятор!")
+                   : QStringLiteral("Пациентка здорова — нельзя помещать в изолятор.");
+    }
+
+    // 5. Проверка свободных мест в НОВОЙ палате
+    if (currentLoad >= chamberCapacity) {
+        s_db.rollback();
+        return QStringLiteral("В палате %1 нет свободных мест.").arg(chamberNumber);
+    }
+
+    // 6. Если она лежала в СТАРОЙ палате, уменьшаем там загрузку
+    if (oldChamberId != -1) {
+        QSqlQuery updOld(s_db);
+        updOld.prepare("UPDATE chamber SET current_load = current_load - 1 WHERE id = :ch_id AND current_load > 0");
+        updOld.bindValue(":ch_id", oldChamberId);
+        if (!updOld.exec()) {
+            s_db.rollback();
+            return QStringLiteral("Ошибка обновления старой палаты: %1").arg(updOld.lastError().text());
+        }
+    }
+
+    // 7. Создаем НОВЫЙ перевод
+    int currentEmployeeId = 1; // Заглушка. В идеале передавать ID авторизованного врача.
+    query.prepare("INSERT INTO transfer (patient_id, employee_id, chamber_id) VALUES (:pid, :emp_id, :ch_id)");
+    query.bindValue(":pid", patientId);
+    query.bindValue(":emp_id", currentEmployeeId);
+    query.bindValue(":ch_id", newChamberId);
+    if (!query.exec()) {
+        s_db.rollback();
+        return QStringLiteral("Ошибка создания перевода: %1").arg(query.lastError().text());
+    }
+
+    // 8. Увеличиваем загрузку НОВОЙ палаты
+    query.prepare("UPDATE chamber SET current_load = current_load + 1 WHERE id = :ch_id");
+    query.bindValue(":ch_id", newChamberId);
+    if (!query.exec()) {
+        s_db.rollback();
+        return QStringLiteral("Ошибка обновления новой палаты: %1").arg(query.lastError().text());
+    }
+
+    if (!s_db.commit()) {
+        const QString e = s_db.lastError().text();
+        s_db.rollback();
+        return QStringLiteral("Ошибка фиксации: %1").arg(e);
+    }
+
+    return QString();
+}
+
+// === ВЫПИСКА ПАЦИЕНТКИ ===
+QString Yadro::dischargePatient(int patientId)
+{
+    if (!s_db.isOpen()) return QStringLiteral("Нет подключения к базе данных.");
+
+    if (!s_db.transaction())
+        return QStringLiteral("Не удалось начать транзакцию: %1").arg(s_db.lastError().text());
+
+    QSqlQuery query(s_db);
+
+    // 1. Находим текущую палату пациентки
+    query.prepare("SELECT chamber_id FROM transfer WHERE patient_id = :pid ORDER BY date DESC, id DESC LIMIT 1");
+    query.bindValue(":pid", patientId);
+
+    int currentChamberId = -1;
+    if (query.exec() && query.next() && !query.value(0).isNull()) {
+        currentChamberId = query.value(0).toInt();
+    }
+
+    // 2. Если она где-то лежала, уменьшаем загрузку этой палаты
+    if (currentChamberId != -1) {
+        QSqlQuery upd(s_db);
+        upd.prepare("UPDATE chamber SET current_load = current_load - 1 WHERE id = :ch_id AND current_load > 0");
+        upd.bindValue(":ch_id", currentChamberId);
+        if (!upd.exec()) {
+            s_db.rollback();
+            return QStringLiteral("Ошибка обновления загрузки палаты: %1").arg(upd.lastError().text());
+        }
+    }
+
+    // 3. Создаем запись о выписке (chamber_id = NULL)
+    int currentEmployeeId = 1;
+    query.prepare("INSERT INTO transfer (patient_id, employee_id, chamber_id) VALUES (:pid, :emp_id, NULL)");
+    query.bindValue(":pid", patientId);
+    query.bindValue(":emp_id", currentEmployeeId);
+
+    if (!query.exec()) {
+        s_db.rollback();
+        return QStringLiteral("Ошибка создания записи о выписке: %1").arg(query.lastError().text());
+    }
+
+    if (!s_db.commit()) {
+        const QString e = s_db.lastError().text();
+        s_db.rollback();
+        return QStringLiteral("Ошибка фиксации: %1").arg(e);
+    }
+
+    return QString();
 }

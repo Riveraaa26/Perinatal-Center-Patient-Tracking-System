@@ -7,10 +7,18 @@
                     "entries": [
                         {
                             "codegenResult": 0,
+                            "column": 5,
+                            "durationMicroseconds": 0,
+                            "functionName": "refresh",
+                            "line": 14,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "onCompleted",
-                            "line": 12,
+                            "line": 18,
                             "message": ""
                         },
                         {
@@ -18,7 +26,7 @@
                             "column": 15,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 20,
+                            "line": 22,
                             "message": ""
                         },
                         {
@@ -26,7 +34,7 @@
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 24,
+                            "line": 26,
                             "message": ""
                         },
                         {
@@ -34,39 +42,47 @@
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 26,
+                            "line": 28,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 24,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 33,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 22,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 35,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 20,
+                            "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 41,
+                            "line": 44,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
                             "codegenResult": 2,
                             "column": 24,
                             "durationMicroseconds": 0,
-                            "functionName": "right",
-                            "line": 34,
-                            "message": "Could not find property \"right\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 22,
-                            "durationMicroseconds": 0,
-                            "functionName": "top",
-                            "line": 36,
-                            "message": "Could not find property \"top\"."
+                            "functionName": "onClicked",
+                            "line": 52,
+                            "message": "Could not find signal \"clicked\"."
                         },
                         {
                             "codegenResult": 0,
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 47,
+                            "line": 57,
                             "message": ""
                         },
                         {
@@ -74,7 +90,7 @@
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 49,
+                            "line": 59,
                             "message": ""
                         },
                         {
@@ -82,7 +98,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 51,
+                            "line": 61,
                             "message": ""
                         },
                         {
@@ -90,7 +106,7 @@
                             "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 53,
+                            "line": 63,
                             "message": ""
                         },
                         {
@@ -98,7 +114,7 @@
                             "column": 27,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 63,
+                            "line": 73,
                             "message": ""
                         },
                         {
@@ -106,7 +122,7 @@
                             "column": 53,
                             "durationMicroseconds": 0,
                             "functionName": "policy",
-                            "line": 67,
+                            "line": 77,
                             "message": "Could not find property \"policy\"."
                         },
                         {
@@ -114,7 +130,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 70,
+                            "line": 80,
                             "message": "Cannot access value for name chamberListModel"
                         },
                         {
@@ -122,7 +138,7 @@
                             "column": 35,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 75,
+                            "line": 85,
                             "message": ""
                         },
                         {
@@ -130,7 +146,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 88,
+                            "line": 98,
                             "message": "Cannot access value for name chamberListModel"
                         },
                         {
@@ -138,7 +154,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 90,
+                            "line": 100,
                             "message": "Cannot access value for name index"
                         },
                         {
@@ -146,7 +162,7 @@
                             "column": 35,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 94,
+                            "line": 104,
                             "message": ""
                         },
                         {
@@ -154,7 +170,7 @@
                             "column": 34,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 99,
+                            "line": 109,
                             "message": "Cannot access value for name modelData"
                         },
                         {
@@ -162,31 +178,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 102,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 105,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 34,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 108,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 31,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 111,
+                            "line": 112,
                             "message": "Cannot access value for name modelData"
                         },
                         {
@@ -198,11 +190,35 @@
                             "message": "Cannot access value for name modelData"
                         },
                         {
+                            "codegenResult": 2,
+                            "column": 34,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 118,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 121,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 125,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
                             "codegenResult": 0,
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 125,
+                            "line": 135,
                             "message": ""
                         },
                         {
@@ -210,7 +226,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "centerIn",
-                            "line": 123,
+                            "line": 133,
                             "message": ""
                         }
                     ],

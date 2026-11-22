@@ -74,11 +74,11 @@
 		},
 		{
 			"backtrace" : 0,
-			"id" : "appPerinatalCenter_qmlimportscan::@6890427a1f51a3e7e1df"
+			"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
-			"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df"
+			"id" : "appPerinatalCenter_qmlimportscan::@6890427a1f51a3e7e1df"
 		}
 	],
 	"folder" : 
@@ -104,11 +104,11 @@
 		},
 		{
 			"backtrace" : 0,
-			"id" : "Qt6::QuickControls2::@6890427a1f51a3e7e1df"
+			"id" : "Qt6::Quick::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
-			"id" : "Qt6::Quick::@6890427a1f51a3e7e1df"
+			"id" : "Qt6::QuickControls2::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
@@ -120,11 +120,11 @@
 		},
 		{
 			"backtrace" : 0,
-			"id" : "appPerinatalCenter_qmlimportscan::@6890427a1f51a3e7e1df"
+			"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
-			"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df"
+			"id" : "appPerinatalCenter_qmlimportscan::@6890427a1f51a3e7e1df"
 		}
 	],
 	"paths" : 

@@ -43,8 +43,17 @@ public:
     Q_INVOKABLE QVariantList getPatients();
     Q_INVOKABLE QVariantList getTransfers();
 
-    // НОВЫЙ МЕТОД: Получить пациентов конкретной палаты
+    // Создать пациента (теперь isDisease — bool)
+    Q_INVOKABLE QString createPatient(const QString &name, const QString &sourName,
+                                      const QString &policy, const QString &pregnancyPeriod,
+                                      bool isDisease);
+
+    // Пациенты конкретной палаты
     Q_INVOKABLE QVariantList getPatientsByChamber(int departmentId, int chamberNumber);
+
+    // === НОВОЕ: перевод пациентки в палату/отделение ===
+    Q_INVOKABLE QString transferPatient(int patientId, int departmentId, int chamberNumber);
+    Q_INVOKABLE QString dischargePatient(int patientId);
 
 private:
     static QSqlDatabase s_db;

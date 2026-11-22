@@ -318,6 +318,35 @@
                     "access": "public",
                     "arguments": [
                         {
+                            "name": "name",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "sourName",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "policy",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "pregnancyPeriod",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "isDisease",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 18,
+                    "lineNumber": 47,
+                    "name": "createPatient",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
                             "name": "departmentId",
                             "type": "int"
                         },
@@ -326,10 +355,44 @@
                             "type": "int"
                         }
                     ],
-                    "index": 18,
-                    "lineNumber": 47,
+                    "index": 19,
+                    "lineNumber": 52,
                     "name": "getPatientsByChamber",
                     "returnType": "QVariantList"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "patientId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "departmentId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "chamberNumber",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 20,
+                    "lineNumber": 55,
+                    "name": "transferPatient",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "patientId",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 21,
+                    "lineNumber": 56,
+                    "name": "dischargePatient",
+                    "returnType": "QString"
                 }
             ],
             "object": true,

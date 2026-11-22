@@ -9,12 +9,14 @@ Item {
     property int deptId: -1
     property string deptName: ""
 
-    Component.onCompleted: {
-        // Загружаем палаты
+    signal backRequested()
+
+    function refresh() {
         chamberListModel.model = Yadro.getChambersByDepartment(chambersView.deptId)
     }
 
-    // Заголовок (название отделения, например "Родовое")
+    Component.onCompleted: refresh()
+
     Text {
         id: pageTitle
         text: chambersView.deptName
@@ -27,19 +29,27 @@ Item {
         anchors.leftMargin: 20
     }
 
-    // Кнопка "Назад" (возврат к отделениям)
-    Button {
-        id: backButton
-        text: "Назад"
+    RowLayout {
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.top: parent.top
-        anchors.topMargin: 20
-        implicitWidth: 100
-        implicitHeight: 35
-        font.pixelSize: 14
-        onClicked: {
-            stackView.pop()
+        anchors.topMargin: 15
+        spacing: 10
+
+        Button {
+            text: "Обновить"
+            implicitWidth: 100
+            implicitHeight: 35
+            font.pixelSize: 14
+            onClicked: chambersView.refresh()
+        }
+
+        Button {
+            text: "Назад"
+            implicitWidth: 100
+            implicitHeight: 35
+            font.pixelSize: 14
+            onClicked: chambersView.backRequested()
         }
     }
 
@@ -99,7 +109,7 @@ Item {
                     Text { text: modelData.number; Layout.preferredWidth: 60; font.pixelSize: 14 }
 
                     Text {
-                        text: modelData.disease ? "Инкубатор" : "Обычная"
+                        text: modelData.disease ? "Изолятор" : "Обычная"
                         Layout.preferredWidth: 120
                         font.pixelSize: 14
                         color: modelData.disease ? "#d9534f" : "#333333"

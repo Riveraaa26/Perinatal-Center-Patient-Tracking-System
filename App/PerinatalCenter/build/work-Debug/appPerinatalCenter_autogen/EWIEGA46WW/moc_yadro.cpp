@@ -80,8 +80,14 @@ template <> constexpr inline auto Yadro::qt_create_metaobjectdata<qt_meta_tag_ZN
         "deleteChamberByNumber",
         "getPatients",
         "getTransfers",
+        "createPatient",
+        "policy",
+        "pregnancyPeriod",
         "getPatientsByChamber",
-        "chamberNumber"
+        "chamberNumber",
+        "transferPatient",
+        "patientId",
+        "dischargePatient"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -150,9 +156,22 @@ template <> constexpr inline auto Yadro::qt_create_metaobjectdata<qt_meta_tag_ZN
         QtMocHelpers::MethodData<QVariantList()>(40, 6, QMC::AccessPublic, 0x80000000 | 15),
         // Method 'getTransfers'
         QtMocHelpers::MethodData<QVariantList()>(41, 6, QMC::AccessPublic, 0x80000000 | 15),
+        // Method 'createPatient'
+        QtMocHelpers::MethodData<QString(const QString &, const QString &, const QString &, const QString &, bool)>(42, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::QString, 19 }, { QMetaType::QString, 20 }, { QMetaType::QString, 43 }, { QMetaType::QString, 44 },
+            { QMetaType::Bool, 38 },
+        }}),
         // Method 'getPatientsByChamber'
-        QtMocHelpers::MethodData<QVariantList(int, int)>(42, 6, QMC::AccessPublic, 0x80000000 | 15, {{
-            { QMetaType::Int, 34 }, { QMetaType::Int, 43 },
+        QtMocHelpers::MethodData<QVariantList(int, int)>(45, 6, QMC::AccessPublic, 0x80000000 | 15, {{
+            { QMetaType::Int, 34 }, { QMetaType::Int, 46 },
+        }}),
+        // Method 'transferPatient'
+        QtMocHelpers::MethodData<QString(int, int, int)>(47, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::Int, 48 }, { QMetaType::Int, 34 }, { QMetaType::Int, 46 },
+        }}),
+        // Method 'dischargePatient'
+        QtMocHelpers::MethodData<QString(int)>(49, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::Int, 48 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -218,8 +237,14 @@ void Yadro::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
             if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
         case 17: { QVariantList _r = _t->getTransfers();
             if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
-        case 18: { QVariantList _r = _t->getPatientsByChamber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])));
+        case 18: { QString _r = _t->createPatient((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast<std::add_pointer_t<bool>>(_a[5])));
+            if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
+        case 19: { QVariantList _r = _t->getPatientsByChamber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])));
             if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
+        case 20: { QString _r = _t->transferPatient((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[3])));
+            if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
+        case 21: { QString _r = _t->dischargePatient((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
+            if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }
@@ -244,14 +269,14 @@ int Yadro::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 19)
+        if (_id < 22)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 19;
+        _id -= 22;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 19)
+        if (_id < 22)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 19;
+        _id -= 22;
     }
     return _id;
 }

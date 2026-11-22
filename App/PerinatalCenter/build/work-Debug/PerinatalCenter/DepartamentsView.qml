@@ -6,7 +6,13 @@ import PerinatalCenter 1.0
 Item {
     id: departmentsView
 
+    signal departmentActivated(int deptId, string deptName)
+
     Component.onCompleted: {
+        departmentModel.model = Yadro.getDepartments()
+    }
+
+    function refresh() {
         departmentModel.model = Yadro.getDepartments()
     }
 
@@ -88,11 +94,7 @@ Item {
                     }
 
                     onDoubleClicked: {
-                        // ✅ Переход на страницу палат с анимацией
-                        stackView.push("ChambersView.qml", {
-                            "deptId": parseInt(modelData.id),
-                            "deptName": modelData.name
-                        })
+                        departmentsView.departmentActivated(parseInt(modelData.id), modelData.name)
                     }
                 }
             }

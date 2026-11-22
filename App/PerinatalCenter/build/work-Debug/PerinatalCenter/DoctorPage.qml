@@ -8,7 +8,6 @@ Item {
 
     property string currentUserLogin: ""
     property string currentUserFullName: ""
-
     property string currentTab: "departments"
 
     // ==========================================
@@ -45,9 +44,7 @@ Item {
         implicitWidth: 100
         implicitHeight: 35
         font.pixelSize: 14
-        onClicked: {
-            stackView.pop()
-        }
+        onClicked: stackView.pop()
     }
 
     Rectangle {
@@ -129,11 +126,8 @@ Item {
             id: doctorStackView
             anchors.fill: parent
 
-            // СТРАНИЦА 1: ОТДЕЛЕНИЯ
             initialItem: Item {
-                Component.onCompleted: {
-                    deptModel.model = Yadro.getDepartments()
-                }
+                Component.onCompleted: deptModel.model = Yadro.getDepartments()
 
                 Text {
                     id: pageTitle
@@ -204,15 +198,11 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
                                 acceptedButtons: Qt.LeftButton
-                                onClicked: {
-                                    deptModel.currentIndex = index
-                                }
-                                onDoubleClicked: {
-                                    doctorStackView.push(mapPage, {
-                                        "deptId": parseInt(modelData.id),
-                                        "deptName": modelData.name
-                                    })
-                                }
+                                onClicked: deptModel.currentIndex = index
+                                onDoubleClicked: doctorStackView.push(mapPage, {
+                                    "deptId": parseInt(modelData.id),
+                                    "deptName": modelData.name
+                                })
                             }
                         }
                     }
@@ -222,7 +212,7 @@ Item {
     }
 
     // ==========================================
-    // 4. КАРТА ЗАГРУЖЕННОСТИ (ПЛИТКА)
+    // 4. КАРТА ПАЛАТ
     // ==========================================
     Component {
         id: mapPage
@@ -233,13 +223,8 @@ Item {
             property string deptName: ""
             property var chambers: []
 
-            Component.onCompleted: {
-                loadChambers()
-            }
-
-            function loadChambers() {
-                chambers = Yadro.getChambersByDepartment(mapItem.deptId)
-            }
+            Component.onCompleted: loadChambers()
+            function loadChambers() { chambers = Yadro.getChambersByDepartment(mapItem.deptId) }
 
             Text {
                 id: mapTitle
@@ -265,9 +250,7 @@ Item {
                     implicitWidth: 100
                     implicitHeight: 35
                     font.pixelSize: 14
-                    onClicked: {
-                        mapItem.loadChambers()
-                    }
+                    onClicked: mapItem.loadChambers()
                 }
 
                 Button {
@@ -275,9 +258,7 @@ Item {
                     implicitWidth: 100
                     implicitHeight: 35
                     font.pixelSize: 14
-                    onClicked: {
-                        doctorStackView.pop()
-                    }
+                    onClicked: doctorStackView.pop()
                 }
             }
 
@@ -314,8 +295,6 @@ Item {
                             height: parent.height - 20
                             anchors.centerIn: parent
                             radius: 8
-
-                            // Логика цвета: зеленый если есть свободные места, красный если заполнена
                             color: modelData.free_places > 0 ? "#dcfce7" : "#fde2e1"
                             border.color: modelData.free_places > 0 ? "#16a34a" : "#d9534f"
                             border.width: 2
@@ -324,42 +303,24 @@ Item {
                                 anchors.fill: parent
                                 anchors.margins: 15
                                 spacing: 10
-
-                                Text {
-                                    text: "Палата " + modelData.number
-                                    font.pixelSize: 18
-                                    font.bold: true
-                                    color: "#333333"
-                                    Layout.fillWidth: true
-                                }
-
-                                Text {
-                                    text: "Тип: " + (modelData.disease ? "Изолятор" : "Обычная")
-                                    font.pixelSize: 14
-                                    color: "#555555"
-                                    Layout.fillWidth: true
-                                }
-
+                                Text { text: "Палата " + modelData.number; font.pixelSize: 18; font.bold: true; color: "#333333"; Layout.fillWidth: true }
+                                Text { text: "Тип: " + (modelData.disease ? "Изолятор" : "Обычная"); font.pixelSize: 14; color: "#555555"; Layout.fillWidth: true }
                                 Text {
                                     text: "Свободно: " + modelData.free_places + " / " + modelData.capacity
-                                    font.pixelSize: 14
-                                    font.bold: true
+                                    font.pixelSize: 14; font.bold: true
                                     color: modelData.free_places > 0 ? "#15803d" : "#b91c1c"
                                     Layout.fillWidth: true
                                 }
                             }
 
-                            // КЛИК ПО КАРТОЧКЕ ПАЛАТЫ
                             MouseArea {
                                 anchors.fill: parent
                                 cursorShape: Qt.PointingHandCursor
-                                onClicked: {
-                                    doctorStackView.push(chamberPatientsPage, {
-                                        "deptId": mapItem.deptId,
-                                        "chamberNumber": parseInt(modelData.number),
-                                        "chamberName": "Палата " + modelData.number
-                                    })
-                                }
+                                onClicked: doctorStackView.push(chamberPatientsPage, {
+                                    "deptId": mapItem.deptId,
+                                    "chamberNumber": parseInt(modelData.number),
+                                    "chamberName": "Палата " + modelData.number
+                                })
                             }
                         }
                     }
@@ -376,7 +337,7 @@ Item {
     }
 
     // ==========================================
-    // 5. СПИСОК ПАЦИЕНТОВ КОНКРЕТНОЙ ПАЛАТЫ (Таблица)
+    // 5. СПИСОК ПАЦИЕНТОВ ПАЛАТЫ
     // ==========================================
     Component {
         id: chamberPatientsPage
@@ -388,10 +349,7 @@ Item {
             property string chamberName: ""
             property var patientsList: []
 
-            Component.onCompleted: {
-                loadPatients()
-            }
-
+            Component.onCompleted: loadPatients()
             function loadPatients() {
                 patientsList = Yadro.getPatientsByChamber(chamberPatItem.deptId, chamberPatItem.chamberNumber)
             }
@@ -420,9 +378,7 @@ Item {
                     implicitWidth: 100
                     implicitHeight: 35
                     font.pixelSize: 14
-                    onClicked: {
-                        chamberPatItem.loadPatients()
-                    }
+                    onClicked: chamberPatItem.loadPatients()
                 }
 
                 Button {
@@ -430,9 +386,7 @@ Item {
                     implicitWidth: 100
                     implicitHeight: 35
                     font.pixelSize: 14
-                    onClicked: {
-                        doctorStackView.pop()
-                    }
+                    onClicked: doctorStackView.pop()
                 }
             }
 
@@ -458,7 +412,6 @@ Item {
                     clip: true
                     highlightFollowsCurrentItem: false
                     ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
-
                     model: chamberPatItem.patientsList
 
                     header: Rectangle {
@@ -471,8 +424,6 @@ Item {
                             anchors.leftMargin: 10
                             anchors.rightMargin: 10
                             spacing: 10
-
-                            // БЕЗ КОЛОНОК ОТДЕЛЕНИЕ И ПАЛАТА
                             Text { text: "ФИО"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 2; font.pixelSize: 14 }
                             Text { text: "Полис"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                             Text { text: "Срок"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
@@ -495,7 +446,10 @@ Item {
                             Text { text: modelData.full_name !== "" ? modelData.full_name : "—"; Layout.fillWidth: true; Layout.preferredWidth: 2; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.policy !== "" ? modelData.policy : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.pregnancy_period !== "" ? modelData.pregnancy_period : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                            Text { text: modelData.disease !== "" ? modelData.disease : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+                            Text {
+                                text: modelData.disease ? "Да" : "—"
+                                Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14
+                            }
                         }
                     }
                 }
@@ -512,7 +466,7 @@ Item {
     }
 
     // ==========================================
-    // 6. СТРАНИЦА ВСЕХ ПАЦИЕНТОВ
+    // 6. СТРАНИЦА ВСЕХ ПАЦИЕНТОВ + ДВОЙНОЙ КЛИК → ПЕРЕВОД
     // ==========================================
     Component {
         id: patientsPage
@@ -523,14 +477,19 @@ Item {
             property var allPatients: []
             property var filteredPatients: []
 
-            Component.onCompleted: {
-                loadPatients()
-            }
+            property int selectedPatientId: -1
+            property string selectedPatientName: ""
+            property bool selectedPatientIsDisease: false
+
+            Component.onCompleted: loadPatients()
 
             function loadPatients() {
                 allPatients = Yadro.getPatients()
                 patientsItem.filteredPatients = allPatients
                 searchField.text = ""
+                patientsItem.selectedPatientId = -1
+                patientsItem.selectedPatientName = ""
+                patientsItem.selectedPatientIsDisease = false
             }
 
             function filterPatients() {
@@ -539,13 +498,11 @@ Item {
                     patientsItem.filteredPatients = patientsItem.allPatients
                     return
                 }
-
                 let result = []
                 for (let i = 0; i < patientsItem.allPatients.length; i++) {
                     let pat = patientsItem.allPatients[i]
-                    if (pat.full_name && pat.full_name.toLowerCase().includes(query)) {
+                    if (pat.full_name && pat.full_name.toLowerCase().includes(query))
                         result.push(pat)
-                    }
                 }
                 patientsItem.filteredPatients = result
             }
@@ -594,15 +551,9 @@ Item {
                         anchors.rightMargin: 5
                         anchors.verticalCenter: parent.verticalCenter
                         visible: searchField.text !== ""
-
-                        background: Rectangle {
-                            color: "transparent"
-                            radius: 12
-                        }
+                        background: Rectangle { color: "transparent"; radius: 12 }
                         contentItem: Text {
-                            text: "✕"
-                            font.pixelSize: 14
-                            color: "#666666"
+                            text: "✕"; font.pixelSize: 14; color: "#666666"
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -618,9 +569,7 @@ Item {
                     implicitWidth: 100
                     implicitHeight: 35
                     font.pixelSize: 14
-                    onClicked: {
-                        patientsItem.loadPatients()
-                    }
+                    onClicked: patientsItem.loadPatients()
                 }
 
                 Button {
@@ -636,14 +585,15 @@ Item {
             }
 
             Rectangle {
+                id: tableContainer
                 anchors.top: pageTitle.bottom
                 anchors.topMargin: 15
                 anchors.left: parent.left
                 anchors.leftMargin: 20
                 anchors.right: parent.right
                 anchors.rightMargin: 20
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 20
+                anchors.bottom: bottomPanel.top
+                anchors.bottomMargin: 15
 
                 color: "#ffffff"
                 border.color: "#e0e0e0"
@@ -657,7 +607,6 @@ Item {
                     clip: true
                     highlightFollowsCurrentItem: false
                     ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
-
                     model: patientsItem.filteredPatients
 
                     header: Rectangle {
@@ -670,7 +619,6 @@ Item {
                             anchors.leftMargin: 10
                             anchors.rightMargin: 10
                             spacing: 10
-
                             Text { text: "ФИО"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                             Text { text: "Полис"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
                             Text { text: "Срок"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; font.pixelSize: 14 }
@@ -683,7 +631,9 @@ Item {
                     delegate: Rectangle {
                         width: patientModel.width - 10
                         height: 40
-                        color: index % 2 === 0 ? "#ffffff" : "#f9f9f9"
+                        color: patientModel.currentIndex === index
+                               ? "#cce5ff"
+                               : (index % 2 === 0 ? "#ffffff" : "#f9f9f9")
                         border.color: "#eeeeee"
 
                         RowLayout {
@@ -695,9 +645,37 @@ Item {
                             Text { text: modelData.full_name !== "" ? modelData.full_name : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.policy !== "" ? modelData.policy : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.pregnancy_period !== "" ? modelData.pregnancy_period : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                            Text { text: modelData.disease !== "" ? modelData.disease : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+                            Text {
+                                text: modelData.disease ? "Да" : "—"
+                                Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14
+                            }
                             Text { text: modelData.department !== "" ? modelData.department : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
                             Text { text: modelData.chamber !== "" ? modelData.chamber : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            acceptedButtons: Qt.LeftButton
+
+                            onClicked: {
+                                patientModel.currentIndex = index
+                                patientsItem.selectedPatientId = parseInt(modelData.id)
+                                patientsItem.selectedPatientName = modelData.full_name
+                                patientsItem.selectedPatientIsDisease = !!modelData.disease
+                            }
+
+                            onDoubleClicked: {
+                                patientModel.currentIndex = index
+                                patientsItem.selectedPatientId = parseInt(modelData.id)
+                                patientsItem.selectedPatientName = modelData.full_name
+                                patientsItem.selectedPatientIsDisease = !!modelData.disease
+
+                                transferPopup.openFor(
+                                    parseInt(modelData.id),
+                                    modelData.full_name,
+                                    !!modelData.disease
+                                )
+                            }
                         }
                     }
                 }
@@ -708,6 +686,404 @@ Item {
                     color: "#999999"
                     visible: patientModel.count === 0
                     font.pixelSize: 14
+                }
+            }
+
+            RowLayout {
+                id: bottomPanel
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 20
+                anchors.right: parent.right
+                anchors.rightMargin: 20
+                spacing: 15
+
+                Button {
+                    text: "Добавить пациентку"
+                    implicitWidth: 180
+                    implicitHeight: 40
+                    font.pixelSize: 15
+                    onClicked: {
+                        createPatientName.text = ""
+                        createPatientSourName.text = ""
+                        createPatientPolicy.text = ""
+                        createPatientPregnancy.text = ""
+                        createPatientDisease.checked = false
+                        createPatientErrorLabel.visible = false
+                        createPatientPopup.open()
+                    }
+                }
+
+                Button {
+                    text: "Перевести в палату"
+                    implicitWidth: 180
+                    implicitHeight: 40
+                    font.pixelSize: 15
+                    enabled: patientsItem.selectedPatientId !== -1
+                    onClicked: {
+                        transferPopup.openFor(
+                            patientsItem.selectedPatientId,
+                            patientsItem.selectedPatientName,
+                            patientsItem.selectedPatientIsDisease
+                        )
+                    }
+                }
+
+                Item { Layout.fillWidth: true }
+            }
+        }
+    }
+
+    // ==========================================
+    // 7. ПОПАП ПЕРЕВОДА ПАЦИЕНТКИ
+    // ==========================================
+    Popup {
+        id: transferPopup
+        width: 460
+        implicitHeight: Math.min(transferLayout.implicitHeight + 50, doctorPage.height - 40)
+        anchors.centerIn: parent
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+
+        property int patientId: -1
+        property bool patientIsDisease: false
+        property var departmentsData: []
+        property var chambersData: []
+
+        function openFor(pid, fullName, isDisease) {
+            patientId = pid
+            patientIsDisease = isDisease
+
+            transferPatientLabel.text = fullName
+
+            departmentsData = Yadro.getDepartments()
+            deptCombo.model = departmentsData
+            deptCombo.currentIndex = -1
+
+            chambersData = []
+            chamberCombo.model = []
+            chamberCombo.currentIndex = -1
+
+            transferErrorLabel.visible = false
+            transferErrorLabel.text = ""
+
+            open()
+        }
+
+        function loadChambers() {
+            chambersData = []
+            chamberCombo.model = []
+            chamberCombo.currentIndex = -1
+
+            if (deptCombo.currentIndex < 0 || departmentsData.length === 0)
+                return
+
+            const dept = departmentsData[deptCombo.currentIndex]
+            const allChambers = Yadro.getChambersByDepartment(parseInt(dept.id))
+
+            const filtered = []
+            for (let i = 0; i < allChambers.length; i++) {
+                const ch = allChambers[i]
+                const isDiseaseChamber = !!ch.disease
+
+                if (isDiseaseChamber !== transferPopup.patientIsDisease)
+                    continue
+
+                if (parseInt(ch.free_places) <= 0)
+                    continue
+
+                filtered.push(ch)
+            }
+
+            chambersData = filtered
+            chamberCombo.model = filtered
+            chamberCombo.currentIndex = -1
+        }
+
+        ColumnLayout {
+            id: transferLayout
+            x: 20
+            y: 20
+            width: parent.width - 40
+            spacing: 12
+
+            Text {
+                text: "Перевод пациентки"
+                font.pixelSize: 20
+                font.bold: true
+                Layout.alignment: Qt.AlignHCenter
+                Layout.bottomMargin: 5
+            }
+
+            Text {
+                id: transferPatientLabel
+                text: ""
+                font.pixelSize: 14
+                color: "#333333"
+                font.bold: true
+                Layout.fillWidth: true
+            }
+
+            Text {
+                text: transferPopup.patientIsDisease
+                      ? "⚠ Пациентка с болезнью — доступны только изоляторы"
+                      : "Пациентка здорова — доступны только обычные палаты"
+                font.pixelSize: 12
+                color: transferPopup.patientIsDisease ? "#b91c1c" : "#15803d"
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+                Layout.bottomMargin: 5
+            }
+
+            Text { text: "Отделение"; font.pixelSize: 12; color: "#666" }
+            ComboBox {
+                id: deptCombo
+                Layout.fillWidth: true
+                implicitHeight: 40
+                textRole: "name"
+                model: []
+
+                delegate: ItemDelegate {
+                    width: deptCombo.width
+                    contentItem: Text {
+                        text: modelData.name
+                        font.pixelSize: 14
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    highlighted: deptCombo.highlightedIndex === index
+                }
+
+                onCurrentIndexChanged: transferPopup.loadChambers()
+            }
+
+            Text { text: "Палата (только свободные)"; font.pixelSize: 12; color: "#666" }
+            ComboBox {
+                id: chamberCombo
+                Layout.fillWidth: true
+                implicitHeight: 40
+                model: transferPopup.chambersData
+
+                delegate: ItemDelegate {
+                    width: chamberCombo.width
+                    contentItem: Text {
+                        text: "Палата " + modelData.number
+                              + "  •  " + (modelData.disease ? "Изолятор" : "Обычная")
+                              + "  •  свободно " + modelData.free_places
+                              + "/" + modelData.capacity
+                        font.pixelSize: 14
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    highlighted: chamberCombo.highlightedIndex === index
+                }
+
+                contentItem: Text {
+                    leftPadding: 10
+                    text: chamberCombo.currentIndex >= 0 && transferPopup.chambersData.length > 0
+                          ? ("Палата " + transferPopup.chambersData[chamberCombo.currentIndex].number
+                             + "  (свободно " + transferPopup.chambersData[chamberCombo.currentIndex].free_places + ")")
+                          : "— выберите палату —"
+                    color: "#333333"
+                    font.pixelSize: 14
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
+                }
+            }
+
+            Text {
+                id: transferErrorLabel
+                color: "red"
+                font.pixelSize: 13
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                visible: false
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.topMargin: 10
+                spacing: 10
+
+                Button {
+                    text: "Отмена"
+                    Layout.fillWidth: true
+                    implicitHeight: 40
+                    onClicked: transferPopup.close()
+                }
+
+                Button {
+                    text: "Перевести"
+                    Layout.fillWidth: true
+                    implicitHeight: 40
+                    enabled: deptCombo.currentIndex >= 0
+                             && chamberCombo.currentIndex >= 0
+                             && transferPopup.chambersData.length > 0
+
+                    onClicked: {
+                        transferErrorLabel.visible = false
+
+                        const dept = transferPopup.departmentsData[deptCombo.currentIndex]
+                        const ch = transferPopup.chambersData[chamberCombo.currentIndex]
+
+                        const err = Yadro.transferPatient(
+                            transferPopup.patientId,
+                            parseInt(dept.id),
+                            parseInt(ch.number)
+                        )
+
+                        if (err.length === 0) {
+                            transferPopup.close()
+                            doctorStackView.pop(null)
+                            doctorStackView.push(patientsPage)
+                        } else {
+                            transferErrorLabel.text = err
+                            transferErrorLabel.visible = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // ==========================================
+    // 8. ПОПАП ДОБАВЛЕНИЯ ПАЦИЕНТКИ
+    // ==========================================
+    Popup {
+        id: createPatientPopup
+        width: 400
+        implicitHeight: Math.min(contentLayout.implicitHeight + 50, doctorPage.height - 40)
+        anchors.centerIn: parent
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+
+        Flickable {
+            id: popupFlick
+            anchors.fill: parent
+            anchors.margins: 5
+            clip: true
+            contentWidth: width
+            contentHeight: contentLayout.implicitHeight + 40
+            flickableDirection: Flickable.VerticalFlick
+            boundsBehavior: Flickable.StopAtBounds
+            ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
+
+            ColumnLayout {
+                id: contentLayout
+                x: 20
+                y: 20
+                width: parent.width - 40
+                spacing: 15
+
+                Text {
+                    text: "Новая пациентка"
+                    font.pixelSize: 20
+                    font.bold: true
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.bottomMargin: 10
+                }
+
+                Text { text: "Имя"; font.pixelSize: 12; color: "#666" }
+                TextField {
+                    id: createPatientName
+                    Layout.fillWidth: true
+                    implicitHeight: 40
+                    font.pixelSize: 14
+                    onTextChanged: createPatientErrorLabel.visible = false
+                }
+
+                Text { text: "Фамилия"; font.pixelSize: 12; color: "#666" }
+                TextField {
+                    id: createPatientSourName
+                    Layout.fillWidth: true
+                    implicitHeight: 40
+                    font.pixelSize: 14
+                    onTextChanged: createPatientErrorLabel.visible = false
+                }
+
+                Text { text: "Полис"; font.pixelSize: 12; color: "#666" }
+                TextField {
+                    id: createPatientPolicy
+                    Layout.fillWidth: true
+                    implicitHeight: 40
+                    font.pixelSize: 14
+                    onTextChanged: createPatientErrorLabel.visible = false
+                }
+
+                Text { text: "Срок беременности"; font.pixelSize: 12; color: "#666" }
+                TextField {
+                    id: createPatientPregnancy
+                    Layout.fillWidth: true
+                    implicitHeight: 40
+                    font.pixelSize: 14
+                    onTextChanged: createPatientErrorLabel.visible = false
+                }
+
+                CheckBox {
+                    id: createPatientDisease
+                    text: "Болезнь (для больных)"
+                    font.pixelSize: 14
+                    onCheckedChanged: createPatientErrorLabel.visible = false
+                }
+
+                Text {
+                    id: createPatientErrorLabel
+                    color: "red"
+                    font.pixelSize: 13
+                    wrapMode: Text.WordWrap
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
+                    visible: false
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.topMargin: 10
+                    spacing: 10
+
+                    Button {
+                        text: "Отмена"
+                        Layout.fillWidth: true
+                        implicitHeight: 40
+                        onClicked: createPatientPopup.close()
+                    }
+
+                    Button {
+                        text: "Сохранить"
+                        Layout.fillWidth: true
+                        implicitHeight: 40
+                        enabled: createPatientName.text.trim() !== ""
+                                 && createPatientSourName.text.trim() !== ""
+                                 && createPatientPolicy.text.trim() !== ""
+                                 && createPatientPregnancy.text.trim() !== ""
+
+                        onClicked: {
+                            createPatientErrorLabel.visible = false
+
+                            const err = Yadro.createPatient(
+                                createPatientName.text,
+                                createPatientSourName.text,
+                                createPatientPolicy.text,
+                                createPatientPregnancy.text,
+                                createPatientDisease.checked
+                            )
+
+                            if (err.length === 0) {
+                                createPatientPopup.close()
+                                if (doctorPage.currentTab === "patients") {
+                                    doctorStackView.pop(null)
+                                    doctorStackView.push(patientsPage)
+                                }
+                            } else {
+                                createPatientErrorLabel.text = err
+                                createPatientErrorLabel.visible = true
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -117,7 +117,6 @@ Item {
                                 "currentUserFullName": fullName
                             })
                         } else {
-                            // По умолчанию (или если роль "Медсестра") кидаем к медсестре
                             stackView.push("NursePage.qml", {
                                 "currentUserLogin": loginField.text,
                                 "currentUserFullName": fullName
