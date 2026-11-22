@@ -9,4 +9,4 @@
 | Узнать, что изменилось относительно исходных архивов | [Изменения](App/PerinatalCenter/CHANGELOG.ru.md) |
 | Посмотреть статусы UC, протокол испытаний и ограничения | [Отчёт](App/PerinatalCenter/TESTING.ru.md) |
 
-В каталогах Course_Work, Design и Software_Requirements находятся материалы команды. Приложенная отдельно спецификация побайтно совпала с документом в архиве Александра. Исходники, SQL, тесты и инструкции находятся в App/PerinatalCenter.
+В каталогах Course_Work, Design и Software_Requirements находятся материалы команды. Исходники, SQL, тесты и инструкции находятся в App/PerinatalCenter.
