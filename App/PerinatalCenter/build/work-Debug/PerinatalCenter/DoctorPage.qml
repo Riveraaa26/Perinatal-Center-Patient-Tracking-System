@@ -6,6 +6,9 @@ import PerinatalCenter 1.0
 Item {
     id: doctorPage
 
+    // 👇 СИГНАЛ ДЛЯ АВТОМАТИЧЕСКОГО ОБНОВЛЕНИЯ ТАБЛИЦЫ
+    signal patientDataChanged()
+
     property string currentUserLogin: ""
     property string currentUserFullName: ""
     property string currentTab: "departments"
@@ -466,7 +469,7 @@ Item {
     }
 
     // ==========================================
-    // 6. СТРАНИЦА ВСЕХ ПАЦИЕНТОВ + ДВОЙНОЙ КЛИК → ПЕРЕВОД
+    // 6. СТРАНИЦА ВСЕХ ПАЦИЕНТОВ
     // ==========================================
     Component {
         id: patientsPage
@@ -481,6 +484,14 @@ Item {
             property string selectedPatientName: ""
             property bool selectedPatientIsDisease: false
 
+            // 👇 ПОДПИСКА НА СИГНАЛ
+            Connections {
+                target: doctorPage
+                function onPatientDataChanged() {
+                    patientsItem.loadPatients()
+                }
+            }
+
             Component.onCompleted: loadPatients()
 
             function loadPatients() {
@@ -490,6 +501,17 @@ Item {
                 patientsItem.selectedPatientId = -1
                 patientsItem.selectedPatientName = ""
                 patientsItem.selectedPatientIsDisease = false
+
+                if (allPatients.length > 0) {
+                    patientModel.currentIndex = 0
+
+                    let pat = allPatients[0]
+                    patientsItem.selectedPatientId = parseInt(pat.id)
+                    patientsItem.selectedPatientName = pat.full_name
+                    patientsItem.selectedPatientIsDisease = !!pat.disease
+                } else {
+                    patientModel.currentIndex = -1
+                }
             }
 
             function filterPatients() {
@@ -609,6 +631,19 @@ Item {
                     ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
                     model: patientsItem.filteredPatients
 
+                    onCurrentIndexChanged: {
+                        if (currentIndex >= 0 && patientsItem.filteredPatients.length > currentIndex) {
+                            let pat = patientsItem.filteredPatients[currentIndex]
+                            patientsItem.selectedPatientId = parseInt(pat.id)
+                            patientsItem.selectedPatientName = pat.full_name
+                            patientsItem.selectedPatientIsDisease = !!pat.disease
+                        } else {
+                            patientsItem.selectedPatientId = -1
+                            patientsItem.selectedPatientName = ""
+                            patientsItem.selectedPatientIsDisease = false
+                        }
+                    }
+
                     header: Rectangle {
                         width: patientModel.width - 10
                         height: 35
@@ -631,6 +666,10 @@ Item {
                     delegate: Rectangle {
                         width: patientModel.width - 10
                         height: 40
+
+                        // 👇 ПРОЗРАЧНОСТЬ ДЛЯ ВЫПИСАННЫХ
+                        opacity: modelData.is_discharged ? 0.5 : 1.0
+
                         color: patientModel.currentIndex === index
                                ? "#cce5ff"
                                : (index % 2 === 0 ? "#ffffff" : "#f9f9f9")
@@ -659,17 +698,10 @@ Item {
 
                             onClicked: {
                                 patientModel.currentIndex = index
-                                patientsItem.selectedPatientId = parseInt(modelData.id)
-                                patientsItem.selectedPatientName = modelData.full_name
-                                patientsItem.selectedPatientIsDisease = !!modelData.disease
                             }
 
                             onDoubleClicked: {
                                 patientModel.currentIndex = index
-                                patientsItem.selectedPatientId = parseInt(modelData.id)
-                                patientsItem.selectedPatientName = modelData.full_name
-                                patientsItem.selectedPatientIsDisease = !!modelData.disease
-
                                 transferPopup.openFor(
                                     parseInt(modelData.id),
                                     modelData.full_name,
@@ -856,6 +888,18 @@ Item {
                     highlighted: deptCombo.highlightedIndex === index
                 }
 
+                // 👇 ПОДСКАЗКА ДЛЯ ОТДЕЛЕНИЯ
+                contentItem: Text {
+                    leftPadding: 10
+                    text: deptCombo.currentIndex >= 0 && deptCombo.model.length > 0
+                          ? deptCombo.model[deptCombo.currentIndex].name
+                          : "— выберите отделение —"
+                    color: deptCombo.currentIndex >= 0 ? "#333333" : "#999999"
+                    font.pixelSize: 14
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
+                }
+
                 onCurrentIndexChanged: transferPopup.loadChambers()
             }
 
@@ -936,8 +980,7 @@ Item {
 
                         if (err.length === 0) {
                             transferPopup.close()
-                            doctorStackView.pop(null)
-                            doctorStackView.push(patientsPage)
+                            doctorPage.patientDataChanged()
                         } else {
                             transferErrorLabel.text = err
                             transferErrorLabel.visible = true
@@ -1074,10 +1117,7 @@ Item {
 
                             if (err.length === 0) {
                                 createPatientPopup.close()
-                                if (doctorPage.currentTab === "patients") {
-                                    doctorStackView.pop(null)
-                                    doctorStackView.push(patientsPage)
-                                }
+                                doctorPage.patientDataChanged()
                             } else {
                                 createPatientErrorLabel.text = err
                                 createPatientErrorLabel.visible = true

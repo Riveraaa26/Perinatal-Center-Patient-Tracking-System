@@ -116,6 +116,12 @@ Item {
                                 "currentUserLogin": loginField.text,
                                 "currentUserFullName": fullName
                             })
+                        } else if (roleName === "Заведующая отделением" || roleName === "Заведующий отделением") {
+                            // 👇 Добавлена маршрутизация для Заведующей
+                            stackView.push("HeadDoctorPage.qml", {
+                                "currentUserLogin": loginField.text,
+                                "currentUserFullName": fullName
+                            })
                         } else {
                             stackView.push("NursePage.qml", {
                                 "currentUserLogin": loginField.text,

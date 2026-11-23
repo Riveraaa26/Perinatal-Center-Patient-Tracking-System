@@ -7,6 +7,7 @@
     <file alias="DoctorPage.qml">C:/Users/sanek26/Documents/PerinatalCenter/DoctorPage.qml</file>
     <file alias="DepartamentsView.qml">C:/Users/sanek26/Documents/PerinatalCenter/DepartamentsView.qml</file>
     <file alias="ChambersView.qml">C:/Users/sanek26/Documents/PerinatalCenter/ChambersView.qml</file>
+    <file alias="HeadDoctorPage.qml">C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml</file>
   </qresource>
 </RCC>
 

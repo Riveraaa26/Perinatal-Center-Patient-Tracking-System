@@ -33,6 +33,7 @@ qt_add_qml_module(appPerinatalCenter
         yadro.h
         QML_FILES DoctorPage.qml
         QML_FILES NursePage.qml
+        QML_FILES HeadDoctorPage.qml
 )
 
 set_target_properties(appPerinatalCenter PROPERTIES

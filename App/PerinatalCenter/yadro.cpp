@@ -471,7 +471,11 @@ QVariantList Yadro::getPatients()
     QSqlQuery query(s_db);
     QString sql = R"(
         SELECT p.id, p.name, p.sour_name, p.policy, p.pregnancy_period, p.disease,
-               d.department_name, c.number AS chamber_number
+               d.department_name, c.number AS chamber_number,
+               CASE
+                   WHEN last_t.chamber_id IS NULL AND EXISTS (SELECT 1 FROM transfer t2 WHERE t2.patient_id = p.id) THEN TRUE
+                   ELSE FALSE
+               END AS is_discharged
         FROM patient p
         LEFT JOIN LATERAL (
             SELECT t.chamber_id
@@ -482,7 +486,13 @@ QVariantList Yadro::getPatients()
         ) last_t ON TRUE
         LEFT JOIN chamber c ON last_t.chamber_id = c.id
         LEFT JOIN department d ON c.department_id = d.id
-        ORDER BY p.id ASC
+        ORDER BY
+            CASE
+                WHEN last_t.chamber_id IS NOT NULL THEN 0
+                WHEN last_t.chamber_id IS NULL AND NOT EXISTS (SELECT 1 FROM transfer t2 WHERE t2.patient_id = p.id) THEN 1
+                ELSE 2
+            END ASC,
+            p.id ASC
     )";
 
     if (!query.exec(sql)) {
@@ -499,6 +509,7 @@ QVariantList Yadro::getPatients()
         pat["disease"] = query.value(5).toBool();
         pat["department"] = query.value(6).isNull() ? "" : query.value(6).toString();
         pat["chamber"] = query.value(7).isNull() ? "" : query.value(7).toString();
+        pat["is_discharged"] = query.value(8).toBool();
         list.append(pat);
     }
     return list;
@@ -599,7 +610,6 @@ QVariantList Yadro::getPatientsByChamber(int departmentId, int chamberNumber)
     return list;
 }
 
-// === ИСПРАВЛЕННЫЙ ПЕРЕВОД ПАЦИЕНТКИ ===
 QString Yadro::transferPatient(int patientId, int departmentId, int chamberNumber)
 {
     if (!s_db.isOpen()) return QStringLiteral("Нет подключения к базе данных.");
@@ -698,7 +708,6 @@ QString Yadro::transferPatient(int patientId, int departmentId, int chamberNumbe
     return QString();
 }
 
-// === ВЫПИСКА ПАЦИЕНТКИ ===
 QString Yadro::dischargePatient(int patientId)
 {
     if (!s_db.isOpen()) return QStringLiteral("Нет подключения к базе данных.");
@@ -708,7 +717,6 @@ QString Yadro::dischargePatient(int patientId)
 
     QSqlQuery query(s_db);
 
-    // 1. Находим текущую палату пациентки
     query.prepare("SELECT chamber_id FROM transfer WHERE patient_id = :pid ORDER BY date DESC, id DESC LIMIT 1");
     query.bindValue(":pid", patientId);
 
@@ -717,7 +725,6 @@ QString Yadro::dischargePatient(int patientId)
         currentChamberId = query.value(0).toInt();
     }
 
-    // 2. Если она где-то лежала, уменьшаем загрузку этой палаты
     if (currentChamberId != -1) {
         QSqlQuery upd(s_db);
         upd.prepare("UPDATE chamber SET current_load = current_load - 1 WHERE id = :ch_id AND current_load > 0");
@@ -728,7 +735,6 @@ QString Yadro::dischargePatient(int patientId)
         }
     }
 
-    // 3. Создаем запись о выписке (chamber_id = NULL)
     int currentEmployeeId = 1;
     query.prepare("INSERT INTO transfer (patient_id, employee_id, chamber_id) VALUES (:pid, :emp_id, NULL)");
     query.bindValue(":pid", patientId);

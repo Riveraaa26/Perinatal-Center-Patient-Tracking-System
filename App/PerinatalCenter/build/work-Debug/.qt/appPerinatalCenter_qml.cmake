@@ -16,6 +16,8 @@ set(src_and_dest_list
     "C:/Users/sanek26/Documents/PerinatalCenter/build/work-Debug/PerinatalCenter/DepartamentsView.qml"
     "C:/Users/sanek26/Documents/PerinatalCenter/ChambersView.qml"
     "C:/Users/sanek26/Documents/PerinatalCenter/build/work-Debug/PerinatalCenter/ChambersView.qml"
+    "C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml"
+    "C:/Users/sanek26/Documents/PerinatalCenter/build/work-Debug/PerinatalCenter/HeadDoctorPage.qml"
 
 )
 set(timestamp_file "C:/Users/sanek26/Documents/PerinatalCenter/build/work-Debug/.qt/appPerinatalCenter_qml.txt")

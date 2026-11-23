@@ -8,5 +8,6 @@ NursePage 1.0 NursePage.qml
 DoctorPage 1.0 DoctorPage.qml
 DepartamentsView 1.0 DepartamentsView.qml
 ChambersView 1.0 ChambersView.qml
+HeadDoctorPage 1.0 HeadDoctorPage.qml
 depends QtQuick
 
