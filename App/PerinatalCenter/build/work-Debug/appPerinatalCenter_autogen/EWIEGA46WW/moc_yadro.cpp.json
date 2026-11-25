@@ -374,6 +374,10 @@
                         {
                             "name": "chamberNumber",
                             "type": "int"
+                        },
+                        {
+                            "name": "employeeId",
+                            "type": "int"
                         }
                     ],
                     "index": 20,
@@ -387,12 +391,23 @@
                         {
                             "name": "patientId",
                             "type": "int"
+                        },
+                        {
+                            "name": "employeeId",
+                            "type": "int"
                         }
                     ],
                     "index": 21,
                     "lineNumber": 56,
                     "name": "dischargePatient",
                     "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "index": 22,
+                    "lineNumber": 58,
+                    "name": "getTransferHistory",
+                    "returnType": "QVariantList"
                 }
             ],
             "object": true,

@@ -10,7 +10,7 @@
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 25,
+                            "line": 24,
                             "message": ""
                         },
                         {
@@ -18,7 +18,23 @@
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 27,
+                            "line": 26,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 37,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalCenter",
+                            "line": 33,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 37,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalCenter",
+                            "line": 37,
                             "message": ""
                         },
                         {
@@ -26,15 +42,23 @@
                             "column": 15,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 33,
+                            "line": 58,
                             "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 16,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 61,
+                            "message": "Cannot access value for name accentHover"
                         },
                         {
                             "codegenResult": 0,
                             "column": 35,
                             "durationMicroseconds": 0,
                             "functionName": "horizontalCenter",
-                            "line": 37,
+                            "line": 62,
                             "message": ""
                         },
                         {
@@ -42,7 +66,7 @@
                             "column": 33,
                             "durationMicroseconds": 0,
                             "functionName": "verticalCenter",
-                            "line": 38,
+                            "line": 63,
                             "message": ""
                         },
                         {
@@ -50,7 +74,7 @@
                             "column": 20,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 50,
+                            "line": 82,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
@@ -58,7 +82,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 44,
+                            "line": 70,
                             "message": "Could not find property \"right\"."
                         },
                         {
@@ -66,15 +90,23 @@
                             "column": 33,
                             "durationMicroseconds": 0,
                             "functionName": "verticalCenter",
-                            "line": 46,
+                            "line": 72,
                             "message": "Could not find property \"verticalCenter\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 20,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 78,
+                            "message": "Cannot load property down from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
                         },
                         {
                             "codegenResult": 0,
                             "column": 16,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 55,
+                            "line": 87,
                             "message": ""
                         },
                         {
@@ -82,7 +114,7 @@
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 58,
+                            "line": 90,
                             "message": ""
                         },
                         {
@@ -90,7 +122,7 @@
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 68,
+                            "line": 100,
                             "message": ""
                         },
                         {
@@ -98,7 +130,7 @@
                             "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 69,
+                            "line": 101,
                             "message": ""
                         },
                         {
@@ -106,7 +138,7 @@
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 70,
+                            "line": 102,
                             "message": ""
                         },
                         {
@@ -114,7 +146,7 @@
                             "column": 27,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 76,
+                            "line": 108,
                             "message": ""
                         },
                         {
@@ -122,7 +154,7 @@
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 90,
+                            "line": 122,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
@@ -130,15 +162,23 @@
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 86,
+                            "line": 118,
                             "message": "Cannot load property down from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 119,
+                            "message": "Cannot load property hovered from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
                         },
                         {
                             "codegenResult": 2,
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 106,
+                            "line": 139,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
@@ -146,15 +186,55 @@
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 102,
+                            "line": 135,
                             "message": "Cannot load property down from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 136,
+                            "message": "Cannot load property hovered from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 156,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 152,
+                            "message": "Cannot load property down from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 153,
+                            "message": "Cannot load property hovered from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "centerIn",
+                            "line": 180,
+                            "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 122,
+                            "line": 191,
                             "message": ""
                         },
                         {
@@ -162,7 +242,7 @@
                             "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 123,
+                            "line": 192,
                             "message": ""
                         },
                         {
@@ -170,7 +250,7 @@
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 124,
+                            "line": 193,
                             "message": ""
                         },
                         {
@@ -178,207 +258,55 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 125,
+                            "line": 194,
                             "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 26,
+                            "durationMicroseconds": 0,
+                            "functionName": "initialItem",
+                            "line": 200,
+                            "message": "Could not find property \"initialItem\"."
                         },
                         {
                             "codegenResult": 2,
                             "column": 27,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 130,
+                            "line": 199,
                             "message": "Could not find property \"fill\"."
                         },
                         {
                             "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "onCompleted",
-                            "line": 133,
-                            "message": "Cannot access value for name deptModel"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 34,
-                            "durationMicroseconds": 0,
-                            "functionName": "top",
-                            "line": 141,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 35,
-                            "durationMicroseconds": 0,
-                            "functionName": "left",
-                            "line": 143,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 34,
-                            "durationMicroseconds": 0,
-                            "functionName": "top",
-                            "line": 148,
-                            "message": "Cannot access value for name pageTitle"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 35,
-                            "durationMicroseconds": 0,
-                            "functionName": "left",
-                            "line": 150,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "right",
-                            "line": 152,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 37,
-                            "durationMicroseconds": 0,
-                            "functionName": "bottom",
-                            "line": 154,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
                             "column": 39,
                             "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 164,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 65,
-                            "durationMicroseconds": 0,
-                            "functionName": "policy",
-                            "line": 168,
-                            "message": "Could not find property \"policy\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "width",
-                            "line": 171,
-                            "message": "Cannot access value for name deptModel"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 175,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "width",
-                            "line": 186,
-                            "message": "Cannot access value for name deptModel"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 188,
-                            "message": "Cannot access value for name deptModel"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 192,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 196,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 119,
-                            "durationMicroseconds": 0,
-                            "functionName": "elide",
-                            "line": 196,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 197,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 198,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 50,
-                            "durationMicroseconds": 0,
-                            "functionName": "acceptedButtons",
-                            "line": 203,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 204,
-                            "message": "Cannot access value for name deptModel"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 50,
-                            "durationMicroseconds": 0,
-                            "functionName": "onDoubleClicked",
-                            "line": 205,
-                            "message": "Cannot access value for name headDoctorStackView"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 202,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "chambers",
-                            "line": 227,
+                            "functionName": "historyList",
+                            "line": 212,
                             "message": "Cannot generate efficient code for storing an array in a non-sequence type"
                         },
                         {
                             "codegenResult": 0,
                             "column": 13,
                             "durationMicroseconds": 0,
-                            "functionName": "loadChambers",
-                            "line": 230,
+                            "functionName": "loadHistory",
+                            "line": 223,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 25,
+                            "durationMicroseconds": 0,
+                            "functionName": "target",
+                            "line": 215,
+                            "message": "Cannot access value for name headDoctorPage"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 17,
+                            "durationMicroseconds": 0,
+                            "functionName": "onPatientDataChanged",
+                            "line": 216,
                             "message": ""
                         },
                         {
@@ -386,15 +314,7 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "onCompleted",
-                            "line": 229,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 23,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 234,
+                            "line": 221,
                             "message": ""
                         },
                         {
@@ -402,7 +322,7 @@
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 238,
+                            "line": 233,
                             "message": ""
                         },
                         {
@@ -410,23 +330,23 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
+                            "line": 235,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
                             "line": 240,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "right",
-                            "line": 245,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 247,
+                            "line": 242,
                             "message": ""
                         },
                         {
@@ -434,7 +354,7 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 256,
+                            "line": 252,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
@@ -442,7 +362,7 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 264,
+                            "line": 261,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
@@ -450,7 +370,7 @@
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 269,
+                            "line": 270,
                             "message": ""
                         },
                         {
@@ -458,7 +378,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 271,
+                            "line": 272,
                             "message": ""
                         },
                         {
@@ -466,7 +386,7 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 273,
+                            "line": 274,
                             "message": ""
                         },
                         {
@@ -474,7 +394,7 @@
                             "column": 33,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 275,
+                            "line": 276,
                             "message": ""
                         },
                         {
@@ -482,7 +402,7 @@
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "model",
-                            "line": 290,
+                            "line": 288,
                             "message": ""
                         },
                         {
@@ -495,274 +415,10 @@
                         },
                         {
                             "codegenResult": 2,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "width",
-                            "line": 293,
-                            "message": "Cannot access value for name chambersGrid"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 33,
-                            "durationMicroseconds": 0,
-                            "functionName": "height",
-                            "line": 294,
-                            "message": "Cannot access value for name chambersGrid"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "width",
-                            "line": 297,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 37,
-                            "durationMicroseconds": 0,
-                            "functionName": "height",
-                            "line": 298,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 301,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "centerIn",
-                            "line": 299,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 43,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 302,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 306,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 309,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 310,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 43,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 312,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 314,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "cursorShape",
-                            "line": 321,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 322,
-                            "message": "Cannot access value for name headDoctorStackView"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 320,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 30,
-                            "durationMicroseconds": 0,
-                            "functionName": "visible",
-                            "line": 336,
-                            "message": "Cannot load property length from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::chambers with type QVariant."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 39,
-                            "durationMicroseconds": 0,
-                            "functionName": "centerIn",
-                            "line": 334,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "patientsList",
-                            "line": 353,
-                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 13,
-                            "durationMicroseconds": 0,
-                            "functionName": "loadPatients",
-                            "line": 356,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "onCompleted",
-                            "line": 355,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 23,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 362,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 30,
-                            "durationMicroseconds": 0,
-                            "functionName": "top",
-                            "line": 366,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 31,
-                            "durationMicroseconds": 0,
-                            "functionName": "left",
-                            "line": 368,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "right",
-                            "line": 373,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 30,
-                            "durationMicroseconds": 0,
-                            "functionName": "top",
-                            "line": 375,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 384,
-                            "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 392,
-                            "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 30,
-                            "durationMicroseconds": 0,
-                            "functionName": "top",
-                            "line": 397,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 31,
-                            "durationMicroseconds": 0,
-                            "functionName": "left",
-                            "line": 399,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "right",
-                            "line": 401,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 33,
-                            "durationMicroseconds": 0,
-                            "functionName": "bottom",
-                            "line": 403,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 28,
-                            "durationMicroseconds": 0,
-                            "functionName": "model",
-                            "line": 418,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 35,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 413,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
                             "column": 61,
                             "durationMicroseconds": 0,
                             "functionName": "policy",
-                            "line": 417,
+                            "line": 289,
                             "message": "Could not find property \"policy\"."
                         },
                         {
@@ -770,15 +426,15 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 421,
-                            "message": "Cannot access value for name patientListModel"
+                            "line": 292,
+                            "message": "Cannot access value for name historyListView"
                         },
                         {
                             "codegenResult": 0,
                             "column": 43,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 426,
+                            "line": 297,
                             "message": ""
                         },
                         {
@@ -786,15 +442,15 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 438,
-                            "message": "Cannot access value for name patientListModel"
+                            "line": 310,
+                            "message": "Cannot access value for name historyListView"
                         },
                         {
                             "codegenResult": 2,
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 440,
+                            "line": 312,
                             "message": "Cannot access value for name index"
                         },
                         {
@@ -802,7 +458,7 @@
                             "column": 43,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 444,
+                            "line": 316,
                             "message": ""
                         },
                         {
@@ -810,15 +466,23 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 449,
+                            "line": 321,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 42,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 322,
                             "message": "Cannot access value for name modelData"
                         },
                         {
                             "codegenResult": 0,
-                            "column": 155,
+                            "column": 118,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 449,
+                            "line": 322,
                             "message": ""
                         },
                         {
@@ -826,15 +490,15 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 450,
+                            "line": 323,
                             "message": "Cannot access value for name modelData"
                         },
                         {
                             "codegenResult": 0,
-                            "column": 149,
+                            "column": 119,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 450,
+                            "line": 323,
                             "message": ""
                         },
                         {
@@ -842,31 +506,31 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 451,
+                            "line": 324,
                             "message": "Cannot access value for name modelData"
                         },
                         {
                             "codegenResult": 0,
-                            "column": 169,
+                            "column": 121,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 451,
+                            "line": 324,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 39,
+                            "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 453,
+                            "line": 325,
                             "message": "Cannot access value for name modelData"
                         },
                         {
                             "codegenResult": 0,
-                            "column": 90,
+                            "column": 95,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 454,
+                            "line": 325,
                             "message": ""
                         },
                         {
@@ -874,7 +538,7 @@
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 464,
+                            "line": 334,
                             "message": ""
                         },
                         {
@@ -882,55 +546,7 @@
                             "column": 39,
                             "durationMicroseconds": 0,
                             "functionName": "centerIn",
-                            "line": 462,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 39,
-                            "durationMicroseconds": 0,
-                            "functionName": "allPatients",
-                            "line": 480,
-                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "filteredPatients",
-                            "line": 481,
-                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 13,
-                            "durationMicroseconds": 0,
-                            "functionName": "loadPatients",
-                            "line": 497,
-                            "message": "Cannot retrieve a non-object type by ID: searchField"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 13,
-                            "durationMicroseconds": 2000,
-                            "functionName": "filterPatients",
-                            "line": 517,
-                            "message": "Cannot retrieve a non-object type by ID: searchField"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 25,
-                            "durationMicroseconds": 0,
-                            "functionName": "target",
-                            "line": 489,
-                            "message": "Cannot access value for name headDoctorPage"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 17,
-                            "durationMicroseconds": 0,
-                            "functionName": "onPatientDataChanged",
-                            "line": 490,
+                            "line": 332,
                             "message": ""
                         },
                         {
@@ -938,7 +554,7 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "onCompleted",
-                            "line": 495,
+                            "line": 350,
                             "message": ""
                         },
                         {
@@ -946,7 +562,7 @@
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 538,
+                            "line": 358,
                             "message": ""
                         },
                         {
@@ -954,15 +570,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 540,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "right",
-                            "line": 545,
+                            "line": 360,
                             "message": ""
                         },
                         {
@@ -970,95 +578,7 @@
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 547,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "onTextChanged",
-                            "line": 566,
-                            "message": "Could not find signal \"textChanged\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 39,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 560,
-                            "message": "Could not find property \"fill\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 34,
-                            "durationMicroseconds": 0,
-                            "functionName": "visible",
-                            "line": 575,
-                            "message": "Could not find property \"visible\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 582,
-                            "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "right",
-                            "line": 572,
-                            "message": "Could not find property \"right\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 49,
-                            "durationMicroseconds": 0,
-                            "functionName": "verticalCenter",
-                            "line": 574,
-                            "message": "Could not find property \"verticalCenter\"."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 50,
-                            "durationMicroseconds": 0,
-                            "functionName": "horizontalAlignment",
-                            "line": 579,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 48,
-                            "durationMicroseconds": 0,
-                            "functionName": "verticalAlignment",
-                            "line": 580,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 594,
-                            "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 602,
-                            "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 30,
-                            "durationMicroseconds": 0,
-                            "functionName": "top",
-                            "line": 611,
+                            "line": 365,
                             "message": ""
                         },
                         {
@@ -1066,7 +586,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 613,
+                            "line": 367,
                             "message": ""
                         },
                         {
@@ -1074,7 +594,7 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 615,
+                            "line": 369,
                             "message": ""
                         },
                         {
@@ -1082,31 +602,15 @@
                             "column": 33,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 617,
+                            "line": 371,
                             "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 28,
-                            "durationMicroseconds": 0,
-                            "functionName": "model",
-                            "line": 632,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "onCurrentIndexChanged",
-                            "line": 634,
-                            "message": "Cannot load property length from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::filteredPatients with type QVariant."
                         },
                         {
                             "codegenResult": 0,
                             "column": 35,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 627,
+                            "line": 381,
                             "message": ""
                         },
                         {
@@ -1114,7 +618,7 @@
                             "column": 61,
                             "durationMicroseconds": 0,
                             "functionName": "policy",
-                            "line": 631,
+                            "line": 385,
                             "message": "Could not find property \"policy\"."
                         },
                         {
@@ -1122,15 +626,15 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 648,
-                            "message": "Cannot access value for name patientModel"
+                            "line": 388,
+                            "message": "Cannot access value for name deptModel"
                         },
                         {
                             "codegenResult": 0,
                             "column": 43,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 653,
+                            "line": 393,
                             "message": ""
                         },
                         {
@@ -1138,31 +642,23 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 667,
-                            "message": "Cannot access value for name patientModel"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 34,
-                            "durationMicroseconds": 0,
-                            "functionName": "opacity",
-                            "line": 671,
-                            "message": "Cannot access value for name modelData"
+                            "line": 404,
+                            "message": "Cannot access value for name deptModel"
                         },
                         {
                             "codegenResult": 2,
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 673,
-                            "message": "Cannot access value for name patientModel"
+                            "line": 406,
+                            "message": "Cannot access value for name deptModel"
                         },
                         {
                             "codegenResult": 0,
                             "column": 43,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 679,
+                            "line": 410,
                             "message": ""
                         },
                         {
@@ -1170,15 +666,15 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 684,
+                            "line": 414,
                             "message": "Cannot access value for name modelData"
                         },
                         {
                             "codegenResult": 0,
-                            "column": 155,
+                            "column": 115,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 684,
+                            "line": 414,
                             "message": ""
                         },
                         {
@@ -1186,87 +682,23 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 685,
+                            "line": 415,
                             "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 149,
-                            "durationMicroseconds": 0,
-                            "functionName": "elide",
-                            "line": 685,
-                            "message": ""
                         },
                         {
                             "codegenResult": 2,
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 686,
+                            "line": 416,
                             "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 169,
-                            "durationMicroseconds": 0,
-                            "functionName": "elide",
-                            "line": 686,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 39,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 688,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 90,
-                            "durationMicroseconds": 0,
-                            "functionName": "elide",
-                            "line": 689,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 42,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 691,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 157,
-                            "durationMicroseconds": 0,
-                            "functionName": "elide",
-                            "line": 691,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 42,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 692,
-                            "message": "Cannot access value for name modelData"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 151,
-                            "durationMicroseconds": 0,
-                            "functionName": "elide",
-                            "line": 692,
-                            "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 46,
                             "durationMicroseconds": 0,
                             "functionName": "acceptedButtons",
-                            "line": 697,
+                            "line": 421,
                             "message": ""
                         },
                         {
@@ -1274,47 +706,63 @@
                             "column": 40,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 699,
-                            "message": "Cannot access value for name patientModel"
+                            "line": 422,
+                            "message": "Cannot access value for name deptModel"
                         },
                         {
                             "codegenResult": 2,
                             "column": 46,
                             "durationMicroseconds": 0,
                             "functionName": "onDoubleClicked",
-                            "line": 703,
-                            "message": "Cannot access value for name patientModel"
+                            "line": 423,
+                            "message": "Cannot access value for name headDoctorStackView"
                         },
                         {
                             "codegenResult": 0,
                             "column": 43,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 696,
+                            "line": 420,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 27,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "chambers",
+                            "line": 444,
+                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 13,
+                            "durationMicroseconds": 0,
+                            "functionName": "loadChambers",
+                            "line": 447,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "onCompleted",
+                            "line": 446,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 716,
-                            "message": "Cannot retrieve a non-object type by ID: searchField"
+                            "line": 451,
+                            "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 30,
                             "durationMicroseconds": 0,
-                            "functionName": "visible",
-                            "line": 719,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 39,
-                            "durationMicroseconds": 0,
-                            "functionName": "centerIn",
-                            "line": 717,
+                            "functionName": "top",
+                            "line": 455,
                             "message": ""
                         },
                         {
@@ -1322,15 +770,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 726,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 33,
-                            "durationMicroseconds": 0,
-                            "functionName": "bottom",
-                            "line": 728,
+                            "line": 457,
                             "message": ""
                         },
                         {
@@ -1338,7 +778,15 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 730,
+                            "line": 462,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 464,
                             "message": ""
                         },
                         {
@@ -1346,244 +794,820 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 739,
+                            "line": 474,
                             "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 30,
-                            "durationMicroseconds": 0,
-                            "functionName": "enabled",
-                            "line": 755,
-                            "message": "Could not find property \"enabled\"."
                         },
                         {
                             "codegenResult": 2,
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 756,
+                            "line": 483,
                             "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 30,
-                            "durationMicroseconds": 0,
-                            "functionName": "enabled",
-                            "line": 770,
-                            "message": "Could not find property \"enabled\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 32,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 772,
-                            "message": "Could not find signal \"clicked\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 25,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitHeight",
-                            "line": 793,
-                            "message": "Could not find property \"implicitHeight\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 22,
-                            "durationMicroseconds": 0,
-                            "functionName": "closePolicy",
-                            "line": 797,
-                            "message": "Could not find property \"closePolicy\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 39,
-                            "durationMicroseconds": 0,
-                            "functionName": "departmentsData",
-                            "line": 802,
-                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 36,
-                            "durationMicroseconds": 0,
-                            "functionName": "chambersData",
-                            "line": 803,
-                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 9,
-                            "durationMicroseconds": 0,
-                            "functionName": "openFor",
-                            "line": 805,
-                            "message": "Functions without type annotations won't be compiled"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 9,
-                            "durationMicroseconds": 0,
-                            "functionName": "loadChambers",
-                            "line": 825,
-                            "message": "Cannot retrieve a non-object type by ID: chamberCombo"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 27,
-                            "durationMicroseconds": 0,
-                            "functionName": "centerIn",
-                            "line": 794,
-                            "message": "Could not find property \"centerIn\"."
                         },
                         {
                             "codegenResult": 0,
-                            "column": 20,
+                            "column": 30,
                             "durationMicroseconds": 0,
-                            "functionName": "width",
-                            "line": 859,
+                            "functionName": "top",
+                            "line": 488,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "left",
+                            "line": 490,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 492,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 33,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottom",
+                            "line": 494,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "model",
+                            "line": 509,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 35,
                             "durationMicroseconds": 0,
-                            "functionName": "alignment",
-                            "line": 866,
+                            "functionName": "fill",
+                            "line": 504,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 23,
+                            "column": 32,
                             "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 880,
-                            "message": "Cannot retrieve a non-object type by ID: transferPopup"
+                            "functionName": "width",
+                            "line": 512,
+                            "message": "Cannot access value for name chambersGrid"
                         },
                         {
                             "codegenResult": 2,
-                            "column": 24,
+                            "column": 33,
                             "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 884,
-                            "message": "Cannot retrieve a non-object type by ID: transferPopup"
+                            "functionName": "height",
+                            "line": 513,
+                            "message": "Cannot access value for name chambersGrid"
                         },
                         {
                             "codegenResult": 0,
-                            "column": 27,
+                            "column": 36,
                             "durationMicroseconds": 0,
-                            "functionName": "wrapMode",
-                            "line": 885,
+                            "functionName": "width",
+                            "line": 516,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 37,
+                            "durationMicroseconds": 0,
+                            "functionName": "height",
+                            "line": 517,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 24,
+                            "column": 36,
                             "durationMicroseconds": 0,
-                            "functionName": "model",
-                            "line": 896,
-                            "message": "Could not find property \"model\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "onCurrentIndexChanged",
-                            "line": 920,
-                            "message": "Could not find signal \"currentIndexChanged\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 28,
-                            "durationMicroseconds": 0,
-                            "functionName": "width",
-                            "line": 899,
-                            "message": "Could not find property \"width\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 34,
-                            "durationMicroseconds": 0,
-                            "functionName": "highlighted",
-                            "line": 905,
-                            "message": "Could not find property \"highlighted\"."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 31,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 901,
+                            "functionName": "color",
+                            "line": 520,
                             "message": "Cannot access value for name modelData"
                         },
                         {
                             "codegenResult": 0,
-                            "column": 44,
+                            "column": 47,
                             "durationMicroseconds": 0,
-                            "functionName": "verticalAlignment",
-                            "line": 903,
+                            "functionName": "centerIn",
+                            "line": 518,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 27,
-                            "durationMicroseconds": 0,
-                            "functionName": "text",
-                            "line": 911,
-                            "message": "Cannot access value for name deptCombo"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 28,
+                            "column": 43,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 914,
-                            "message": "Cannot access value for name deptCombo"
+                            "line": 521,
+                            "message": "Cannot access value for name modelData"
                         },
                         {
                             "codegenResult": 0,
+                            "column": 47,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 525,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 46,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 528,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 46,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 529,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 43,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 531,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 533,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 46,
+                            "durationMicroseconds": 0,
+                            "functionName": "cursorShape",
+                            "line": 540,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 541,
+                            "message": "Cannot access value for name headDoctorStackView"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 47,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 539,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 555,
+                            "message": "Cannot load property length from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::chambers with type QVariant."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "centerIn",
+                            "line": 553,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
                             "column": 40,
                             "durationMicroseconds": 0,
-                            "functionName": "verticalAlignment",
-                            "line": 916,
+                            "functionName": "patientsList",
+                            "line": 573,
+                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 13,
+                            "durationMicroseconds": 0,
+                            "functionName": "loadPatients",
+                            "line": 576,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "onCompleted",
+                            "line": 575,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 23,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 582,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 586,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "left",
+                            "line": 588,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 593,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 595,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 605,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 614,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 619,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "left",
+                            "line": 621,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 623,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 33,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottom",
+                            "line": 625,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 28,
                             "durationMicroseconds": 0,
-                            "functionName": "elide",
-                            "line": 917,
+                            "functionName": "model",
+                            "line": 640,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 635,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 24,
+                            "column": 61,
                             "durationMicroseconds": 0,
-                            "functionName": "model",
-                            "line": 928,
-                            "message": "Could not find property \"model\"."
+                            "functionName": "policy",
+                            "line": 639,
+                            "message": "Could not find property \"policy\"."
                         },
                         {
                             "codegenResult": 2,
-                            "column": 28,
+                            "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 931,
-                            "message": "Could not find property \"width\"."
+                            "line": 643,
+                            "message": "Cannot access value for name patientListModel"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 43,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 649,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "width",
+                            "line": 661,
+                            "message": "Cannot access value for name patientListModel"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 663,
+                            "message": "Cannot access value for name index"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 43,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 667,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 42,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 672,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 155,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 672,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 42,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 673,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 149,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 673,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 42,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 674,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 169,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 674,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 676,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 90,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 677,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 687,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "centerIn",
+                            "line": 685,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "allPatients",
+                            "line": 703,
+                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "filteredPatients",
+                            "line": 704,
+                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 13,
+                            "durationMicroseconds": 0,
+                            "functionName": "loadPatients",
+                            "line": 722,
+                            "message": "Cannot retrieve a non-object type by ID: searchField"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 13,
+                            "durationMicroseconds": 2000,
+                            "functionName": "filterPatients",
+                            "line": 747,
+                            "message": "Cannot retrieve a non-object type by ID: searchField"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 25,
+                            "durationMicroseconds": 0,
+                            "functionName": "target",
+                            "line": 714,
+                            "message": "Cannot access value for name headDoctorPage"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 17,
+                            "durationMicroseconds": 0,
+                            "functionName": "onPatientDataChanged",
+                            "line": 715,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "onCompleted",
+                            "line": 720,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 768,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "left",
+                            "line": 770,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 775,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 777,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "onTextChanged",
+                            "line": 796,
+                            "message": "Could not find signal \"textChanged\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 790,
+                            "message": "Could not find property \"fill\"."
                         },
                         {
                             "codegenResult": 2,
                             "column": 34,
                             "durationMicroseconds": 0,
-                            "functionName": "highlighted",
-                            "line": 940,
-                            "message": "Could not find property \"highlighted\"."
+                            "functionName": "visible",
+                            "line": 805,
+                            "message": "Could not find property \"visible\"."
                         },
                         {
                             "codegenResult": 2,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 812,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 802,
+                            "message": "Could not find property \"right\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 49,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalCenter",
+                            "line": 804,
+                            "message": "Could not find property \"verticalCenter\"."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "horizontalAlignment",
+                            "line": 809,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 48,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 810,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 825,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 834,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 844,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
                             "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "left",
+                            "line": 846,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 848,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 33,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottom",
+                            "line": 850,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "model",
+                            "line": 865,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "onCurrentIndexChanged",
+                            "line": 867,
+                            "message": "Cannot load property length from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::filteredPatients with type QVariant."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 860,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 61,
+                            "durationMicroseconds": 0,
+                            "functionName": "policy",
+                            "line": 864,
+                            "message": "Could not find property \"policy\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "width",
+                            "line": 887,
+                            "message": "Cannot access value for name patientModel"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 43,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 893,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "width",
+                            "line": 907,
+                            "message": "Cannot access value for name patientModel"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 34,
+                            "durationMicroseconds": 0,
+                            "functionName": "opacity",
+                            "line": 911,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 913,
+                            "message": "Cannot access value for name patientModel"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 43,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 919,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 42,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 925,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 155,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 925,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 42,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 926,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 149,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 926,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 42,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 927,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 169,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 927,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 929,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 90,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 930,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 42,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 932,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 157,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 932,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "text",
                             "line": 933,
@@ -1591,10 +1615,42 @@
                         },
                         {
                             "codegenResult": 0,
-                            "column": 44,
+                            "column": 151,
                             "durationMicroseconds": 0,
-                            "functionName": "verticalAlignment",
+                            "functionName": "elide",
+                            "line": 933,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 46,
+                            "durationMicroseconds": 0,
+                            "functionName": "acceptedButtons",
                             "line": 938,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 940,
+                            "message": "Cannot access value for name patientModel"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 46,
+                            "durationMicroseconds": 0,
+                            "functionName": "onDoubleClicked",
+                            "line": 944,
+                            "message": "Cannot access value for name patientModel"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 43,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 937,
                             "message": ""
                         },
                         {
@@ -1602,39 +1658,47 @@
                             "column": 27,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 945,
-                            "message": "Cannot access value for name chamberCombo"
+                            "line": 957,
+                            "message": "Cannot retrieve a non-object type by ID: searchField"
                         },
                         {
                             "codegenResult": 0,
-                            "column": 40,
+                            "column": 30,
                             "durationMicroseconds": 0,
-                            "functionName": "verticalAlignment",
-                            "line": 951,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 28,
-                            "durationMicroseconds": 0,
-                            "functionName": "elide",
-                            "line": 952,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 27,
-                            "durationMicroseconds": 0,
-                            "functionName": "wrapMode",
+                            "functionName": "visible",
                             "line": 960,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 38,
+                            "column": 39,
                             "durationMicroseconds": 0,
-                            "functionName": "horizontalAlignment",
-                            "line": 962,
+                            "functionName": "centerIn",
+                            "line": 958,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "left",
+                            "line": 967,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 33,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottom",
+                            "line": 969,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 971,
                             "message": ""
                         },
                         {
@@ -1642,7 +1706,7 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 975,
+                            "line": 981,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
@@ -1650,7 +1714,7 @@
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "enabled",
-                            "line": 982,
+                            "line": 997,
                             "message": "Could not find property \"enabled\"."
                         },
                         {
@@ -1658,15 +1722,71 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 986,
+                            "line": 1003,
                             "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 999,
+                            "message": "Cannot load property down from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1000,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "enabled",
+                            "line": 1017,
+                            "message": "Could not find property \"enabled\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "opacity",
+                            "line": 1021,
+                            "message": "Could not find property \"opacity\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 1028,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1023,
+                            "message": "Cannot load property down from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1024,
+                            "message": ""
                         },
                         {
                             "codegenResult": 2,
                             "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "implicitHeight",
-                            "line": 1017,
+                            "line": 1049,
                             "message": "Could not find property \"implicitHeight\"."
                         },
                         {
@@ -1674,7 +1794,319 @@
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "closePolicy",
-                            "line": 1021,
+                            "line": 1053,
+                            "message": "Could not find property \"closePolicy\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "departmentsData",
+                            "line": 1058,
+                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "chambersData",
+                            "line": 1059,
+                            "message": "Cannot generate efficient code for storing an array in a non-sequence type"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 9,
+                            "durationMicroseconds": 0,
+                            "functionName": "openFor",
+                            "line": 1061,
+                            "message": "Functions without type annotations won't be compiled"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 9,
+                            "durationMicroseconds": 0,
+                            "functionName": "loadChambers",
+                            "line": 1081,
+                            "message": "Cannot retrieve a non-object type by ID: chamberCombo"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "centerIn",
+                            "line": 1050,
+                            "message": "Could not find property \"centerIn\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 65,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1054,
+                            "message": "Cannot access value for name accentColor"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 20,
+                            "durationMicroseconds": 0,
+                            "functionName": "width",
+                            "line": 1115,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "alignment",
+                            "line": 1122,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 24,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1130,
+                            "message": "Cannot access value for name accentHover"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 23,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 1136,
+                            "message": "Cannot retrieve a non-object type by ID: transferPopup"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 24,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1140,
+                            "message": "Cannot retrieve a non-object type by ID: transferPopup"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "wrapMode",
+                            "line": 1141,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 24,
+                            "durationMicroseconds": 0,
+                            "functionName": "model",
+                            "line": 1152,
+                            "message": "Could not find property \"model\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "onCurrentIndexChanged",
+                            "line": 1175,
+                            "message": "Could not find signal \"currentIndexChanged\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "width",
+                            "line": 1155,
+                            "message": "Could not find property \"width\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 34,
+                            "durationMicroseconds": 0,
+                            "functionName": "highlighted",
+                            "line": 1161,
+                            "message": "Could not find property \"highlighted\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 1157,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 1159,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 1166,
+                            "message": "Cannot access value for name deptCombo"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1169,
+                            "message": "Cannot access value for name deptCombo"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 1171,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 1172,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 24,
+                            "durationMicroseconds": 0,
+                            "functionName": "model",
+                            "line": 1183,
+                            "message": "Could not find property \"model\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "width",
+                            "line": 1186,
+                            "message": "Could not find property \"width\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 34,
+                            "durationMicroseconds": 0,
+                            "functionName": "highlighted",
+                            "line": 1195,
+                            "message": "Could not find property \"highlighted\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 1188,
+                            "message": "Cannot access value for name modelData"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 1193,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 1200,
+                            "message": "Cannot access value for name chamberCombo"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 1206,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 1207,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "wrapMode",
+                            "line": 1215,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 38,
+                            "durationMicroseconds": 0,
+                            "functionName": "horizontalAlignment",
+                            "line": 1217,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 1231,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "enabled",
+                            "line": 1238,
+                            "message": "Could not find property \"enabled\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 1247,
+                            "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1242,
+                            "message": "Cannot load property down from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1243,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 25,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitHeight",
+                            "line": 1279,
+                            "message": "Could not find property \"implicitHeight\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 22,
+                            "durationMicroseconds": 0,
+                            "functionName": "closePolicy",
+                            "line": 1283,
                             "message": "Could not find property \"closePolicy\"."
                         },
                         {
@@ -1682,15 +2114,23 @@
                             "column": 27,
                             "durationMicroseconds": 0,
                             "functionName": "centerIn",
-                            "line": 1018,
+                            "line": 1280,
                             "message": "Could not find property \"centerIn\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 65,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1284,
+                            "message": "Cannot access value for name accentColor"
                         },
                         {
                             "codegenResult": 0,
                             "column": 27,
                             "durationMicroseconds": 0,
                             "functionName": "contentWidth",
-                            "line": 1029,
+                            "line": 1291,
                             "message": ""
                         },
                         {
@@ -1698,7 +2138,7 @@
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "contentHeight",
-                            "line": 1030,
+                            "line": 1292,
                             "message": ""
                         },
                         {
@@ -1706,7 +2146,7 @@
                             "column": 33,
                             "durationMicroseconds": 0,
                             "functionName": "flickableDirection",
-                            "line": 1031,
+                            "line": 1293,
                             "message": ""
                         },
                         {
@@ -1714,7 +2154,7 @@
                             "column": 29,
                             "durationMicroseconds": 0,
                             "functionName": "boundsBehavior",
-                            "line": 1032,
+                            "line": 1294,
                             "message": ""
                         },
                         {
@@ -1722,7 +2162,7 @@
                             "column": 27,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 1026,
+                            "line": 1288,
                             "message": ""
                         },
                         {
@@ -1730,7 +2170,7 @@
                             "column": 53,
                             "durationMicroseconds": 0,
                             "functionName": "policy",
-                            "line": 1033,
+                            "line": 1295,
                             "message": "Could not find property \"policy\"."
                         },
                         {
@@ -1738,7 +2178,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 1039,
+                            "line": 1301,
                             "message": ""
                         },
                         {
@@ -1746,7 +2186,7 @@
                             "column": 39,
                             "durationMicroseconds": 0,
                             "functionName": "alignment",
-                            "line": 1046,
+                            "line": 1308,
                             "message": ""
                         },
                         {
@@ -1754,7 +2194,7 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "onTextChanged",
-                            "line": 1056,
+                            "line": 1320,
                             "message": "Could not find signal \"textChanged\"."
                         },
                         {
@@ -1762,7 +2202,7 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "onTextChanged",
-                            "line": 1065,
+                            "line": 1331,
                             "message": "Could not find signal \"textChanged\"."
                         },
                         {
@@ -1770,7 +2210,7 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "onTextChanged",
-                            "line": 1074,
+                            "line": 1342,
                             "message": "Could not find signal \"textChanged\"."
                         },
                         {
@@ -1778,7 +2218,7 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "onTextChanged",
-                            "line": 1083,
+                            "line": 1353,
                             "message": "Could not find signal \"textChanged\"."
                         },
                         {
@@ -1786,7 +2226,7 @@
                             "column": 39,
                             "durationMicroseconds": 0,
                             "functionName": "onCheckedChanged",
-                            "line": 1090,
+                            "line": 1360,
                             "message": "Could not find signal \"checkedChanged\"."
                         },
                         {
@@ -1794,7 +2234,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "wrapMode",
-                            "line": 1097,
+                            "line": 1367,
                             "message": ""
                         },
                         {
@@ -1802,7 +2242,7 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "horizontalAlignment",
-                            "line": 1099,
+                            "line": 1369,
                             "message": ""
                         },
                         {
@@ -1810,7 +2250,7 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 1112,
+                            "line": 1383,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
@@ -1818,7 +2258,7 @@
                             "column": 34,
                             "durationMicroseconds": 0,
                             "functionName": "enabled",
-                            "line": 1119,
+                            "line": 1390,
                             "message": "Could not find property \"enabled\"."
                         },
                         {
@@ -1826,8 +2266,24 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 1124,
+                            "line": 1400,
                             "message": "Could not find signal \"clicked\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1395,
+                            "message": "Cannot load property down from (component in C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 43,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 1396,
+                            "message": ""
                         }
                     ],
                     "filePath": "C:/Users/sanek26/Documents/PerinatalCenter/HeadDoctorPage.qml"

@@ -147,12 +147,15 @@ Module {
             Parameter { name: "patientId"; type: "int" }
             Parameter { name: "departmentId"; type: "int" }
             Parameter { name: "chamberNumber"; type: "int" }
+            Parameter { name: "employeeId"; type: "int" }
         }
         Method {
             name: "dischargePatient"
             type: "QString"
             lineNumber: 56
             Parameter { name: "patientId"; type: "int" }
+            Parameter { name: "employeeId"; type: "int" }
         }
+        Method { name: "getTransferHistory"; type: "QVariantList"; lineNumber: 58 }
     }
 }

@@ -87,7 +87,9 @@ template <> constexpr inline auto Yadro::qt_create_metaobjectdata<qt_meta_tag_ZN
         "chamberNumber",
         "transferPatient",
         "patientId",
-        "dischargePatient"
+        "employeeId",
+        "dischargePatient",
+        "getTransferHistory"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -166,13 +168,15 @@ template <> constexpr inline auto Yadro::qt_create_metaobjectdata<qt_meta_tag_ZN
             { QMetaType::Int, 34 }, { QMetaType::Int, 46 },
         }}),
         // Method 'transferPatient'
-        QtMocHelpers::MethodData<QString(int, int, int)>(47, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::Int, 48 }, { QMetaType::Int, 34 }, { QMetaType::Int, 46 },
+        QtMocHelpers::MethodData<QString(int, int, int, int)>(47, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::Int, 48 }, { QMetaType::Int, 34 }, { QMetaType::Int, 46 }, { QMetaType::Int, 49 },
         }}),
         // Method 'dischargePatient'
-        QtMocHelpers::MethodData<QString(int)>(49, 6, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::Int, 48 },
+        QtMocHelpers::MethodData<QString(int, int)>(50, 6, QMC::AccessPublic, QMetaType::QString, {{
+            { QMetaType::Int, 48 }, { QMetaType::Int, 49 },
         }}),
+        // Method 'getTransferHistory'
+        QtMocHelpers::MethodData<QVariantList()>(51, 6, QMC::AccessPublic, 0x80000000 | 15),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -241,10 +245,12 @@ void Yadro::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
         case 19: { QVariantList _r = _t->getPatientsByChamber((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])));
             if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
-        case 20: { QString _r = _t->transferPatient((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[3])));
+        case 20: { QString _r = _t->transferPatient((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[4])));
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
-        case 21: { QString _r = _t->dischargePatient((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])));
+        case 21: { QString _r = _t->dischargePatient((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<int>>(_a[2])));
             if (_a[0]) *reinterpret_cast<QString*>(_a[0]) = std::move(_r); }  break;
+        case 22: { QVariantList _r = _t->getTransferHistory();
+            if (_a[0]) *reinterpret_cast<QVariantList*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }
@@ -269,14 +275,14 @@ int Yadro::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 22)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 22;
+        _id -= 23;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 22)
+        if (_id < 23)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 22;
+        _id -= 23;
     }
     return _id;
 }

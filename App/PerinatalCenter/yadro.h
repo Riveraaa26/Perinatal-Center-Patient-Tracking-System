@@ -1,5 +1,5 @@
 #pragma once
-
+#include <QDateTime>
 #include <QObject>
 #include <QString>
 #include <QSqlDatabase>
@@ -43,7 +43,7 @@ public:
     Q_INVOKABLE QVariantList getPatients();
     Q_INVOKABLE QVariantList getTransfers();
 
-    // Создать пациента (теперь isDisease — bool)
+    // Создать пациента
     Q_INVOKABLE QString createPatient(const QString &name, const QString &sourName,
                                       const QString &policy, const QString &pregnancyPeriod,
                                       bool isDisease);
@@ -51,9 +51,11 @@ public:
     // Пациенты конкретной палаты
     Q_INVOKABLE QVariantList getPatientsByChamber(int departmentId, int chamberNumber);
 
-    // === НОВОЕ: перевод пациентки в палату/отделение ===
-    Q_INVOKABLE QString transferPatient(int patientId, int departmentId, int chamberNumber);
-    Q_INVOKABLE QString dischargePatient(int patientId);
+    // === Перевод и выписка (передаем ID сотрудника из QML) ===
+    Q_INVOKABLE QString transferPatient(int patientId, int departmentId, int chamberNumber, int employeeId);
+    Q_INVOKABLE QString dischargePatient(int patientId, int employeeId);
+
+    Q_INVOKABLE QVariantList getTransferHistory();
 
 private:
     static QSqlDatabase s_db;

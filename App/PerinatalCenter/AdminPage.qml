@@ -12,6 +12,10 @@ Item {
     property var rolesList: []
     property var collectedChambers: []
 
+    // Цветовая палитра
+    property color accentColor: "#ffb3c6"
+    property color accentHover: "#ff8fab"
+
     Component.onCompleted: {
         employeeModel.model = Yadro.getEmployees()
         departmentModel.model = Yadro.getDepartments()
@@ -24,25 +28,41 @@ Item {
     }
 
     // 1. ШАПКА
-    Text {
-        id: brandText
-        text: "Перинатальный центр"
-        font.pixelSize: 20
-        font.bold: true
-        color: "#333333"
+    Row {
         anchors.left: parent.left
         anchors.leftMargin: 20
         anchors.top: parent.top
-        anchors.topMargin: 40
+        anchors.topMargin: 30
+        spacing: 10
+
+        Column {
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: 2
+
+            Text {
+                id: brandText
+                text: "Перинатальный центр"
+                font.pixelSize: 20
+                font.bold: true
+                color: "#333333"
+            }
+            Text {
+                text: "Система управления"
+                font.pixelSize: 13
+                font.italic: true
+                color: "#888888"
+            }
+        }
     }
 
     Text {
         text: "Администратор"
         font.pixelSize: 24
         font.bold: true
-        color: "#333333"
+        color: accentHover
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: brandText.verticalCenter
+        anchors.verticalCenter: parent.top
+        anchors.verticalCenterOffset: 50
     }
 
     Button {
@@ -50,10 +70,16 @@ Item {
         text: "Выйти"
         anchors.right: parent.right
         anchors.rightMargin: 20
-        anchors.verticalCenter: brandText.verticalCenter
+        anchors.verticalCenter: parent.top
+        anchors.verticalCenterOffset: 50
         implicitWidth: 100
         implicitHeight: 35
         font.pixelSize: 14
+        background: Rectangle {
+            color: parent.down ? "#e0e0e0" : (parent.hovered ? "#f5f5f5" : "#ffffff")
+            border.color: "#cccccc"
+            radius: 8
+        }
         onClicked: {
             stackView.pop()
         }
@@ -64,8 +90,8 @@ Item {
         width: parent.width
         height: 2
         color: "#d3d3d3"
-        anchors.top: brandText.bottom
-        anchors.topMargin: 30
+        anchors.top: parent.top
+        anchors.topMargin: 90
     }
 
     // 2. САЙДБАР
@@ -90,9 +116,9 @@ Item {
                 implicitHeight: 40
                 font.pixelSize: 15
                 background: Rectangle {
-                    color: parent.down ? "#e0e0e0" : (parent.hovered ? "#eeeeee" : "#ffffff")
-                    border.color: "#cccccc"
-                    radius: 4
+                    color: parent.down ? accentColor : (parent.hovered ? "#fff0f5" : "#ffffff")
+                    border.color: parent.hovered ? accentColor : "#cccccc"
+                    radius: 8
                 }
                 onClicked: {
                     contentArea.currentPage = "Сотрудники"
@@ -114,9 +140,9 @@ Item {
                 implicitHeight: 40
                 font.pixelSize: 15
                 background: Rectangle {
-                    color: parent.down ? "#e0e0e0" : (parent.hovered ? "#eeeeee" : "#ffffff")
-                    border.color: "#cccccc"
-                    radius: 4
+                    color: parent.down ? accentColor : (parent.hovered ? "#fff0f5" : "#ffffff")
+                    border.color: parent.hovered ? accentColor : "#cccccc"
+                    radius: 8
                 }
                 onClicked: {
                     contentArea.currentPage = "Отделения"
@@ -133,7 +159,28 @@ Item {
                 }
             }
 
-            Item { Layout.fillHeight: true }
+            Item {
+                Layout.fillHeight: true
+            }
+
+            // Красивая плашка "Хорошего дня"
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 50
+                Layout.bottomMargin: 10
+                color: "#fff0f5"
+                border.color: "#ffb3c6"
+                border.width: 1
+                radius: 12
+
+                Text {
+                    text: "Хорошего дня! 🎀"
+                    font.pixelSize: 14
+                    font.bold: true
+                    color: "#ff8fab"
+                    anchors.centerIn: parent
+                }
+            }
         }
     }
 
@@ -144,6 +191,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: sidebar.right
         anchors.right: parent.right
+        clip: true
 
         property string currentPage: "Сотрудники"
 
@@ -172,7 +220,7 @@ Item {
             color: "#ffffff"
             border.color: "#e0e0e0"
             border.width: 1
-            radius: 8
+            radius: 12
 
             // ТАБЛИЦА СОТРУДНИКОВ
             ListView {
@@ -183,29 +231,74 @@ Item {
                 clip: true
                 focus: true
                 highlightFollowsCurrentItem: false
-                ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
+                ScrollBar.vertical: ScrollBar {
+                    policy: ScrollBar.AsNeeded
+                    width: 10
+                }
 
                 header: Rectangle {
                     width: employeeModel.width - 10
                     height: 35
-                    color: "#f0f0f0"
+                    color: "#fff0f5"
+                    radius: 8
                     RowLayout {
                         anchors.fill: parent
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
                         spacing: 10
-                        Text { text: "ФИО"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: "Логин"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: "Пароль"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: "Роль"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: "Статус"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+
+                        Text {
+                            text: "ФИО"
+                            font.bold: true
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                            color: "#4a4a4a"
+                        }
+                        Text {
+                            text: "Логин"
+                            font.bold: true
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                            color: "#4a4a4a"
+                        }
+                        Text {
+                            text: "Пароль"
+                            font.bold: true
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                            color: "#4a4a4a"
+                        }
+                        Text {
+                            text: "Роль"
+                            font.bold: true
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                            color: "#4a4a4a"
+                        }
+                        Text {
+                            text: "Статус"
+                            font.bold: true
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                            color: "#4a4a4a"
+                        }
                     }
                 }
 
                 delegate: Rectangle {
                     width: employeeModel.width - 10
                     height: 40
-                    color: employeeModel.currentIndex === index ? "#cce5ff" : (index % 2 === 0 ? "#ffffff" : "#f9f9f9")
+                    color: employeeModel.currentIndex === index ? "#e3f2fd" : (index % 2 === 0 ? "#ffffff" : "#fcfcfc")
                     border.color: "#eeeeee"
 
                     RowLayout {
@@ -213,10 +306,35 @@ Item {
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
                         spacing: 10
-                        Text { text: modelData.full_name !== undefined ? modelData.full_name : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: modelData.login !== undefined ? modelData.login : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: modelData.password !== undefined ? modelData.password : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: modelData.role !== undefined ? modelData.role : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+
+                        Text {
+                            text: modelData.full_name !== undefined ? modelData.full_name : "—"
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                        }
+                        Text {
+                            text: modelData.login !== undefined ? modelData.login : "—"
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                        }
+                        Text {
+                            text: modelData.password !== undefined ? modelData.password : "—"
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                        }
+                        Text {
+                            text: modelData.role !== undefined ? modelData.role : "—"
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                        }
                         Text {
                             text: modelData.block ? "Заблокирован" : "Активен"
                             Layout.fillWidth: true
@@ -242,7 +360,7 @@ Item {
                             editLogin.text = modelData.login !== undefined ? modelData.login : ""
                             editPassword.text = modelData.password !== undefined ? modelData.password : ""
 
-                            for (let i = 0; i < adminPage.rolesList.length; i++) {
+                            for (var i = 0; i < adminPage.rolesList.length; i++) {
                                 if (adminPage.rolesList[i].id === modelData.role_id) {
                                     editRoleCombo.currentIndex = i
                                     break
@@ -263,27 +381,56 @@ Item {
                 clip: true
                 focus: true
                 highlightFollowsCurrentItem: false
-                ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded; width: 10 }
+                ScrollBar.vertical: ScrollBar {
+                    policy: ScrollBar.AsNeeded
+                    width: 10
+                }
 
                 header: Rectangle {
                     width: departmentModel.width - 10
                     height: 35
-                    color: "#f0f0f0"
+                    color: "#fff0f5"
+                    radius: 8
                     RowLayout {
                         anchors.fill: parent
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
                         spacing: 10
-                        Text { text: "Название отделения"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: "Всего палат"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: "Из них изоляторов"; font.bold: true; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+
+                        Text {
+                            text: "Название отделения"
+                            font.bold: true
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                            color: "#4a4a4a"
+                        }
+                        Text {
+                            text: "Всего палат"
+                            font.bold: true
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                            color: "#4a4a4a"
+                        }
+                        Text {
+                            text: "Из них изоляторов"
+                            font.bold: true
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                            color: "#4a4a4a"
+                        }
                     }
                 }
 
                 delegate: Rectangle {
                     width: departmentModel.width - 10
                     height: 40
-                    color: departmentModel.currentIndex === index ? "#cce5ff" : (index % 2 === 0 ? "#ffffff" : "#f9f9f9")
+                    color: departmentModel.currentIndex === index ? "#e3f2fd" : (index % 2 === 0 ? "#ffffff" : "#fcfcfc")
                     border.color: "#eeeeee"
 
                     RowLayout {
@@ -291,9 +438,28 @@ Item {
                         anchors.leftMargin: 10
                         anchors.rightMargin: 10
                         spacing: 10
-                        Text { text: modelData.name !== undefined ? modelData.name : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: modelData.capacity !== undefined ? modelData.capacity : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
-                        Text { text: modelData.capacity_disease !== undefined ? modelData.capacity_disease : "—"; Layout.fillWidth: true; Layout.preferredWidth: 1; elide: Text.ElideRight; font.pixelSize: 14 }
+
+                        Text {
+                            text: modelData.name !== undefined ? modelData.name : "—"
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                        }
+                        Text {
+                            text: modelData.capacity !== undefined ? modelData.capacity : "—"
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                        }
+                        Text {
+                            text: modelData.capacity_disease !== undefined ? modelData.capacity_disease : "—"
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 1
+                            elide: Text.ElideRight
+                            font.pixelSize: 14
+                        }
                     }
 
                     MouseArea {
@@ -316,11 +482,12 @@ Item {
             }
 
             Text {
-                text: "Данные отсутствуют"
+                text: "Данные отсутствуют 🧸"
                 anchors.centerIn: parent
                 color: "#999999"
                 visible: (contentArea.currentPage === "Сотрудники" && employeeModel.count === 0) ||
                          (contentArea.currentPage === "Отделения" && departmentModel.count === 0)
+                font.pixelSize: 16
             }
         }
 
@@ -339,6 +506,11 @@ Item {
                 implicitHeight: 40
                 implicitWidth: 180
                 font.pixelSize: 15
+                background: Rectangle {
+                    color: "#e8f5e9"
+                    border.color: "#a5d6a7"
+                    radius: 10
+                }
 
                 onClicked: {
                     createName.text = ""
@@ -346,17 +518,24 @@ Item {
                     createLogin.text = ""
                     createPassword.text = ""
                     createRoleCombo.currentIndex = 0
+                    createErrorLabel.visible = false
                     createPopup.open()
                 }
             }
 
             Button {
-                text: "Удалить пользователя"
+                text: "Удалить пользователя️"
                 visible: contentArea.currentPage === "Сотрудники"
                 implicitHeight: 40
                 implicitWidth: 180
                 font.pixelSize: 15
                 enabled: adminPage.selectedEmployeeId !== -1
+                opacity: enabled ? 1.0 : 0.45
+                background: Rectangle {
+                    color: enabled ? (parent.down ? "#ffcdd2" : (parent.hovered ? "#ffebee" : "#ffffff")) : "#f5f5f5"
+                    border.color: enabled ? "#ef9a9a" : "#e0e0e0"
+                    radius: 10
+                }
 
                 onClicked: {
                     deletePopup.open()
@@ -370,12 +549,18 @@ Item {
                 implicitWidth: 180
                 font.pixelSize: 15
                 enabled: adminPage.selectedEmployeeId !== -1
+                opacity: enabled ? 1.0 : 0.45
+                background: Rectangle {
+                    color: enabled ? (parent.down ? "#ffe082" : (parent.hovered ? "#fff8e1" : "#ffffff")) : "#f5f5f5"
+                    border.color: enabled ? "#ffcc80" : "#e0e0e0"
+                    radius: 10
+                }
 
                 property bool selectedIsBlocked: {
                     if (adminPage.selectedEmployeeId === -1) return false
-                    const m = employeeModel.model
+                    var m = employeeModel.model
                     if (!m) return false
-                    for (let i = 0; i < m.length; i++) {
+                    for (var i = 0; i < m.length; i++) {
                         if (parseInt(m[i].id) === adminPage.selectedEmployeeId)
                             return !!m[i].block
                     }
@@ -385,12 +570,12 @@ Item {
                 text: selectedIsBlocked ? "Разблокировать" : "Заблокировать"
 
                 onClicked: {
-                    const blocked = !selectedIsBlocked
-                    const err = Yadro.setEmployeeBlocked(adminPage.selectedEmployeeId, blocked)
+                    var blocked = !selectedIsBlocked
+                    var err = Yadro.setEmployeeBlocked(adminPage.selectedEmployeeId, blocked)
                     if (err.length === 0) {
                         employeeModel.model = Yadro.getEmployees()
 
-                        for (let i = 0; i < employeeModel.count; i++) {
+                        for (var i = 0; i < employeeModel.count; i++) {
                             if (parseInt(employeeModel.model[i].id) === adminPage.selectedEmployeeId) {
                                 employeeModel.currentIndex = i
                                 break
@@ -403,11 +588,16 @@ Item {
             }
 
             Button {
-                text: "Создать отделение"
+                text: "Создать отделение ➕"
                 visible: contentArea.currentPage === "Отделения"
                 implicitHeight: 40
                 implicitWidth: 180
                 font.pixelSize: 15
+                background: Rectangle {
+                    color: "#e8f5e9"
+                    border.color: "#a5d6a7"
+                    radius: 10
+                }
 
                 onClicked: {
                     createDeptName.text = ""
@@ -429,7 +619,12 @@ Item {
         anchors.centerIn: parent
         modal: true
         focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         ColumnLayout {
             anchors.fill: parent
@@ -449,6 +644,11 @@ Item {
                 Layout.fillWidth: true
                 implicitHeight: 40
                 font.pixelSize: 15
+                background: Rectangle {
+                    color: "#ffffff"
+                    border.color: "#cccccc"
+                    radius: 8
+                }
 
                 onClicked: {
                     departmentActionPopup.close()
@@ -462,6 +662,11 @@ Item {
                 Layout.fillWidth: true
                 implicitHeight: 40
                 font.pixelSize: 15
+                background: Rectangle {
+                    color: "#ffffff"
+                    border.color: "#cccccc"
+                    radius: 8
+                }
 
                 onClicked: {
                     departmentActionPopup.close()
@@ -469,13 +674,20 @@ Item {
                 }
             }
 
-            Item { Layout.fillHeight: true }
+            Item {
+                Layout.fillHeight: true
+            }
 
             Button {
                 text: "Отмена"
                 Layout.fillWidth: true
                 implicitHeight: 40
                 font.pixelSize: 15
+                background: Rectangle {
+                    color: "#ffffff"
+                    border.color: "#cccccc"
+                    radius: 8
+                }
 
                 onClicked: {
                     departmentActionPopup.close()
@@ -492,28 +704,103 @@ Item {
         anchors.centerIn: parent
         modal: true
         focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: 25
             spacing: 15
 
-            Text { text: "Новый сотрудник"; font.pixelSize: 20; font.bold: true; Layout.alignment: Qt.AlignHCenter; Layout.bottomMargin: 10 }
+            Text {
+                text: "Новый сотрудник 🎀"
+                font.pixelSize: 20
+                font.bold: true
+                Layout.alignment: Qt.AlignHCenter
+                Layout.bottomMargin: 10
+            }
 
-            Text { text: "Имя"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createName; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
+            Text {
+                text: "Имя"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: createName
+                Layout.fillWidth: true
+                implicitHeight: 40
+                font.pixelSize: 14
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                onTextChanged: createErrorLabel.visible = false
+            }
 
-            Text { text: "Фамилия"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createSourName; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
+            Text {
+                text: "Фамилия"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: createSourName
+                Layout.fillWidth: true
+                implicitHeight: 40
+                font.pixelSize: 14
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                onTextChanged: createErrorLabel.visible = false
+            }
 
-            Text { text: "Логин"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createLogin; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
+            Text {
+                text: "Логин"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: createLogin
+                Layout.fillWidth: true
+                implicitHeight: 40
+                font.pixelSize: 14
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                onTextChanged: createErrorLabel.visible = false
+            }
 
-            Text { text: "Пароль"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createPassword; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: createErrorLabel.visible = false }
+            Text {
+                text: "Пароль"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: createPassword
+                Layout.fillWidth: true
+                implicitHeight: 40
+                font.pixelSize: 14
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                onTextChanged: createErrorLabel.visible = false
+            }
 
-            Text { text: "Роль"; font.pixelSize: 12; color: "#666" }
+            Text {
+                text: "Роль"
+                font.pixelSize: 12
+                color: "#666"
+            }
             ComboBox {
                 id: createRoleCombo
                 Layout.fillWidth: true
@@ -531,8 +818,18 @@ Item {
                 }
             }
 
-            Text { id: createErrorLabel; color: "red"; font.pixelSize: 13; wrapMode: Text.WordWrap; Layout.fillWidth: true; horizontalAlignment: Text.AlignHCenter; visible: false }
-            Item { Layout.fillHeight: true }
+            Text {
+                id: createErrorLabel
+                color: "red"
+                font.pixelSize: 13
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                visible: false
+            }
+            Item {
+                Layout.fillHeight: true
+            }
 
             RowLayout {
                 Layout.fillWidth: true
@@ -542,26 +839,36 @@ Item {
                     text: "Отмена"
                     Layout.fillWidth: true
                     implicitHeight: 40
+                    background: Rectangle {
+                        color: "#ffffff"
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
                     onClicked: {
                         createPopup.close()
                     }
                 }
 
                 Button {
-                    text: "Создать"
+                    text: "Создать 💾"
                     Layout.fillWidth: true
                     implicitHeight: 40
                     enabled: createName.text.trim() !== "" && createSourName.text.trim() !== "" && createLogin.text.trim() !== "" && createPassword.text.trim() !== "" && createRoleCombo.currentIndex >= 0
+                    background: Rectangle {
+                        color: enabled ? (parent.down ? "#a5d6a7" : (parent.hovered ? "#c8e6c9" : "#e8f5e9")) : "#f5f5f5"
+                        border.color: enabled ? "#81c784" : "#e0e0e0"
+                        radius: 10
+                    }
 
                     onClicked: {
                         createErrorLabel.visible = false
-                        let selectedRoleId = 1
+                        var selectedRoleId = 1
 
                         if (createRoleCombo.currentIndex >= 0 && adminPage.rolesList.length > 0) {
                             selectedRoleId = adminPage.rolesList[createRoleCombo.currentIndex].id
                         }
 
-                        const err = Yadro.createEmployee(createName.text, createSourName.text, createLogin.text, createPassword.text, selectedRoleId)
+                        var err = Yadro.createEmployee(createName.text, createSourName.text, createLogin.text, createPassword.text, selectedRoleId)
 
                         if (err.length === 0) {
                             createPopup.close()
@@ -588,28 +895,103 @@ Item {
         anchors.centerIn: parent
         modal: true
         focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: 25
             spacing: 15
 
-            Text { text: "Редактирование профиля"; font.pixelSize: 20; font.bold: true; Layout.alignment: Qt.AlignHCenter; Layout.bottomMargin: 10 }
+            Text {
+                text: "Редактирование профиля"
+                font.pixelSize: 20
+                font.bold: true
+                Layout.alignment: Qt.AlignHCenter
+                Layout.bottomMargin: 10
+            }
 
-            Text { text: "Имя"; font.pixelSize: 12; color: "#666" }
-            TextField { id: editName; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: editErrorLabel.visible = false }
+            Text {
+                text: "Имя"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: editName
+                Layout.fillWidth: true
+                implicitHeight: 40
+                font.pixelSize: 14
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                onTextChanged: editErrorLabel.visible = false
+            }
 
-            Text { text: "Фамилия"; font.pixelSize: 12; color: "#666" }
-            TextField { id: editSourName; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: editErrorLabel.visible = false }
+            Text {
+                text: "Фамилия"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: editSourName
+                Layout.fillWidth: true
+                implicitHeight: 40
+                font.pixelSize: 14
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                onTextChanged: editErrorLabel.visible = false
+            }
 
-            Text { text: "Логин"; font.pixelSize: 12; color: "#666" }
-            TextField { id: editLogin; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: editErrorLabel.visible = false }
+            Text {
+                text: "Логин"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: editLogin
+                Layout.fillWidth: true
+                implicitHeight: 40
+                font.pixelSize: 14
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                onTextChanged: editErrorLabel.visible = false
+            }
 
-            Text { text: "Пароль"; font.pixelSize: 12; color: "#666" }
-            TextField { id: editPassword; Layout.fillWidth: true; implicitHeight: 40; font.pixelSize: 14; onTextChanged: editErrorLabel.visible = false }
+            Text {
+                text: "Пароль"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: editPassword
+                Layout.fillWidth: true
+                implicitHeight: 40
+                font.pixelSize: 14
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                onTextChanged: editErrorLabel.visible = false
+            }
 
-            Text { text: "Роль"; font.pixelSize: 12; color: "#666" }
+            Text {
+                text: "Роль"
+                font.pixelSize: 12
+                color: "#666"
+            }
             ComboBox {
                 id: editRoleCombo
                 Layout.fillWidth: true
@@ -627,8 +1009,18 @@ Item {
                 }
             }
 
-            Text { id: editErrorLabel; color: "red"; font.pixelSize: 13; wrapMode: Text.WordWrap; Layout.fillWidth: true; horizontalAlignment: Text.AlignHCenter; visible: false }
-            Item { Layout.fillHeight: true }
+            Text {
+                id: editErrorLabel
+                color: "red"
+                font.pixelSize: 13
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                visible: false
+            }
+            Item {
+                Layout.fillHeight: true
+            }
 
             RowLayout {
                 Layout.fillWidth: true
@@ -638,26 +1030,36 @@ Item {
                     text: "Отмена"
                     Layout.fillWidth: true
                     implicitHeight: 40
+                    background: Rectangle {
+                        color: "#ffffff"
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
                     onClicked: {
                         editPopup.close()
                     }
                 }
 
                 Button {
-                    text: "Сохранить"
+                    text: "Сохранить 💾"
                     Layout.fillWidth: true
                     implicitHeight: 40
                     enabled: editName.text.trim() !== "" && editSourName.text.trim() !== "" && editLogin.text.trim() !== "" && editPassword.text.trim() !== ""
+                    background: Rectangle {
+                        color: enabled ? (parent.down ? "#a5d6a7" : (parent.hovered ? "#c8e6c9" : "#e8f5e9")) : "#f5f5f5"
+                        border.color: enabled ? "#81c784" : "#e0e0e0"
+                        radius: 10
+                    }
 
                     onClicked: {
                         editErrorLabel.visible = false
-                        let selectedRoleId = 1
+                        var selectedRoleId = 1
 
                         if (editRoleCombo.currentIndex >= 0 && adminPage.rolesList.length > 0) {
                             selectedRoleId = adminPage.rolesList[editRoleCombo.currentIndex].id
                         }
 
-                        const err = Yadro.updateEmployee(adminPage.selectedEmployeeId, editName.text, editSourName.text, editLogin.text, editPassword.text, selectedRoleId)
+                        var err = Yadro.updateEmployee(adminPage.selectedEmployeeId, editName.text, editSourName.text, editLogin.text, editPassword.text, selectedRoleId)
 
                         if (err.length === 0) {
                             editPopup.close()
@@ -686,15 +1088,27 @@ Item {
         anchors.centerIn: parent
         modal: true
         focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: 20
             spacing: 15
 
-            Text { text: "Вы уверены, что хотите удалить\nэтого сотрудника?"; font.pixelSize: 16; horizontalAlignment: Text.AlignHCenter; Layout.fillWidth: true }
-            Item { Layout.fillHeight: true }
+            Text {
+                text: "Вы уверены, что хотите удалить\nэтого сотрудника? 🗑️"
+                font.pixelSize: 16
+                horizontalAlignment: Text.AlignHCenter
+                Layout.fillWidth: true
+            }
+            Item {
+                Layout.fillHeight: true
+            }
 
             RowLayout {
                 Layout.fillWidth: true
@@ -704,6 +1118,11 @@ Item {
                     text: "Отмена"
                     Layout.fillWidth: true
                     implicitHeight: 40
+                    background: Rectangle {
+                        color: "#ffffff"
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
                     onClicked: {
                         deletePopup.close()
                     }
@@ -714,18 +1133,20 @@ Item {
                     Layout.fillWidth: true
                     implicitHeight: 40
                     background: Rectangle {
-                        color: "#d9534f"
-                        radius: 4
+                        color: parent.down ? "#ef9a9a" : (parent.hovered ? "#ffcdd2" : "#ffebee")
+                        border.color: "#ef9a9a"
+                        radius: 10
                     }
                     contentItem: Text {
                         text: parent.text
-                        color: "white"
+                        color: "#c62828"
+                        font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
 
                     onClicked: {
-                        const err = Yadro.deleteEmployee(adminPage.selectedEmployeeId)
+                        var err = Yadro.deleteEmployee(adminPage.selectedEmployeeId)
 
                         if (err.length === 0) {
                             deletePopup.close()
@@ -754,23 +1175,79 @@ Item {
         anchors.centerIn: parent
         modal: true
         focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: 25
             spacing: 15
 
-            Text { text: "Новое отделение"; font.pixelSize: 20; font.bold: true; Layout.alignment: Qt.AlignHCenter }
+            Text {
+                text: "Новое отделение 🏥"
+                font.pixelSize: 20
+                font.bold: true
+                Layout.alignment: Qt.AlignHCenter
+            }
 
-            Text { text: "Название"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createDeptName; Layout.fillWidth: true; implicitHeight: 40; onTextChanged: createDeptErrorLabel.visible = false }
+            Text {
+                text: "Название"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: createDeptName
+                Layout.fillWidth: true
+                implicitHeight: 40
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                onTextChanged: createDeptErrorLabel.visible = false
+            }
 
-            Text { text: "Всего палат"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createDeptCapacity; Layout.fillWidth: true; implicitHeight: 40; validator: IntValidator { bottom: 0 } }
+            Text {
+                text: "Всего палат"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: createDeptCapacity
+                Layout.fillWidth: true
+                implicitHeight: 40
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                validator: IntValidator {
+                    bottom: 0
+                }
+            }
 
-            Text { text: "Из них изоляторов"; font.pixelSize: 12; color: "#666" }
-            TextField { id: createDeptCapacityDisease; Layout.fillWidth: true; implicitHeight: 40; validator: IntValidator { bottom: 0 } }
+            Text {
+                text: "Из них изоляторов"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: createDeptCapacityDisease
+                Layout.fillWidth: true
+                implicitHeight: 40
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                validator: IntValidator {
+                    bottom: 0
+                }
+            }
 
             Text {
                 id: createDeptErrorLabel
@@ -782,7 +1259,9 @@ Item {
                 visible: false
             }
 
-            Item { Layout.fillHeight: true }
+            Item {
+                Layout.fillHeight: true
+            }
 
             RowLayout {
                 Layout.fillWidth: true
@@ -792,21 +1271,31 @@ Item {
                     text: "Отмена"
                     Layout.fillWidth: true
                     implicitHeight: 40
+                    background: Rectangle {
+                        color: "#ffffff"
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
                     onClicked: {
                         createDeptPopup.close()
                     }
                 }
 
                 Button {
-                    text: "Далее"
+                    text: "Далее ➡️"
                     Layout.fillWidth: true
                     implicitHeight: 40
                     enabled: createDeptName.text.trim() !== "" && createDeptCapacity.text.trim() !== "" && createDeptCapacityDisease.text.trim() !== ""
+                    background: Rectangle {
+                        color: enabled ? (parent.down ? "#a5d6a7" : (parent.hovered ? "#c8e6c9" : "#e8f5e9")) : "#f5f5f5"
+                        border.color: enabled ? "#81c784" : "#e0e0e0"
+                        radius: 10
+                    }
 
                     onClicked: {
                         createDeptErrorLabel.visible = false
-                        let total = parseInt(createDeptCapacity.text)
-                        let disease = parseInt(createDeptCapacityDisease.text)
+                        var total = parseInt(createDeptCapacity.text)
+                        var disease = parseInt(createDeptCapacityDisease.text)
 
                         if (disease > total) {
                             createDeptErrorLabel.text = "Изоляторов не может быть больше общего количества!"
@@ -814,9 +1303,8 @@ Item {
                             return
                         }
 
-                        // ПРОВЕРКА НА СУЩЕСТВОВАНИЕ ОТДЕЛЕНИЯ
-                        let exists = false
-                        for (let i = 0; i < departmentModel.count; i++) {
+                        var exists = false
+                        for (var i = 0; i < departmentModel.count; i++) {
                             if (departmentModel.model[i].name.toLowerCase() === createDeptName.text.trim().toLowerCase()) {
                                 exists = true
                                 break
@@ -826,10 +1314,9 @@ Item {
                         if (exists) {
                             createDeptErrorLabel.text = "Отделение с таким названием уже существует!"
                             createDeptErrorLabel.visible = true
-                            return // Выходим, не даем открыть визард
+                            return
                         }
 
-                        // Если отделения нет, продолжаем логику
                         adminPage.collectedChambers = []
                         chambersWizard.totalChambers = total
                         chambersWizard.totalDisease = disease
@@ -842,7 +1329,7 @@ Item {
                         if (total > 0) {
                             chambersWizard.open()
                         } else {
-                            let err = Yadro.createDepartment(createDeptName.text, 0, 0, [])
+                            var err = Yadro.createDepartment(createDeptName.text, 0, 0, [])
 
                             if (err.length === 0) {
                                 departmentModel.model = Yadro.getDepartments()
@@ -866,7 +1353,12 @@ Item {
         modal: true
         focus: true
         closePolicy: Popup.NoAutoClose
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         property string deptName: ""
         property int totalChambers: 0
@@ -887,23 +1379,45 @@ Item {
                 Layout.bottomMargin: 10
             }
 
-            Text { text: "Номер палаты"; font.pixelSize: 12; color: "#666" }
+            Text {
+                text: "Номер палаты"
+                font.pixelSize: 12
+                color: "#666"
+            }
             TextField {
                 id: wizardChamberNumber
                 Layout.fillWidth: true
                 implicitHeight: 40
                 font.pixelSize: 14
-                validator: IntValidator { bottom: 1 }
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                validator: IntValidator {
+                    bottom: 1
+                }
                 onVisibleChanged: text = ""
             }
 
-            Text { text: "Вместимость (мест)"; font.pixelSize: 12; color: "#666" }
+            Text {
+                text: "Вместимость (мест)"
+                font.pixelSize: 12
+                color: "#666"
+            }
             TextField {
                 id: wizardChamberCapacity
                 Layout.fillWidth: true
                 implicitHeight: 40
                 font.pixelSize: 14
-                validator: IntValidator { bottom: 1 }
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                validator: IntValidator {
+                    bottom: 1
+                }
                 onVisibleChanged: text = ""
             }
 
@@ -924,16 +1438,23 @@ Item {
                 visible: false
             }
 
-            Item { Layout.fillHeight: true }
+            Item {
+                Layout.fillHeight: true
+            }
 
             RowLayout {
                 Layout.fillWidth: true
                 spacing: 10
 
                 Button {
-                    text: "Отмена (прервать)"
+                    text: "Отмена"
                     Layout.fillWidth: true
                     implicitHeight: 40
+                    background: Rectangle {
+                        color: "#ffffff"
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
                     onClicked: {
                         chambersWizard.close()
                         adminPage.collectedChambers = []
@@ -941,16 +1462,21 @@ Item {
                 }
 
                 Button {
-                    text: (chambersWizard.currentIndex + 1 === chambersWizard.totalChambers) ? "Завершить" : "Следующая палата"
+                    text: (chambersWizard.currentIndex + 1 === chambersWizard.totalChambers) ? "Завершить ✅" : "Далее ➡️"
                     Layout.fillWidth: true
                     implicitHeight: 40
                     enabled: wizardChamberNumber.text !== "" && wizardChamberCapacity.text !== ""
+                    background: Rectangle {
+                        color: enabled ? (parent.down ? "#a5d6a7" : (parent.hovered ? "#c8e6c9" : "#e8f5e9")) : "#f5f5f5"
+                        border.color: enabled ? "#81c784" : "#e0e0e0"
+                        radius: 10
+                    }
 
                     onClicked: {
                         wizardErrorLabel.visible = false
-                        let num = parseInt(wizardChamberNumber.text)
+                        var num = parseInt(wizardChamberNumber.text)
 
-                        for (let i = 0; i < adminPage.collectedChambers.length; i++) {
+                        for (var i = 0; i < adminPage.collectedChambers.length; i++) {
                             if (adminPage.collectedChambers[i].number === num) {
                                 wizardErrorLabel.text = "Палата с таким номером уже добавлена в списке!"
                                 wizardErrorLabel.visible = true
@@ -958,16 +1484,15 @@ Item {
                             }
                         }
 
-                        let isDisease = (chambersWizard.totalChambers - chambersWizard.currentIndex) <= (chambersWizard.totalDisease - chambersWizard.diseaseCreated)
+                        var isDisease = (chambersWizard.totalChambers - chambersWizard.currentIndex) <= (chambersWizard.totalDisease - chambersWizard.diseaseCreated)
 
-                        let newChamber = {
+                        var newChamber = {
                             "number": num,
                             "capacity": parseInt(wizardChamberCapacity.text),
                             "disease": isDisease
                         }
 
                         adminPage.collectedChambers.push(newChamber)
-
                         chambersWizard.currentIndex++
 
                         if (isDisease) {
@@ -975,7 +1500,7 @@ Item {
                         }
 
                         if (chambersWizard.currentIndex === chambersWizard.totalChambers) {
-                            let err = Yadro.createDepartment(
+                            var err = Yadro.createDepartment(
                                 chambersWizard.deptName,
                                 chambersWizard.totalChambers,
                                 chambersWizard.totalDisease,
@@ -1013,17 +1538,37 @@ Item {
         anchors.centerIn: parent
         modal: true
         focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: 20
             spacing: 15
 
-            Text { text: "Новое название"; font.pixelSize: 16; font.bold: true }
-            TextField { id: editDeptNameInput; Layout.fillWidth: true; implicitHeight: 40 }
+            Text {
+                text: "Новое название ✏️"
+                font.pixelSize: 16
+                font.bold: true
+            }
+            TextField {
+                id: editDeptNameInput
+                Layout.fillWidth: true
+                implicitHeight: 40
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+            }
 
-            Item { Layout.fillHeight: true }
+            Item {
+                Layout.fillHeight: true
+            }
 
             RowLayout {
                 Layout.fillWidth: true
@@ -1033,18 +1578,28 @@ Item {
                     text: "Отмена"
                     Layout.fillWidth: true
                     implicitHeight: 40
+                    background: Rectangle {
+                        color: "#ffffff"
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
                     onClicked: {
                         editNamePopup.close()
                     }
                 }
 
                 Button {
-                    text: "Сохранить"
+                    text: "Сохранить 💾"
                     Layout.fillWidth: true
                     implicitHeight: 40
+                    background: Rectangle {
+                        color: parent.down ? "#a5d6a7" : (parent.hovered ? "#c8e6c9" : "#e8f5e9")
+                        border.color: "#81c784"
+                        radius: 10
+                    }
 
                     onClicked: {
-                        let err = Yadro.updateDepartmentName(adminPage.selectedDepartmentId, editDeptNameInput.text)
+                        var err = Yadro.updateDepartmentName(adminPage.selectedDepartmentId, editDeptNameInput.text)
 
                         if (err.length === 0) {
                             editNamePopup.close()
@@ -1071,19 +1626,34 @@ Item {
         anchors.centerIn: parent
         modal: true
         focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: 20
             spacing: 15
 
-            Text { text: "Действие с палатами"; font.pixelSize: 16; font.bold: true; Layout.alignment: Qt.AlignHCenter }
+            Text {
+                text: "Действие с палатами"
+                font.pixelSize: 16
+                font.bold: true
+                Layout.alignment: Qt.AlignHCenter
+            }
 
             Button {
-                text: "Добавить палату"
+                text: "Добавить палату ➕"
                 Layout.fillWidth: true
                 implicitHeight: 40
+                background: Rectangle {
+                    color: "#e8f5e9"
+                    border.color: "#a5d6a7"
+                    radius: 8
+                }
 
                 onClicked: {
                     chamberActionsPopup.close()
@@ -1092,9 +1662,14 @@ Item {
             }
 
             Button {
-                text: "Убрать палату"
+                text: "Убрать палату 🗑️"
                 Layout.fillWidth: true
                 implicitHeight: 40
+                background: Rectangle {
+                    color: "#ffebee"
+                    border.color: "#ef9a9a"
+                    radius: 8
+                }
 
                 onClicked: {
                     chamberActionsPopup.close()
@@ -1106,6 +1681,11 @@ Item {
                 text: "Отмена"
                 Layout.fillWidth: true
                 implicitHeight: 40
+                background: Rectangle {
+                    color: "#ffffff"
+                    border.color: "#cccccc"
+                    radius: 8
+                }
                 onClicked: {
                     chamberActionsPopup.close()
                 }
@@ -1120,31 +1700,80 @@ Item {
         anchors.centerIn: parent
         modal: true
         focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: 20
             spacing: 15
 
-            Text { text: "Новая палата"; font.pixelSize: 16; font.bold: true }
+            Text {
+                text: "Новая палата 🎀"
+                font.pixelSize: 16
+                font.bold: true
+            }
 
-            Text { text: "Номер палаты"; font.pixelSize: 12; color: "#666" }
+            Text {
+                text: "Номер палаты"
+                font.pixelSize: 12
+                color: "#666"
+            }
             TextField {
                 id: addChamberNumber
                 Layout.fillWidth: true
                 implicitHeight: 40
-                validator: IntValidator { bottom: 1 }
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                validator: IntValidator {
+                    bottom: 1
+                }
             }
 
-            Text { text: "Кол-во мест"; font.pixelSize: 12; color: "#666" }
-            TextField { id: addChamberCapacity; Layout.fillWidth: true; implicitHeight: 40; validator: IntValidator { bottom: 1 } }
+            Text {
+                text: "Кол-во мест"
+                font.pixelSize: 12
+                color: "#666"
+            }
+            TextField {
+                id: addChamberCapacity
+                Layout.fillWidth: true
+                implicitHeight: 40
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                validator: IntValidator {
+                    bottom: 1
+                }
+            }
 
-            CheckBox { id: addChamberDisease; text: "Изолятор (для больных)"; font.pixelSize: 14 }
+            CheckBox {
+                id: addChamberDisease
+                text: "Изолятор (для больных)"
+                font.pixelSize: 14
+            }
 
-            Text { id: addChamberError; color: "red"; font.pixelSize: 13; Layout.fillWidth: true; horizontalAlignment: Text.AlignHCenter; visible: false }
+            Text {
+                id: addChamberError
+                color: "red"
+                font.pixelSize: 13
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                visible: false
+            }
 
-            Item { Layout.fillHeight: true }
+            Item {
+                Layout.fillHeight: true
+            }
 
             RowLayout {
                 Layout.fillWidth: true
@@ -1154,26 +1783,36 @@ Item {
                     text: "Отмена"
                     Layout.fillWidth: true
                     implicitHeight: 40
+                    background: Rectangle {
+                        color: "#ffffff"
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
                     onClicked: {
                         addChamberPopup.close()
                     }
                 }
 
                 Button {
-                    text: "Создать"
+                    text: "Создать 💾"
                     Layout.fillWidth: true
                     implicitHeight: 40
                     enabled: addChamberNumber.text !== "" && addChamberCapacity.text !== ""
+                    background: Rectangle {
+                        color: enabled ? (parent.down ? "#a5d6a7" : (parent.hovered ? "#c8e6c9" : "#e8f5e9")) : "#f5f5f5"
+                        border.color: enabled ? "#81c784" : "#e0e0e0"
+                        radius: 10
+                    }
 
                     onClicked: {
                         addChamberError.visible = false
-                        let err = Yadro.addChamber(adminPage.selectedDepartmentId, parseInt(addChamberNumber.text), parseInt(addChamberCapacity.text), addChamberDisease.checked)
+                        var err = Yadro.addChamber(adminPage.selectedDepartmentId, parseInt(addChamberNumber.text), parseInt(addChamberCapacity.text), addChamberDisease.checked)
 
                         if (err.length === 0) {
                             addChamberPopup.close()
                             departmentModel.model = Yadro.getDepartments()
 
-                            for (let i = 0; i < departmentModel.count; i++) {
+                            for (var i = 0; i < departmentModel.count; i++) {
                                 if (parseInt(departmentModel.model[i].id) === adminPage.selectedDepartmentId) {
                                     departmentModel.currentIndex = i
                                     break
@@ -1196,26 +1835,55 @@ Item {
         anchors.centerIn: parent
         modal: true
         focus: true
-        background: Rectangle { color: "#ffffff"; border.color: "#cccccc"; radius: 8 }
+        background: Rectangle {
+            color: "#ffffff"
+            border.color: accentColor
+            border.width: 2
+            radius: 16
+        }
 
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: 20
             spacing: 15
 
-            Text { text: "Удаление палаты"; font.pixelSize: 16; font.bold: true }
+            Text {
+                text: "Удаление палаты 🗑️"
+                font.pixelSize: 16
+                font.bold: true
+            }
 
-            Text { text: "Введите номер палаты для удаления"; font.pixelSize: 12; color: "#666" }
+            Text {
+                text: "Введите номер палаты для удаления"
+                font.pixelSize: 12
+                color: "#666"
+            }
             TextField {
                 id: deleteChamberNumberInput
                 Layout.fillWidth: true
                 implicitHeight: 40
-                validator: IntValidator { bottom: 1 }
+                leftPadding: 10
+                background: Rectangle {
+                    border.color: "#cccccc"
+                    radius: 8
+                }
+                validator: IntValidator {
+                    bottom: 1
+                }
             }
 
-            Text { id: deleteChamberError; color: "red"; font.pixelSize: 13; wrapMode: Text.WordWrap; Layout.fillWidth: true; visible: false }
+            Text {
+                id: deleteChamberError
+                color: "red"
+                font.pixelSize: 13
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+                visible: false
+            }
 
-            Item { Layout.fillHeight: true }
+            Item {
+                Layout.fillHeight: true
+            }
 
             RowLayout {
                 Layout.fillWidth: true
@@ -1225,6 +1893,11 @@ Item {
                     text: "Отмена"
                     Layout.fillWidth: true
                     implicitHeight: 40
+                    background: Rectangle {
+                        color: "#ffffff"
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
                     onClicked: {
                         removeChamberPopup.close()
                     }
@@ -1235,26 +1908,30 @@ Item {
                     Layout.fillWidth: true
                     implicitHeight: 40
                     background: Rectangle {
-                        color: "#d9534f"
-                        radius: 4
+                        color: parent.down ? "#ef9a9a" : (parent.hovered ? "#ffcdd2" : "#ffebee")
+                        border.color: "#ef9a9a"
+                        radius: 10
                     }
                     contentItem: Text {
                         text: parent.text
-                        color: "white"
+                        color: "#c62828"
+                        font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
 
                     onClicked: {
-                        if (deleteChamberNumberInput.text === "") return
+                        if (deleteChamberNumberInput.text === "") {
+                            return
+                        }
 
-                        let err = Yadro.deleteChamberByNumber(adminPage.selectedDepartmentId, parseInt(deleteChamberNumberInput.text))
+                        var err = Yadro.deleteChamberByNumber(adminPage.selectedDepartmentId, parseInt(deleteChamberNumberInput.text))
 
                         if (err.length === 0) {
                             removeChamberPopup.close()
                             departmentModel.model = Yadro.getDepartments()
 
-                            for (let i = 0; i < departmentModel.count; i++) {
+                            for (var i = 0; i < departmentModel.count; i++) {
                                 if (parseInt(departmentModel.model[i].id) === adminPage.selectedDepartmentId) {
                                     departmentModel.currentIndex = i
                                     break

@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
         "Perinatal",
         "postgres",
         "Ao6rhpiop"
-        );
+    );
 
     if (!err.isEmpty()) {
         qCritical() << "Критическая ошибка БД:" << err;
